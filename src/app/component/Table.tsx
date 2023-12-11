@@ -40,33 +40,24 @@ import {
   cilUserFemale,
 } from "@coreui/icons";
 import { useState } from "react";
+import { StringNumberObject } from "../types";
 
 interface Props {
-  items: {
-    name: string;
-    userId: string;
-    department: string;
-    userRole: string;
-    activity: string;
-    status: string;
-    action: string;
-  }[];
+  // items & headers must same length
+  items: StringNumberObject[];
+  headers: string[];
 }
 export default function Table(props: Props) {
+  const { items, headers } = props;
   return (
     <main className={styles.table}>
       <section className={styles.headerSection}>
-        <CellHeader>No</CellHeader>
-        <CellHeader>Name</CellHeader>
-        <CellHeader>User ID</CellHeader>
-        <CellHeader>Department/Branch</CellHeader>
-        <CellHeader>User Role</CellHeader>
-        <CellHeader>Activity</CellHeader>
-        <CellHeader>Status</CellHeader>
-        <CellHeader>Action</CellHeader>
+        {headers.map((header, index) => (
+          <CellHeader key={index}>{header}</CellHeader>
+        ))}
       </section>
       <section className={styles.usersSection}>
-        {props.items.map((item, index) => {
+        {items.map((item, index) => {
           return (
             <div
               key={index}
@@ -74,14 +65,9 @@ export default function Table(props: Props) {
                 styles.row + (index % 2 === 0 ? " " + styles.even : "")
               }
             >
-              <CellUser>{index + 1}</CellUser>
-              <CellUser>{item.name}</CellUser>
-              <CellUser>{item.userId}</CellUser>
-              <CellUser>{item.department}</CellUser>
-              <CellUser>{item.userRole}</CellUser>
-              <CellUser>{item.activity}</CellUser>
-              <CellUser>{item.status}</CellUser>
-              <CellUser>{item.action}</CellUser>
+              {Object.keys(item).map((key, index) => {
+                return <CellUser key={index}>{item[key]}</CellUser>;
+              })}
             </div>
           );
         })}
@@ -94,7 +80,9 @@ interface CellProps {
   children: React.ReactNode;
 }
 function CellHeader({ children }: CellProps) {
-  return <div className={styles.cell + " " + styles.headerCell}>{children}</div>;
+  return (
+    <div className={styles.cell + " " + styles.headerCell}>{children}</div>
+  );
 }
 function CellUser({ children }: CellProps) {
   return <div className={styles.cell + " " + styles.userCell}>{children}</div>;
