@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import Table from "./component/Table";
-import SearchBar from './dashboard/user/SearchBar';
-import { StringNumberObject } from './types';
-import UserList from './dashboard/user/UserList';
+import SearchBar from './SearchBar';
+import UserList from './UserList';
 
 export default function Home() {
   const [headers, setHeaders] = useState([

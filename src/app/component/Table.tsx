@@ -43,10 +43,17 @@ import { useState } from "react";
 import { StringNumberObject } from "../types";
 
 interface Props {
-  // items & headers must same length
   items: StringNumberObject[];
   headers: string[];
+  colWidths?: (number | null)[];
 }
+/**
+ * Standard table.
+ *
+ * @param {StringNumberObject[]} props.items - Items displayed in table body. Must be same array length as props.headers
+ * @param {string[]} props.headers - Headers. Must be same array length as props.items
+ * @param {number[]} props.colWidths - Width of each column. null width columns will occupy remaining space. Must be same array length as props.items/props.headers
+ */
 export default function Table(props: Props) {
   const { items, headers } = props;
   return (
