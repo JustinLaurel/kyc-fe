@@ -1,0 +1,127 @@
+$ultralight-gray: rgb(240, 240, 240);
+$light-gray: rgb(225, 225, 225);
+$dark-gray: rgb(100, 100, 100);
+$container-radius: 5px;
+$column-size: 30px repeat(7, minmax(0, 1fr));
+.userTable {
+  .headerSection {
+    display: grid;
+    grid-template-columns: $column-size;
+    grid-auto-rows: minmax(60px, auto);
+    gap: 10px;
+    background-color: $light-gray;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-top-right-radius: $container-radius;
+    border-top-left-radius: $container-radius;
+
+    .headerCell {
+      font-weight: bold;
+      color: $dark-gray;
+    }
+  }
+  .usersSection {
+    display: grid;
+    grid-auto-rows: minmax(60px, auto);
+    :last-child {
+      border-bottom-right-radius: $container-radius;
+      border-bottom-left-radius: $container-radius;  
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: $column-size;
+      gap: 10px;
+      align-items: center;
+      padding-left: 20px;
+      padding-right: 10px;  
+      &.even {
+        background-color: $ultralight-gray;
+      }
+      .userCell {
+        color: darkslategray;
+      }
+    }
+  }
+  .cell {
+    overflow-wrap: anywhere;
+  }
+}
+
+.searchBar {
+  $section-vertical-padding: 20px;
+  $section-horizontal-padding: 30px;
+
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid $light-gray;
+  border-radius: 10px;
+
+  .headerSection {
+    font-size: 25px;
+    padding-left: $section-horizontal-padding;
+    padding-right: $section-horizontal-padding;
+    padding-bottom: $section-vertical-padding;
+    padding-top: $section-vertical-padding;
+    border-bottom: 1px solid $light-gray;
+  }
+
+  .fieldsSection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 15px;
+    column-gap: 35px;
+    padding-left: $section-horizontal-padding;
+    padding-right: $section-horizontal-padding;
+    padding-bottom: $section-vertical-padding;
+    padding-top: $section-vertical-padding;
+    border-bottom: 1px solid $light-gray;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+    }
+    .input {
+      box-sizing: border-box;
+      font-size: 16px;
+      width: 100%;
+      height: 35px;
+      background-color: $light-gray;
+      border: none;
+      border-radius: 5px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  .actionsSection {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: $section-horizontal-padding;
+    padding-right: $section-horizontal-padding;
+    padding-bottom: $section-vertical-padding;
+    padding-top: $section-vertical-padding;
+    
+    .action {
+      font-size: 16px;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 200px;
+      border: none;
+      border-radius: 5px;
+
+      &.primaryBtn {
+        background-color: rgb(205, 85, 85);
+        color: white;
+      }
+      &.secondaryBtn {
+        background-color: white;
+        color: rgb(205, 85, 85);
+      }
+    }
+  }
+}
