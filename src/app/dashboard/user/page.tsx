@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
-import SearchBar from './SearchBar';
-import UserList from './UserList';
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import UserList from "./components/UserList";
+import styles from "./styles.module.scss";
 
-export default function Home() {
+export default function User() {
   const [headers, setHeaders] = useState([
     "No",
     "Name",
@@ -12,8 +13,8 @@ export default function Home() {
     "User Role",
     "Activity",
     "Status",
-    "Action"
-  ])
+    "Action",
+  ]);
   const [items, setItems] = useState([
     {
       no: 1,
@@ -45,11 +46,11 @@ export default function Home() {
       status: "Active",
       action: "Review",
     },
-  ])
+  ]);
   return (
-    <div>
+    <section className={styles.userContainer}>
       <SearchBar />
       <UserList items={items} headers={headers} />
-    </div>
-  )
+    </section>
+  );
 }
