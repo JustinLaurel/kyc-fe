@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import UserTable from "./UserTable";
+import Table from "./component/Table";
 import SearchBar from './SearchBar';
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div>
       <SearchBar />
-      <UserTable items={items} />
+      <Table items={items} />
     </div>
   )
 }

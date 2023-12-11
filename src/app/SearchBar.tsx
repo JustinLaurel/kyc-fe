@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./userTable.module.scss";
+import styles from "./searchbar.module.scss";
 
 export default function SearchBar() {
   return (

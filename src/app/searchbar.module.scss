@@ -1,53 +1,4 @@
-$ultralight-gray: rgb(240, 240, 240);
-$light-gray: rgb(225, 225, 225);
-$dark-gray: rgb(100, 100, 100);
-$container-radius: 5px;
-$column-size: 30px repeat(7, minmax(0, 1fr));
-.userTable {
-  .headerSection {
-    display: grid;
-    grid-template-columns: $column-size;
-    grid-auto-rows: minmax(60px, auto);
-    gap: 10px;
-    background-color: $light-gray;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 10px;
-    border-top-right-radius: $container-radius;
-    border-top-left-radius: $container-radius;
-
-    .headerCell {
-      font-weight: bold;
-      color: $dark-gray;
-    }
-  }
-  .usersSection {
-    display: grid;
-    grid-auto-rows: minmax(60px, auto);
-    :last-child {
-      border-bottom-right-radius: $container-radius;
-      border-bottom-left-radius: $container-radius;  
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: $column-size;
-      gap: 10px;
-      align-items: center;
-      padding-left: 20px;
-      padding-right: 10px;  
-      &.even {
-        background-color: $ultralight-gray;
-      }
-      .userCell {
-        color: darkslategray;
-      }
-    }
-  }
-  .cell {
-    overflow-wrap: anywhere;
-  }
-}
+@use "src/app/colors";
 
 .searchBar {
   $section-vertical-padding: 20px;
@@ -57,7 +8,7 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 1px solid $light-gray;
+  border: 1px solid colors.$light-gray;
   border-radius: 10px;
 
   .headerSection {
@@ -66,7 +17,7 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid colors.$light-gray;
   }
 
   .fieldsSection {
@@ -78,7 +29,7 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid colors.$light-gray;
 
     .field {
       display: flex;
@@ -90,7 +41,7 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
       font-size: 16px;
       width: 100%;
       height: 35px;
-      background-color: $light-gray;
+      background-color: colors.$light-gray;
       border: none;
       border-radius: 5px;
       padding-left: 15px;

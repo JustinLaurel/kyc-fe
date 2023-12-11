@@ -1,0 +1,49 @@
+@use "src/app/colors";
+
+$container-radius: 5px;
+$column-size: 30px repeat(7, minmax(0, 1fr));
+.table {
+  .headerSection {
+    display: grid;
+    grid-template-columns: $column-size;
+    grid-auto-rows: minmax(60px, auto);
+    gap: 10px;
+    background-color: colors.$light-gray;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-top-right-radius: $container-radius;
+    border-top-left-radius: $container-radius;
+
+    .headerCell {
+      font-weight: bold;
+      color: colors.$dark-gray;
+    }
+  }
+  .usersSection {
+    display: grid;
+    grid-auto-rows: minmax(60px, auto);
+    :last-child {
+      border-bottom-right-radius: $container-radius;
+      border-bottom-left-radius: $container-radius;  
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: $column-size;
+      gap: 10px;
+      align-items: center;
+      padding-left: 20px;
+      padding-right: 10px;  
+      &.even {
+        background-color: colors.$ultralight-gray;
+      }
+      .userCell {
+        color: darkslategray;
+      }
+    }
+  }
+  .cell {
+    overflow-wrap: anywhere;
+  }
+}

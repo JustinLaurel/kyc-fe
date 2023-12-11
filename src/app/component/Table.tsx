@@ -1,5 +1,5 @@
 "use client";
-import styles from "./userTable.module.scss";
+import styles from "./table.module.scss";
 import Image from "next/image";
 import {
   CAvatar,
@@ -52,9 +52,9 @@ interface Props {
     action: string;
   }[];
 }
-export default function UserTable(props: Props) {
+export default function Table(props: Props) {
   return (
-    <main className={styles.userTable}>
+    <main className={styles.table}>
       <section className={styles.headerSection}>
         <CellHeader>No</CellHeader>
         <CellHeader>Name</CellHeader>
