@@ -1,0 +1,153 @@
+@use 'src/app/colors';
+
+.body {
+  margin: 0;
+  background-color: colors.$ultralight-gray;
+
+  display: flex;
+  flex-direction: column;
+
+  .dimmingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 500;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .controlbar {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 95px;
+    background-color: white;
+    box-shadow: 0 10px 15px -5px rgba(180, 180, 180, 0.2),
+      0 20px 25px -10px rgba(220, 220, 220, 0.1);
+
+    .logoHeader {
+      display: flex;
+      align-items: center;
+      .header {
+        font-size: 25px;
+        padding-left: 50px;
+      }
+    }
+    .actionsHeader {
+      display: flex;
+      align-items: center;
+      column-gap: 35px;
+      padding-right: 35px;
+      color: colors.$dark-gray;
+
+      .summary {
+        display: flex;
+        flex-direction: column;
+        .summaryName {
+          text-align: right;
+          font-size: 22px;
+        }
+        .summaryRole {
+          font-size: 16px;
+          text-align: right;
+          color: colors.$medium-gray;
+          font-weight: 300;
+        }
+      }
+
+      .pointer {
+        cursor: pointer;
+      }
+    }
+  }
+  .sidebar {
+    // Positioning CSS
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 360px;
+    height: 100%;
+    background: #333;
+    transition: right 0.3s;
+    z-index: 1000;
+    // Positioning CSS end
+
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+
+    &.active {
+      right: 0;
+    }
+
+    .userInfo {
+      height: 20%;
+      width: 100%;
+      background-color: darkred;
+      .wrapper {
+        margin: 25px;
+        row-gap: 5px;
+        .closeButton {
+          display: flex;
+          justify-content: right;
+        }
+        display: flex;
+        flex-direction: column;
+        .username {}
+        .phone {
+        }
+        .email {
+          font-size: 14px;
+          font-weight: 300;
+        }
+      }
+    }
+    .actions {
+      height: 80%;
+      width: 100%;
+      background-color: red;
+      .wrapper {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        column-gap: 36px;
+
+        .btn {
+          border-radius: 4px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          cursor: pointer;
+          column-gap: 24px;
+
+          padding: 10px;
+          padding-left: 10px;
+          padding-right: 10px;
+          &:hover {
+            background-color: yellow;
+            color: colors.$dark-gray;
+          }
+          .icon {
+            color: inherit;
+          }
+        }  
+      }
+    }
+  }
+  .content {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+  }
+}

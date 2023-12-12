@@ -6,7 +6,7 @@
 
 .card {
   $section-vertical-padding: 20px;
-  $section-horizontal-padding: 30px;
+  $section-horizontal-padding: 40px;
 
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
@@ -14,6 +14,7 @@
   flex-wrap: wrap;
   border: 1px solid colors.$light-gray;
   border-radius: 10px;
+  background-color: white;
 
   .headerSection {
     font-size: 25px;

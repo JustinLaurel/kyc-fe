@@ -49,6 +49,7 @@ export default function User() {
   ]);
   return (
     <section className={styles.userContainer}>
+      <div className={styles.header}>User Management</div>
       <SearchBar />
       <UserList items={items} headers={headers} />
     </section>
