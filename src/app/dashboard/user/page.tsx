@@ -1,10 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import UserList from "./components/UserList";
 import styles from "./styles.module.scss";
+import axios from "axios";
 
 export default function User() {
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/rest/application/5/view", {
+        withCredentials: true,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const [headers, setHeaders] = useState([
     "No",
     "Name",
