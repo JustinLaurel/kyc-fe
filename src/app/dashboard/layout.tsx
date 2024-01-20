@@ -31,14 +31,14 @@ export default function Layout(props: Props) {
         <section className={styles.controlbar}>
           <div className={styles.logoHeader}>
             <Image
-              src={"/assets/images/ambank_logo.png"}
+              src={"/assets/images/logo_ambank.png"}
               alt={"Ambank Logo"}
-              width={364}
-              height={95}
+              width={194}
+              height={40}
             />
-            <div className={styles.header}>Universal KYC Onboarding</div>
           </div>
           <div className={styles.actionsHeader}>
+            <div className={styles.header}>Universal KYC Onboarding</div>
             <div className={styles.summary}>
               <div className={styles.summaryName}>{"Welcome <Name>"}</div>
               <div className={styles.summaryRole}>Admin Approver</div>

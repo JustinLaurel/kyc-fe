@@ -1,19 +1,35 @@
 "use client";
 import { useEffect } from "react";
-import axios from "axios";
+import styles from "./page.module.scss";
+import Card from "../component/Card";
+import { BUTTON_COLOR_SCHEMES } from "../component/ActionButton";
 
 export default function Login() {
-  useEffect(() => {
-    init();
-  }, []);
+  useEffect(() => {}, []);
 
-  async function init() {
-    try {
-      window.location.href = "http://localhost:8080/oauth2/authorize?client_id=myapp&response_type=code";
-    } catch (error) {
-      console.log(`error`, error);
-    }
-  }
-
-  return (<div></div>);
+  return (
+    <div className={styles.container}>
+      <Card buttons={[
+        {
+          label: "Clear",
+          onClick: () => {},
+          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+        },
+        {
+          label: "Log In",
+          onClick: () => {},
+          colorScheme: BUTTON_COLOR_SCHEMES.RED,
+        }
+      ]}>
+        <div>
+          <div>User ID</div>
+          <input />
+        </div>
+        <div>
+          <div>Password</div>
+          <input />
+        </div>
+      </Card>
+    </div>
+  );
 }

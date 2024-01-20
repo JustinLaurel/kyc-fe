@@ -1,0 +1,46 @@
+@use 'src/app/colors';
+
+.body {
+  height: 100%;
+  margin: 0;
+
+
+  .controlbar {
+    display: flex;
+    width: 100%;
+    height: 72px;
+    background-color: white;
+    box-shadow: 0 10px 15px -5px rgba(180, 180, 180, 0.2),
+      0 20px 25px -10px rgba(220, 220, 220, 0.1);
+
+    .logoHeader {
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      background-color: colors.$ambank-red;
+    }
+    .actionsHeader {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      color: colors.$dark-gray;
+      padding-left: 40px;
+      padding-right: 40px;
+
+      .header {
+        font-family: colors.$font-lato;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+        letter-spacing: 0em;
+        color: black;
+      }
+    }
+  }
+  .content {
+    height: 100%;
+  }
+}
