@@ -8,7 +8,7 @@ import Notification from "@/components/Notification";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 export default function User() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(true);
   useEffect(() => {
     init();
   }, []);
@@ -72,8 +72,8 @@ export default function User() {
   return (
     <section className={styles.userContainer}>
       <Notification
-        isVisible={isVisible}
-        closeNotification={() => setIsVisible(false)}
+        isVisible={isNotificationVisible}
+        closeNotification={() => setIsNotificationVisible(false)}
         buttons={[
           {
             label: "Clear",

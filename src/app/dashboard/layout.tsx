@@ -29,7 +29,7 @@ export default function Layout(props: Props) {
           onClick={() => setIsSidebarOpen(false)}
         />
         <section className={styles.controlbar}>
-          <div className={styles.logoHeader}>
+          <div className={styles.logoSection}>
             <Image
               src={"/assets/images/logo_ambank.png"}
               alt={"Ambank Logo"}
@@ -37,31 +37,42 @@ export default function Layout(props: Props) {
               height={40}
             />
           </div>
-          <div className={styles.actionsHeader}>
+          <div className={styles.actionsSection}>
             <div className={styles.header}>Universal KYC Onboarding</div>
-            <div className={styles.summary}>
-              <div className={styles.summaryName}>{"Welcome <Name>"}</div>
-              <div className={styles.summaryRole}>Admin Approver</div>
+            <div className={styles.actions}>
+              <section className={styles.summary}>
+                <div className={styles.summaryName}>{"Welcome <Name>"}</div>
+                <div className={styles.summaryRole}>Admin Approver</div>
+              </section>
+              <section className={styles.item}>
+                <Image
+                  src={"/assets/images/icon_burger.png"}
+                  alt={"Burger Icon"}
+                  className={styles.pointer}
+                  width={19}
+                  height={15}
+                  onClick={() => setIsSidebarOpen(true)}
+                />
+              </section>
+              <section className={styles.item}>
+                <Image
+                  src={"/assets/images/icon_bell.png"}
+                  alt={"Notification Icon"}
+                  className={styles.pointer}
+                  width={20}
+                  height={20}
+                />
+              </section>
+              <section className={styles.item}>
+                <Image
+                  src={"/assets/images/icon_user.png"}
+                  alt={"User Icon"}
+                  className={styles.pointer}
+                  width={40}
+                  height={40}
+                />
+              </section>
             </div>
-            <List
-              className={styles.pointer}
-              size={32}
-              onClick={() => setIsSidebarOpen(true)}
-              color="red"
-              weight="fill"
-            />
-            <Bell
-              className={styles.pointer}
-              size={32}
-              color="red"
-              weight="regular"
-            />
-            <UserCircle
-              className={styles.pointer}
-              size={64}
-              color="red"
-              weight="thin"
-            />
           </div>
         </section>
         <section

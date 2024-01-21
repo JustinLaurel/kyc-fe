@@ -30,7 +30,7 @@
     box-shadow: 0 10px 15px -5px rgba(180, 180, 180, 0.2),
       0 20px 25px -10px rgba(220, 220, 220, 0.1);
 
-    .logoHeader {
+    .logoSection {
       display: flex;
       align-items: center;
       padding-left: 40px;
@@ -39,8 +39,12 @@
       padding-bottom: 16px;
       background-color: colors.$ambank-red;
     }
-    .actionsHeader {
+    .actionsSection {
       display: flex;
+      width: 100%;
+      padding-left: 40px;
+      padding-right: 40px;
+      justify-content: space-between;
       align-items: center;
       color: colors.$dark-gray;
 
@@ -52,19 +56,36 @@
         letter-spacing: 0em;
         color: black;
       }
-
-      .summary {
+      .actions {
         display: flex;
-        flex-direction: column;
-        .summaryName {
-          text-align: right;
-          font-size: 22px;
+        align-items: center;
+        column-gap: 16px;
+        .summary {
+          display: flex;
+          flex-direction: column;
+          row-gap: 2px;
+          .summaryName {
+            font-family: colors.$font-lato;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: right;
+          }
+          .summaryRole {
+            font-family: colors.$font-lato;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px;
+            letter-spacing: 0em;
+            text-align: right;
+            color: colors.$medium-gray;
+          }
         }
-        .summaryRole {
-          font-size: 16px;
-          text-align: right;
-          color: colors.$medium-gray;
-          font-weight: 300;
+        .item {
+          display: flex;
+          justify-content: center;
+          width: 40px;
         }
       }
 
