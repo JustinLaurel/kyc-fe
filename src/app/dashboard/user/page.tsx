@@ -39,7 +39,29 @@ export default function User() {
   ]);
   const [items, setItems] = useState([
     {
-      no: 1,
+      no: "1",
+      name: {
+        label: "Chiew Weng Keat",
+        onClick: () => alert("Name clicked!"),
+      },
+      userId: "1234567890",
+      department: "Lorem Ipsum",
+      userRole: "Lorem Ipsum",
+      activity: "Delete User",
+      status: "Active",
+      action: [
+        {
+          label: "Update",
+          onClick: () => alert("Update clicked!"),
+        },
+        {
+          label: "Delete",
+          onClick: () => alert("Delete clicked!"),
+        }
+      ],
+    },
+    {
+      no: "2",
       name: "Chiew Weng Keat",
       userId: "1234567890",
       department: "Lorem Ipsum",
@@ -49,17 +71,7 @@ export default function User() {
       action: "Review",
     },
     {
-      no: 2,
-      name: "Chiew Weng Keat",
-      userId: "1234567890",
-      department: "Lorem Ipsum",
-      userRole: "Lorem Ipsum",
-      activity: "Delete User",
-      status: "Active",
-      action: "Review",
-    },
-    {
-      no: 3,
+      no: "3",
       name: "Chiew Weng Keat",
       userId: "1234567890",
       department: "Lorem Ipsum",
@@ -69,6 +81,7 @@ export default function User() {
       action: "Review",
     },
   ]);
+  const [colWidths, setColWidths] = useState([1, 2, 2, 2, 2, 2, 2, 2]);
   return (
     <section className={styles.userContainer}>
       {/* <Notification
@@ -100,7 +113,7 @@ export default function User() {
         </ActionButton>
       </div>
       <SearchBar />
-      <UserList items={items} headers={headers} />
+      <UserList items={items} headers={headers} colWidths={colWidths} />
     </section>
   );
 }

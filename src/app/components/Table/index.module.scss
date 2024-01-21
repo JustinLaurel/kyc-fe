@@ -1,13 +1,12 @@
 @use "src/app/colors";
 
 $container-radius: 5px;
-$column-size: 30px repeat(7, minmax(0, 1fr));
+$column-gap: 10px;
 .table {
   .headerSection {
-    display: grid;
-    grid-template-columns: $column-size;
-    grid-auto-rows: minmax(60px, auto);
-    gap: 10px;
+    display: flex;
+    height: 60px;
+    column-gap: $column-gap;
     background-color: colors.$light-gray;
     align-items: center;
     padding-left: 20px;
@@ -15,30 +14,42 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
     border-top-right-radius: $container-radius;
     border-top-left-radius: $container-radius;
 
+    color: colors.$mediumdark-gray;
+    font-family: colors.$font-lato;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
     .headerCell {
-      font-weight: bold;
-      color: colors.$dark-gray;
     }
   }
   .usersSection {
-    display: grid;
-    grid-auto-rows: minmax(60px, auto);
     :last-child {
       border-bottom-right-radius: $container-radius;
-      border-bottom-left-radius: $container-radius;  
+      border-bottom-left-radius: $container-radius;
     }
 
     .row {
-      display: grid;
-      grid-template-columns: $column-size;
-      gap: 10px;
+      height: 60px;
+      display: flex;
+      column-gap: $column-gap;
       align-items: center;
       padding-left: 20px;
-      padding-right: 10px;  
+      padding-right: 10px;
+
+      color: colors.$mediumdark-gray;
+      font-family: colors.$font-lato;
+      font-size: 16px;
+      line-height: 19px;
+      font-weight: 400;
+      letter-spacing: 0em;    
       &.even {
         background-color: colors.$verylight-gray;
       }
       .userCell {
+        display: flex;
         color: darkslategray;
       }
     }
@@ -46,4 +57,12 @@ $column-size: 30px repeat(7, minmax(0, 1fr));
   .cell {
     overflow-wrap: anywhere;
   }
+}
+
+.buttonText {
+  cursor: pointer;
+  font-weight: 700;
+  color: colors.$ambank-red;
+  text-decoration: underline;
+  margin-right: 16px;
 }
