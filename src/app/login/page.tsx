@@ -1,33 +1,78 @@
 "use client";
-import { useEffect } from "react";
+import { useState } from "react";
 import styles from "./page.module.scss";
-import Card from "../component/Card";
-import { BUTTON_COLOR_SCHEMES } from "../component/ActionButton";
+import Card from "@/components/Card";
+import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import { routes, post } from "@/services/api";
+import { useRouter } from "next/navigation";
 
+const initialForm = {
+  username: "",
+  password: "",
+};
 export default function Login() {
-  useEffect(() => {}, []);
+  const [form, setForm] = useState({ ...initialForm });
+  const router = useRouter();
+
+  async function handleLogin() {
+    try {
+      const response = await post(routes.login, {
+        username: form.username,
+        password: form.password,
+      });
+      
+      if (response.authToken) {
+        router.push("/dashboard/user");
+        alert("Login successful");
+      }
+      console.log(`response`, response);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async function handleClear() {
+    setForm({ ...initialForm });
+  }
 
   return (
     <div className={styles.container}>
-      <Card buttons={[
-        {
-          label: "Clear",
-          onClick: () => {},
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        },
-        {
-          label: "Log In",
-          onClick: () => {},
-          colorScheme: BUTTON_COLOR_SCHEMES.RED,
-        }
-      ]}>
-        <div>
-          <div>User ID</div>
-          <input />
-        </div>
-        <div>
-          <div>Password</div>
-          <input />
+      <Card
+        buttons={[
+          {
+            label: "Clear",
+            onClick: () => handleClear(),
+            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+          },
+          {
+            label: "Log In",
+            onClick: () => handleLogin(),
+            colorScheme: BUTTON_COLOR_SCHEMES.RED,
+          },
+        ]}
+      >
+        <div className={styles.form}>
+          <section className={styles.fieldContainer}>
+            <div className={styles.title}>User ID</div>
+            <input
+              className={styles.input}
+              value={form.username}
+              onChange={(event) =>
+                setForm({ ...form, username: event.target.value })
+              }
+            />
+          </section>
+          <section className={styles.fieldContainer}>
+            <div className={styles.title}>Password</div>
+            <input
+              className={styles.input}
+              type="password"
+              value={form.password}
+              onChange={(event) =>
+                setForm({ ...form, password: event.target.value })
+              }
+            />
+          </section>
         </div>
       </Card>
     </div>

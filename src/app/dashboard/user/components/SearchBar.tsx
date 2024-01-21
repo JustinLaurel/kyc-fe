@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./searchbar.module.scss";
-import ActionButton, {
-  BUTTON_COLOR_SCHEMES,
-} from "@/app/component/ActionButton";
-import Card from "@/app/component/Card";
+import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import { Card } from "@/components/index";
 
 export default function SearchBar() {
   return (

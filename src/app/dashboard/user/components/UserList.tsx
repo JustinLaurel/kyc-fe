@@ -1,10 +1,8 @@
 import React from "react";
-import Table from "../../../component/Table";
-import { StringNumberObject } from "../../../types";
-import Card from "@/app/component/Card";
+import { Table, Card } from "@/components/index";
 
 interface UserTableProps {
-  items: StringNumberObject[];
+  items: Record<string, string>[];
   headers: string[];
 }
 export default function UserTable(props: UserTableProps) {

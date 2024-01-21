@@ -1,56 +1,15 @@
 "use client";
-import styles from "./table.module.scss";
-import Image from "next/image";
-import {
-  CAvatar,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CProgress,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cibGoogle,
-  cibFacebook,
-  cibLinkedin,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cibTwitter,
-  cilCloudDownload,
-  cilPeople,
-  cilUser,
-  cilUserFemale,
-} from "@coreui/icons";
-import { useState } from "react";
-import { StringNumberObject } from "../types";
+import styles from "./index.module.scss";
 
 interface Props {
-  items: StringNumberObject[];
+  items: Record<string, string>[];
   headers: string[];
   colWidths?: (number | null)[];
 }
 /**
  * Standard table.
  *
- * @param {StringNumberObject[]} props.items - Items displayed in table body. Must be same array length as props.headers
+ * @param {Record<string, string>[]} props.items - Items displayed in table body. Must be same array length as props.headers
  * @param {string[]} props.headers - Headers. Must be same array length as props.items
  * @param {number[]} props.colWidths - Width of each column. null width columns will occupy remaining space. Must be same array length as props.items/props.headers
  */

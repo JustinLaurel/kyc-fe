@@ -1,15 +1,14 @@
-@use 'src/app/colors';
+@use "src/app/colors";
 
 .action {
   font-size: 14px;
   font-family: colors.$font-lato;
   padding-top: 11.5px;
   padding-bottom: 11.5px;
-  width: 212px;
+  width: 220px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-
 
   &.redBtn {
     background: colors.$ambank-red-gradient;

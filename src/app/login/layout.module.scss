@@ -4,6 +4,8 @@
   height: 100%;
   margin: 0;
 
+  display: flex;
+  flex-direction: column;
 
   .controlbar {
     display: flex;
@@ -40,7 +42,8 @@
       }
     }
   }
+
   .content {
-    height: 100%;
+    flex-grow: 1;
   }
 }
