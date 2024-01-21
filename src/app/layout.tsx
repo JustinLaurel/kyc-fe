@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const lato = Lato({
-  weight: ["700"],
+  weight: ["400", "700"],
   variable: '--font-lato',
   subsets: ["latin"],
   display: "swap",

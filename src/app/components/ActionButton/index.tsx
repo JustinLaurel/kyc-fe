@@ -11,11 +11,20 @@ interface Props {
   label: string;
   colorScheme: BUTTON_COLOR_SCHEMES;
   onClick: () => void;
+  className?: string;
 }
 export default function ActionButton(props: Props) {
-  const { label, colorScheme, onClick } = props;
+  const { label, colorScheme, onClick, className = null } = props;
   return (
-    <button className={styles.action + " " + styles[colorScheme]} onClick={() => onClick()}>
+    <button
+      className={
+        styles.action +
+        " " +
+        styles[colorScheme] +
+        (className ? ` ${className}` : "")
+      }
+      onClick={() => onClick()}
+    >
       {label}
     </button>
   );

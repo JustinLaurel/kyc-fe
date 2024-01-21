@@ -4,22 +4,28 @@ import SearchBar from "./components/SearchBar";
 import UserList from "./components/UserList";
 import styles from "./styles.module.scss";
 import axios from "axios";
+import Notification from "@/components/Notification";
+import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 export default function User() {
+  const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
     init();
   }, []);
 
   const init = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/rest/application/5/view", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "http://localhost:8080/rest/application/5/view",
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const [headers, setHeaders] = useState([
     "No",
@@ -65,6 +71,24 @@ export default function User() {
   ]);
   return (
     <section className={styles.userContainer}>
+      <Notification
+        isVisible={isVisible}
+        closeNotification={() => setIsVisible(false)}
+        buttons={[
+          {
+            label: "Clear",
+            onClick: () => console.log("clear"),
+            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+          },
+          {
+            label: "Log In",
+            onClick: () => console.log("login"),
+            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+          },
+        ]}
+      >
+        This User ID does not exist in the system, please contact your administrator for further assistance.
+      </Notification>
       <div className={styles.header}>User Management</div>
       <SearchBar />
       <UserList items={items} headers={headers} />

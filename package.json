@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coreui/icons": "^3.0.1",
-    "@coreui/icons-react": "^2.2.1",
-    "@coreui/react": "^4.11.0",
     "@phosphor-icons/react": "^2.0.15",
     "axios": "^1.6.2",
     "next": "14.0.4",

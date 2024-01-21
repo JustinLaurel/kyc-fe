@@ -1,0 +1,55 @@
+@use "src/app/colors";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  // Position at center CSS start
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  // Position at center CSS end
+
+  .wrapper {
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    width: 300px;
+    max-width: max-content;
+    background-color: white;
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+  }
+}
+.headerSection {
+  font-family: colors.$font-lato;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.contentSection {
+  font-family: colors.$font-lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: colors.$medium-gray;
+}
+.buttonSection {
+  display: flex;
+  justify-content: space-between;
+  .notificationButton {
+    width: 125px !important;
+  }
+}
