@@ -9,7 +9,7 @@ interface CardProps {
     onClick: () => void;
     colorScheme: BUTTON_COLOR_SCHEMES;
   }[];
-  header?: string;
+  header?: React.ReactNode | string;
 }
 export default function Card(props: CardProps) {
   const { buttons, header = null } = props;

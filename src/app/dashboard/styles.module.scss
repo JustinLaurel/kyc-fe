@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: colors.$dimmed-gray;
     z-index: 500;
 
     &.active {
@@ -27,8 +27,7 @@
     width: 100%;
     height: 72px;
     background-color: white;
-    box-shadow: 0 10px 15px -5px rgba(180, 180, 180, 0.2),
-      0 20px 25px -10px rgba(220, 220, 220, 0.1);
+    box-shadow: 0px 9px 9px 0px colors.$verylight-gray;
 
     .logoSection {
       display: flex;
@@ -175,6 +174,6 @@
   .content {
     margin-left: 40px;
     margin-right: 40px;
-    margin-top: 40px;
+    margin-top: 72px;
   }
 }

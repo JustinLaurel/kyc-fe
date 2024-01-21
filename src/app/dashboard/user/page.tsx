@@ -8,7 +8,7 @@ import Notification from "@/components/Notification";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 export default function User() {
-  const [isNotificationVisible, setIsNotificationVisible] = useState(true);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   useEffect(() => {
     init();
   }, []);
@@ -71,7 +71,7 @@ export default function User() {
   ]);
   return (
     <section className={styles.userContainer}>
-      <Notification
+      {/* <Notification
         isVisible={isNotificationVisible}
         closeNotification={() => setIsNotificationVisible(false)}
         buttons={[
@@ -88,7 +88,7 @@ export default function User() {
         ]}
       >
         This User ID does not exist in the system, please contact your administrator for further assistance.
-      </Notification>
+      </Notification> */}
       <div className={styles.header}>User Management</div>
       <SearchBar />
       <UserList items={items} headers={headers} />

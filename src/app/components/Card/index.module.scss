@@ -1,28 +1,36 @@
 @use "src/app/colors";
 
-@mixin bottomBorder {
-  border-bottom: 1px solid colors.$light-gray;
+@mixin bottomSeparator {
+  border-bottom: 1px solid colors.$separator-gray;
 }
 
 .card {
-  $section-vertical-padding: 20px;
+  $section-vertical-padding: 24px;
   $section-horizontal-padding: 40px;
 
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 1px solid colors.$light-gray;
+  border: 1px solid colors.$border-gray;
   border-radius: 10px;
   background-color: white;
 
+  box-shadow: 0px 9px 9px 0px colors.$verylight-gray;
+
   .headerSection {
-    font-size: 25px;
+    font-family: colors.$font-lato;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    color: rgba(35, 31, 32, 1);
+    text-align: left;
     padding-left: $section-horizontal-padding;
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    @include bottomBorder;
+    @include bottomSeparator;
   }
 
   .contentSection {
@@ -30,7 +38,7 @@
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    @include bottomBorder;
+    @include bottomSeparator;
   }
   .actionsSection {
     display: flex;
@@ -39,10 +47,11 @@
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    
+
     .action {
       font-size: 16px;
-      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
       padding-top: 10px;
       padding-bottom: 10px;
       width: 200px;

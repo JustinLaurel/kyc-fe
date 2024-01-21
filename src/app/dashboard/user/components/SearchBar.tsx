@@ -22,41 +22,41 @@ export default function SearchBar() {
     >
       <section className={styles.fieldsSection}>
         <div className={styles.field}>
-          <div>Name</div>
+          <div className={styles.fieldTitle}>Name</div>
           <input
-            className={styles.input}
+            className={styles.fieldInput}
             type="text"
             placeholder="Search by name"
           />
         </div>
         <div className={styles.field}>
-          <div>User Role</div>
+          <div className={styles.fieldTitle}>User Role</div>
           <input
-            className={styles.input}
+            className={styles.fieldInput}
             type="text"
             placeholder="Please Select"
           />
         </div>
         <div className={styles.field}>
-          <div>User ID</div>
+          <div className={styles.fieldTitle}>User ID</div>
           <input
-            className={styles.input}
+            className={styles.fieldInput}
             type="text"
             placeholder="Search by user ID"
           />
         </div>
         <div className={styles.field}>
-          <div>Status</div>
+          <div className={styles.fieldTitle}>Status</div>
           <input
-            className={styles.input}
+            className={styles.fieldInput}
             type="text"
             placeholder="Search by status"
           />
         </div>
         <div className={styles.field}>
-          <div>Department</div>
+          <div className={styles.fieldTitle}>Department</div>
           <input
-            className={styles.input}
+            className={styles.fieldInput}
             type="text"
             placeholder="Search by department/branch"
           />
