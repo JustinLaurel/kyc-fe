@@ -8,13 +8,13 @@ export enum BUTTON_COLOR_SCHEMES {
 }
 
 interface Props {
-  label: string;
+  children?: React.ReactNode;
   colorScheme: BUTTON_COLOR_SCHEMES;
   onClick: () => void;
   className?: string;
 }
 export default function ActionButton(props: Props) {
-  const { label, colorScheme, onClick, className = null } = props;
+  const { colorScheme, onClick, className = null } = props;
   return (
     <button
       className={
@@ -25,7 +25,7 @@ export default function ActionButton(props: Props) {
       }
       onClick={() => onClick()}
     >
-      {label}
+      {props.children}
     </button>
   );
 }

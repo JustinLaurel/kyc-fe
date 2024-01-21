@@ -5,7 +5,7 @@ import UserList from "./components/UserList";
 import styles from "./styles.module.scss";
 import axios from "axios";
 import Notification from "@/components/Notification";
-import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 export default function User() {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -89,7 +89,16 @@ export default function User() {
       >
         This User ID does not exist in the system, please contact your administrator for further assistance.
       </Notification> */}
-      <div className={styles.header}>User Management</div>
+      <div className={styles.headerSection}>
+        <div>User Management</div>
+        <ActionButton
+          colorScheme={BUTTON_COLOR_SCHEMES.RED}
+          onClick={() => {}}
+          className={styles.createButton}
+        >
+          Create New
+        </ActionButton>
+      </div>
       <SearchBar />
       <UserList items={items} headers={headers} />
     </section>

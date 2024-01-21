@@ -44,10 +44,11 @@ export default function Notification(props: NotificationProps) {
               <ActionButton
                 className={styles.notificationButton}
                 key={index}
-                label={button.label}
                 colorScheme={button.colorScheme}
                 onClick={() => button.onClick()}
-              />
+              >
+                {button.label}
+              </ActionButton>
             ))}
           </section>
         )}
