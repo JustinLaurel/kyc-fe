@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./searchbar.module.scss";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { Card } from "@/components/index";
+import FieldInput from "@/components/FieldInput";
+import FieldDropdown, { LEFT_ICONS } from "@/components/FieldDropdown";
 
 export default function SearchBar() {
   return (
@@ -21,46 +23,47 @@ export default function SearchBar() {
       ]}
     >
       <section className={styles.fieldsSection}>
-        <div className={styles.field}>
-          <div className={styles.fieldTitle}>Name</div>
-          <input
-            className={styles.fieldInput}
-            type="text"
-            placeholder="Search by name"
-          />
-        </div>
-        <div className={styles.field}>
-          <div className={styles.fieldTitle}>User Role</div>
-          <input
-            className={styles.fieldInput}
-            type="text"
-            placeholder="Please Select"
-          />
-        </div>
-        <div className={styles.field}>
-          <div className={styles.fieldTitle}>User ID</div>
-          <input
-            className={styles.fieldInput}
-            type="text"
-            placeholder="Search by user ID"
-          />
-        </div>
-        <div className={styles.field}>
-          <div className={styles.fieldTitle}>Status</div>
-          <input
-            className={styles.fieldInput}
-            type="text"
-            placeholder="Search by status"
-          />
-        </div>
-        <div className={styles.field}>
-          <div className={styles.fieldTitle}>Department</div>
-          <input
-            className={styles.fieldInput}
-            type="text"
-            placeholder="Search by department/branch"
-          />
-        </div>
+        <FieldInput title={"Name"} placeholder={"Search by name"} />
+        <FieldDropdown
+          items={[
+            {
+              label: "Role 1",
+              value: "Role 1",
+            },
+            {
+              label: "Role 2",
+              value: "Role 2",
+            },
+          ]}
+          title={"User Role"}
+          placeholder={"Please Select"}
+        />
+        <FieldInput title={"User ID"} placeholder={"Search by user ID"} />
+        <FieldDropdown
+          items={[
+            {
+              label: "Status 1",
+              value: "Status 1",
+            },
+            {
+              label: "Status 2",
+              value: "Status 2",
+            },
+          ]}
+          title={"Status"}
+          placeholder={"Search by status"}
+        />
+        <FieldDropdown
+          items={[
+            {
+              label: "Lorem Ipsum",
+              value: "Lorem Ipsum",
+            },
+          ]}
+          title={"Department"}
+          placeholder={"Search by department/branch"}
+          leftIcon={LEFT_ICONS.MAGNIFYING_GLASS}
+        />
       </section>
     </Card>
   );

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
+import "@mantine/core/styles.css";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 export const metadata: Metadata = {
   title: "Ambank KYC",
@@ -8,7 +10,7 @@ export const metadata: Metadata = {
 
 const lato = Lato({
   weight: ["400", "700"],
-  variable: '--font-lato',
+  variable: "--font-lato",
   subsets: ["latin"],
   display: "swap",
 });
@@ -20,7 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${lato.variable}`}>
-      <body>{children}</body>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body>
+        <MantineProvider>{children}</MantineProvider>
+      </body>
     </html>
   );
 }
