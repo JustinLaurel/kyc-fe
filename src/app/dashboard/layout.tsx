@@ -1,5 +1,5 @@
 "use client";
-import styles from "./styles.module.scss";
+import styles from "./layout.module.scss";
 import Image from "next/image";
 import {
   List,
@@ -81,43 +81,53 @@ export default function Layout(props: Props) {
           <div className={styles.userInfo}>
             <div className={styles.wrapper}>
               <div className={styles.closeButton}>
-                <X
-                  size={22}
-                  color="white"
-                  weight="bold"
-                  style={{ textAlign: "right", cursor: "pointer" }}
+                <Image
+                  src={"/assets/images/icon_close.png"}
+                  alt={"Close sidebar"}
+                  className={styles.pointer}
+                  width={24}
+                  height={24}
                   onClick={() => setIsSidebarOpen(false)}
                 />
               </div>
-              <div className={styles.username}>john99doe</div>
-              <div className={styles.phone}>+6012xxxx123</div>
-              <div className={styles.email}>john99doe@youremail.com</div>
+              <section className={styles.infoSection}>
+                <div className={styles.username}>john99doe</div>
+                <section className={styles.phoneEmailWrapper}>
+                  <div className={styles.phone}>+6012xxxx123</div>
+                  <div className={styles.email}>john99doe@youremail.com</div>
+                </section>
+              </section>
             </div>
           </div>
           <div className={styles.actions}>
             <div className={styles.wrapper}>
               <SidebarButton
-                ButtonIcon={ChartPieSlice}
+                src="/assets/images/icon_dashboard.png"
+                darkSrc="/assets/images/icon_dashboard_dark.png"
                 label={"Dashboard"}
                 onClick={() => {}}
               />
               <SidebarButton
-                ButtonIcon={UserGear}
+                src="/assets/images/icon_user_management.png"
+                darkSrc="/assets/images/icon_user_management_dark.png"
                 label={"User Management"}
                 onClick={() => {}}
               />
               <SidebarButton
-                ButtonIcon={Bell}
+                src="/assets/images/icon_notification.png"
+                darkSrc="/assets/images/icon_notification_dark.png"
                 label={"Notification"}
                 onClick={() => {}}
               />
               <SidebarButton
-                ButtonIcon={UserCircle}
+                src="/assets/images/icon_my_profile.png"
+                darkSrc="/assets/images/icon_my_profile_dark.png"
                 label={"My Profile"}
                 onClick={() => {}}
               />
               <SidebarButton
-                ButtonIcon={SignOut}
+                src="/assets/images/icon_logout.png"
+                darkSrc="/assets/images/icon_logout_dark.png"
                 label={"Logout"}
                 onClick={() => {}}
               />
@@ -131,16 +141,30 @@ export default function Layout(props: Props) {
 }
 
 interface SidebarButtonProps {
-  ButtonIcon: typeof List;
+  src: string;
+  darkSrc?: string;
   label: string;
   onClick: () => void;
 }
 function SidebarButton(props: SidebarButtonProps) {
-  const { ButtonIcon, label, onClick } = props;
+  const { src, darkSrc = null, label, onClick } = props;
+
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <section className={styles.btn} onClick={() => onClick()}>
-      <ButtonIcon className={styles.icon} size={34} weight="regular" />
-      <div>{label}</div>
+    <section
+      className={styles.btn}
+      onClick={() => onClick()}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Image
+        src={isHovered && darkSrc ? darkSrc : src}
+        alt={label}
+        width={20}
+        height={20}
+        color={"black"}
+      />
+      <div className={styles.label}>{label}</div>
     </section>
   );
 }

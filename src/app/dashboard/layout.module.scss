@@ -1,4 +1,4 @@
-@use 'src/app/colors';
+@use "src/app/colors";
 
 .body {
   margin: 0;
@@ -87,18 +87,14 @@
           width: 40px;
         }
       }
-
-      .pointer {
-        cursor: pointer;
-      }
     }
   }
   .sidebar {
     // Positioning CSS
     position: fixed;
     top: 0;
-    right: -360px;
-    width: 360px;
+    right: -320px;
+    width: 320px;
     height: 100%;
     background: #333;
     transition: right 0.3s;
@@ -108,7 +104,8 @@
     display: flex;
     flex-direction: column;
     color: white;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
     font-weight: 400;
     font-size: 20px;
     letter-spacing: 0.5px;
@@ -118,24 +115,57 @@
     }
 
     .userInfo {
-      height: 20%;
+      height: 200px;
       width: 100%;
       background-color: darkred;
+      padding-top: 20px;
+      padding-bottom: 44px;
       .wrapper {
-        margin: 25px;
-        row-gap: 5px;
         .closeButton {
           display: flex;
           justify-content: right;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          padding-right: 24px;
         }
         display: flex;
         flex-direction: column;
-        .username {}
-        .phone {
-        }
-        .email {
-          font-size: 14px;
-          font-weight: 300;
+
+        .infoSection {
+          display: flex;
+          flex-direction: column;
+          row-gap: 12px;
+
+          padding-top: 24px;
+          padding-bottom: 24px;
+          padding-left: 16px;
+          padding-right: 16px;
+
+          font-family: colors.$font-inter;
+          letter-spacing: 0em;
+
+          .username {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 22px;
+          }
+
+          .phoneEmailWrapper {
+            display: flex;
+            flex-direction: column;
+            row-gap: 4px;
+
+            .phone {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 19px;
+            }
+            .email {
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 15px;
+            }
+          }
         }
       }
     }
@@ -144,7 +174,10 @@
       width: 100%;
       background-color: red;
       .wrapper {
-        padding: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 24px;
+        padding-bottom: 24px;
         display: flex;
         flex-direction: column;
         column-gap: 36px;
@@ -157,9 +190,10 @@
           cursor: pointer;
           column-gap: 24px;
 
-          padding: 10px;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: 16px;
+          padding-right: 16px;
+          padding-top: 12px;
+          padding-bottom: 12px;
           &:hover {
             background-color: yellow;
             color: colors.$dark-gray;
@@ -167,11 +201,20 @@
           .icon {
             color: inherit;
           }
-        }  
+          .label {
+            font-family: colors.$font-lato;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 17px;
+          }
+        }
       }
     }
   }
   .content {
     margin: 40px;
   }
+}
+.pointer {
+  cursor: pointer;
 }

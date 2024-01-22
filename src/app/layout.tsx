@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
@@ -14,6 +14,11 @@ const lato = Lato({
   subsets: ["latin"],
   display: "swap",
 });
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -21,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${lato.variable}`}>
+    <html lang="en" className={`${lato.variable} ${inter.variable}`}>
       <head>
         <ColorSchemeScript />
       </head>
