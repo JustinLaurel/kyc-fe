@@ -1,7 +1,7 @@
 @use "src/app/colors";
 
-$container-radius: 5px;
-$column-gap: 10px;
+$container-radius: 4px;
+$column-gap: 8px;
 .table {
   .headerSection {
     display: flex;
@@ -23,6 +23,10 @@ $column-gap: 10px;
     text-align: left;
 
     .headerCell {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
     }
   }
   .usersSection {
@@ -44,7 +48,9 @@ $column-gap: 10px;
       font-size: 16px;
       line-height: 19px;
       font-weight: 400;
-      letter-spacing: 0em;    
+      letter-spacing: 0em;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid colors.$separator-gray;
       &.even {
         background-color: colors.$verylight-gray;
       }

@@ -1,9 +1,9 @@
 import ActionButton from "./ActionButton";
 import Card from "./Card";
-import Table from "./Table";
+import DataTable from "./DataTable";
 
 export {
   ActionButton,
   Card,
-  Table,
+  DataTable,
 }

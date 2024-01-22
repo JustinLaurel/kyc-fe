@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import SearchBar from "./components/SearchBar";
-import UserList from "./components/UserList";
 import styles from "./styles.module.scss";
-import axios from "axios";
-import Notification from "@/components/Notification";
+import SearchBar from "./components/SearchBar";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import DataTable from "@/components/DataTable";
+import Card from "@/components/Card";
+import Notification from "@/components/Notification";
 
 export default function User() {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -15,13 +15,6 @@ export default function User() {
 
   const init = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/rest/application/5/view",
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -29,12 +22,30 @@ export default function User() {
 
   const [headers, setHeaders] = useState([
     "No",
-    "Name",
-    "User ID",
-    "Department/Branch",
-    "User Role",
-    "Activity",
-    "Status",
+    {
+      label: "Name",
+      onClick: () => {},
+    },
+    {
+      label: "User ID",
+      onClick: () => {},
+    },
+    {
+      label: "Department/Branch",
+      onClick: () => {},
+    },
+    {
+      label: "User Role",
+      onClick: () => {},
+    },
+    {
+      label: "Activity",
+      onClick: () => {},
+    },
+    {
+      label: "Status",
+      onClick: () => {},
+    },
     "Action",
   ]);
   const [items, setItems] = useState([
@@ -42,7 +53,7 @@ export default function User() {
       no: "1",
       name: {
         label: "Chiew Weng Keat",
-        onClick: () => alert("Name clicked!"),
+        onClick: () => {},
       },
       userId: "1234567890",
       department: "Lorem Ipsum",
@@ -52,36 +63,80 @@ export default function User() {
       action: [
         {
           label: "Update",
-          onClick: () => alert("Update clicked!"),
+          onClick: () => {},
         },
         {
           label: "Delete",
-          onClick: () => alert("Delete clicked!"),
-        }
+          onClick: () => {},
+        },
       ],
     },
     {
       no: "2",
-      name: "Chiew Weng Keat",
+      name: {
+        label: "Chiew Weng Keat",
+        onClick: () => {},
+      },
       userId: "1234567890",
       department: "Lorem Ipsum",
       userRole: "Lorem Ipsum",
       activity: "Delete User",
       status: "Active",
-      action: "Review",
+      action: {
+        label: "Review",
+        onClick: () => {},
+      },
     },
     {
       no: "3",
-      name: "Chiew Weng Keat",
+      name: {
+        label: "Chiew Weng Keat",
+        onClick: () => {},
+      },
       userId: "1234567890",
       department: "Lorem Ipsum",
       userRole: "Lorem Ipsum",
       activity: "Delete User",
       status: "Active",
-      action: "Review",
+      action: {
+        label: "Review",
+        onClick: () => {},
+      },
+    },
+    {
+      no: "4",
+      name: {
+        label: "Chiew Weng Keat",
+        onClick: () => {},
+      },
+      userId: "1234567890",
+      department: "Lorem Ipsum",
+      userRole: "Lorem Ipsum",
+      activity: "Delete User",
+      status: "Active",
+      action: {
+        label: "Review",
+        onClick: () => {},
+      },
+    },
+    {
+      no: "5",
+      name: {
+        label: "Chiew Weng Keat",
+        onClick: () => alert("Name clicked!"),
+      },
+      userId: "1234567890",
+      department: "Lorem Ipsum",
+      userRole: "Lorem Ipsum",
+      activity: "Delete User",
+      status: "Active",
+      action: {
+        label: "Review",
+        onClick: () => alert("Review clicked!"),
+      },
     },
   ]);
-  const [colWidths, setColWidths] = useState([1, 2, 2, 2, 2, 2, 2, 2]);
+  const [colWidths, setColWidths] = useState([0.3, 3, 1.5, 2, 2, 2, 1, 1.5]);
   return (
     <section className={styles.userContainer}>
       {/* <Notification
@@ -113,7 +168,9 @@ export default function User() {
         </ActionButton>
       </div>
       <SearchBar />
-      <UserList items={items} headers={headers} colWidths={colWidths} />
+      <Card header="Search Result">
+        <DataTable items={items} headers={headers} colWidths={colWidths} />
+      </Card>
     </section>
   );
 }
