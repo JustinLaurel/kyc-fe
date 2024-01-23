@@ -1,4 +1,4 @@
-import { Autocomplete, rem } from "@mantine/core";
+import { Autocomplete } from "@mantine/core";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { ValueOf } from "@/util";

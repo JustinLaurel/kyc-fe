@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
+import { Button } from "@mui/material";
 
 export enum BUTTON_COLOR_SCHEMES {
   WHITE = "whiteBtn",
@@ -16,7 +17,9 @@ interface Props {
 export default function ActionButton(props: Props) {
   const { colorScheme, onClick, className = null } = props;
   return (
-    <button
+    <Button
+      variant="contained"
+      disableElevation
       className={
         styles.action +
         " " +
@@ -26,6 +29,6 @@ export default function ActionButton(props: Props) {
       onClick={() => onClick()}
     >
       {props.children}
-    </button>
+    </Button>
   );
 }

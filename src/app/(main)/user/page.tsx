@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 import SearchBar from "./components/SearchBar";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import DataTable from "@/components/DataTable";

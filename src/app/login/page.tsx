@@ -22,7 +22,7 @@ export default function Login() {
       });
       
       if (response.authToken) {
-        router.push("/dashboard/user");
+        router.push("/user");
         alert("Login successful");
       }
       console.log(`response`, response);
