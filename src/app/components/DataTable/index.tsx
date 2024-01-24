@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { ValueOf } from "@/util";
+import TextButton from "../TextButton";
 
 const ICON_SORT_TYPE = {
   UP: "UP",
@@ -119,12 +120,13 @@ export default function DataTable(props: Props) {
                     <CellUser key={cellIndex} style={flexStyle}>
                       {cellItem.map((item, index) => {
                         return (
-                          <ButtonText
+                          <TextButton
                             key={index}
                             onClick={() => item.onClick()}
+                            className={styles.buttonText}
                           >
                             {item.label}
-                          </ButtonText>
+                          </TextButton>
                         );
                       })}
                     </CellUser>
@@ -132,9 +134,13 @@ export default function DataTable(props: Props) {
                 } else {
                   return (
                     <CellUser key={cellIndex} style={flexStyle}>
-                      <ButtonText key={key} onClick={() => cellItem.onClick()}>
+                      <TextButton
+                        key={key}
+                        onClick={() => cellItem.onClick()}
+                        className={styles.buttonText}
+                      >
                         {cellItem.label}
-                      </ButtonText>
+                      </TextButton>
                     </CellUser>
                   );
                 }
@@ -169,18 +175,6 @@ function CellUser({ children, style }: CellProps) {
       className={styles.cell + " " + styles.userCell}
       style={style ? style : {}}
     >
-      {children}
-    </div>
-  );
-}
-
-interface ButtonTextProps {
-  children: React.ReactNode;
-  onClick: () => void;
-}
-function ButtonText({ children, onClick }: ButtonTextProps) {
-  return (
-    <div className={styles.buttonText} onClick={() => onClick()}>
       {children}
     </div>
   );

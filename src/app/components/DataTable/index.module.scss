@@ -24,6 +24,7 @@ $column-gap: 8px;
 
     .headerCell {
       display: flex;
+      flex-wrap: nowrap;
       justify-content: space-between;
       align-items: center;
       height: 100%;
@@ -66,14 +67,14 @@ $column-gap: 8px;
     }
   }
   .cell {
+    flex-wrap: wrap;
     overflow-wrap: anywhere;
   }
 }
 
 .buttonText {
-  cursor: pointer;
-  font-weight: 700;
-  color: colors.$ambank-red;
-  text-decoration: underline;
   margin-right: 16px;
+  user-select: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }

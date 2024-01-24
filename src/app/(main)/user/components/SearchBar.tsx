@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./searchbar.module.scss";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
-import { Card } from "@/components/index";
+import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
-import FieldDropdown, { LEFT_ICONS } from "@/components/FieldDropdown";
+import FieldAutocomplete from "@/components/FieldAutocomplete";
 
 export default function SearchBar() {
   return (
@@ -24,7 +24,7 @@ export default function SearchBar() {
     >
       <section className={styles.fieldsSection}>
         <FieldInput title={"Name"} placeholder={"Search by name"} />
-        <FieldDropdown
+        <FieldAutocomplete
           items={[
             {
               label: "Role 1",
@@ -39,7 +39,7 @@ export default function SearchBar() {
           placeholder={"Please Select"}
         />
         <FieldInput title={"User ID"} placeholder={"Search by user ID"} />
-        <FieldDropdown
+        <FieldAutocomplete
           items={[
             {
               label: "Status 1",
@@ -53,7 +53,7 @@ export default function SearchBar() {
           title={"Status"}
           placeholder={"Search by status"}
         />
-        <FieldDropdown
+        <FieldAutocomplete
           items={[
             {
               label: "Lorem Ipsum",
@@ -62,7 +62,6 @@ export default function SearchBar() {
           ]}
           title={"Department"}
           placeholder={"Search by department/branch"}
-          leftIcon={LEFT_ICONS.MAGNIFYING_GLASS}
         />
       </section>
     </Card>

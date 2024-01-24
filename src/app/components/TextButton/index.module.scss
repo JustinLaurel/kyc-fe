@@ -1,0 +1,20 @@
+@use "src/app/colors";
+
+.root {
+  cursor: pointer;
+  color: colors.$ambank-red;
+  text-decoration: underline;
+  text-transform: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+
+  font-family: colors.$font-lato;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 700;
+  letter-spacing: 0em;
+
+  min-width: auto;
+  user-select: text;
+}

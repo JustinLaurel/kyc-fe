@@ -1,0 +1,48 @@
+@use "src/app/colors";
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  .title {
+    color: colors.$dark-gray;
+    font-family: colors.$font-lato;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+  }
+  .input {
+    border: none;
+
+    font-family: colors.$font-lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+  }
+  .root {
+    padding: 0;
+    background-color: colors.$light-gray;
+    border: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0px 16px;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    &:focus-within {
+      outline: -webkit-focus-ring-color auto 1px
+    }
+  }
+}
+.dropdownItem {
+  font-family: colors.$font-lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  height: 40px;
+}

@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.scss";
-import Card from "@/components/Card";
-import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
-import { routes, post } from "@/services/api";
+import Card from "../components/Card";
+import { BUTTON_COLOR_SCHEMES } from "../components/ActionButton";
+import { routes, post } from "../services/api";
 import { useRouter } from "next/navigation";
 
 const initialForm = {

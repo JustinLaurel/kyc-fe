@@ -15,6 +15,7 @@ export default function Layout(props: Props) {
         <section className={styles.controlbar}>
           <div className={styles.logoHeader}>
             <Image
+              priority
               src={"/assets/images/logo_ambank.png"}
               alt={"Ambank Logo"}
               width={194}

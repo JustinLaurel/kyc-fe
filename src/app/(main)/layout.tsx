@@ -1,15 +1,6 @@
 "use client";
 import styles from "./layout.module.scss";
 import Image from "next/image";
-import {
-  List,
-  Bell,
-  UserCircle,
-  X,
-  ChartPieSlice,
-  UserGear,
-  SignOut,
-} from "@phosphor-icons/react";
 import React, { useState } from "react";
 
 interface Props {
@@ -31,6 +22,7 @@ export default function Layout(props: Props) {
         <section className={styles.controlbar}>
           <div className={styles.logoSection}>
             <Image
+              priority
               src={"/assets/images/logo_ambank.png"}
               alt={"Ambank Logo"}
               width={194}

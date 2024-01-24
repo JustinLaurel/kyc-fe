@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
-import "@mantine/core/styles.css";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 export const metadata: Metadata = {
   title: "Ambank KYC",
@@ -27,12 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${lato.variable} ${inter.variable}`}>
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <body>
-        <MantineProvider>{children}</MantineProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
