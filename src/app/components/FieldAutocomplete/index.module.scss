@@ -29,12 +29,17 @@
     height: 40px;
     display: flex;
     align-items: center;
-    padding: 0px 16px;
     border-radius: 4px;
     box-sizing: border-box;
-
     &:focus-within {
       outline: -webkit-focus-ring-color auto 1px
+    }
+
+    .searchIcon {
+      padding-left: 16px;
+    }
+    .endAdornment {
+      padding-right: 16px;
     }
   }
 }
@@ -45,4 +50,5 @@
   line-height: 14px;
   letter-spacing: 0em;
   height: 40px;
+  width: 100%;
 }

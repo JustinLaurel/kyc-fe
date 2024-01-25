@@ -28,7 +28,6 @@ export default function FieldDropdown(props: Props) {
           select: styles.select,
           outlined: styles.outlined,
           icon: styles.icon,
-          iconOpen: styles.icon,
         }}
         onChange={(event) => setValue(event.target.value as string)}
       >
