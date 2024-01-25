@@ -1,7 +1,10 @@
 @use "src/app/colors";
 
-@mixin bottomSeparator {
+.bottomSeparator {
   border-bottom: 1px solid colors.$separator-gray;
+  height: 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .card {
@@ -18,6 +21,19 @@
 
   box-shadow: 0px 9px 9px 0px colors.$verylight-gray;
 
+  >section {
+    &:first-child {
+      padding-bottom: $section-vertical-padding / 2 !important;
+    }
+    &:last-child {
+      padding-top: $section-vertical-padding / 2 !important;
+    }
+    &:only-child {
+      padding-top: $section-vertical-padding !important;
+      padding-bottom: $section-vertical-padding !important;
+    }
+  }
+
   .headerSection {
     font-family: colors.$font-lato;
     font-size: 20px;
@@ -28,9 +44,8 @@
     text-align: left;
     padding-left: $section-horizontal-padding;
     padding-right: $section-horizontal-padding;
-    padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    @include bottomSeparator;
+    padding-bottom: $section-vertical-padding;
   }
 
   .contentSection {
@@ -38,15 +53,14 @@
     padding-right: $section-horizontal-padding;
     padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
-    @include bottomSeparator;
   }
   .actionsSection {
     display: flex;
     justify-content: flex-end;
     padding-left: $section-horizontal-padding;
     padding-right: $section-horizontal-padding;
-    padding-bottom: $section-vertical-padding;
     padding-top: $section-vertical-padding;
+    padding-bottom: $section-vertical-padding;
 
     .action {
       font-size: 16px;

@@ -22,10 +22,9 @@ export default function Login() {
       });
       
       if (response.authToken) {
-        router.push("/user");
+        router.push("/dashboard");
         alert("Login successful");
       }
-      console.log(`response`, response);
     } catch (error) {
       alert(error);
     }
@@ -50,6 +49,7 @@ export default function Login() {
             colorScheme: BUTTON_COLOR_SCHEMES.RED,
           },
         ]}
+        hasSeparator={false}
       >
         <div className={styles.form}>
           <section className={styles.fieldContainer}>

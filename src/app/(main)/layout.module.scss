@@ -183,17 +183,21 @@
         column-gap: 36px;
 
         .btn {
+          display: flex;
+          justify-content: flex-start;
           border-radius: 4px;
           display: flex;
           flex-direction: row;
           align-items: center;
           cursor: pointer;
           column-gap: 24px;
+          text-transform: none;
 
           padding-left: 16px;
           padding-right: 16px;
           padding-top: 12px;
           padding-bottom: 12px;
+          color: white;
           &:hover {
             background-color: yellow;
             color: colors.$dark-gray;

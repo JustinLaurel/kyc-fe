@@ -17,6 +17,8 @@ export default function FieldDropdown(props: Props) {
     <div className={styles.fieldContainer}>
       {title && <div className={styles.title}>{title}</div>}
       <Select
+        value={value}
+        onChange={(event) => setValue(event.target.value as string)}
         disableUnderline
         displayEmpty
         renderValue={() =>
@@ -29,7 +31,6 @@ export default function FieldDropdown(props: Props) {
           outlined: styles.outlined,
           icon: styles.icon,
         }}
-        onChange={(event) => setValue(event.target.value as string)}
       >
         {Array.isArray(items) &&
           items.length > 0 &&

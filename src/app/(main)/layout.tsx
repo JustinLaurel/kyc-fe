@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@mui/material";
 import styles from "./layout.module.scss";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -143,7 +144,7 @@ function SidebarButton(props: SidebarButtonProps) {
 
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <section
+    <Button
       className={styles.btn}
       onClick={() => onClick()}
       onMouseEnter={() => setIsHovered(true)}
@@ -157,6 +158,6 @@ function SidebarButton(props: SidebarButtonProps) {
         color={"black"}
       />
       <div className={styles.label}>{label}</div>
-    </section>
+    </Button>
   );
 }

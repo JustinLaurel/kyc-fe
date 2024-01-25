@@ -61,8 +61,6 @@ export default function FieldAutocomplete(props: Props) {
           );
         }}
         renderOption={(props, option, state) => {
-          console.log(`state`, state);
-          console.log(`props`, props);
           return (
             <MenuItem
               {...props}
