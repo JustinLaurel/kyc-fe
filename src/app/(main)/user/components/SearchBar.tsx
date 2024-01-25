@@ -4,6 +4,7 @@ import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
+import FieldDropdown from "@/components/FieldDropdown";
 
 export default function SearchBar() {
   return (
@@ -24,7 +25,7 @@ export default function SearchBar() {
     >
       <section className={styles.fieldsSection}>
         <FieldInput title={"Name"} placeholder={"Search by name"} />
-        <FieldAutocomplete
+        <FieldDropdown
           items={[
             {
               label: "Role 1",

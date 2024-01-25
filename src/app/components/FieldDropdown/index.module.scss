@@ -1,0 +1,61 @@
+@use "src/app/colors";
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  .title {
+    color: colors.$dark-gray;
+    font-family: colors.$font-lato;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+  }
+  .root {
+    padding: 0;
+    background-color: colors.$light-gray;
+    border: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    &:focus-within {
+      outline: -webkit-focus-ring-color auto 1px
+    }
+
+    .select {
+      display: flex;
+      align-items: center;
+
+      background-color: inherit;
+      font-family: colors.$font-lato;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19px;
+      letter-spacing: 0em;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .placeholder {
+      color: colors.$medium-gray;
+    }
+    .icon {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }
+  .outlined {
+    outline: none;
+  }
+}
+.dropdownItem {
+  font-family: colors.$font-lato;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  height: 40px;
+}

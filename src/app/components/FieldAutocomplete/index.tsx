@@ -15,7 +15,7 @@ interface Props {
   title?: string;
   placeholder?: string;
 }
-export default function FieldDropdown(props: Props) {
+export default function FieldAutocomplete(props: Props) {
   const { items, title, placeholder = "" } = props;
 
   return (
