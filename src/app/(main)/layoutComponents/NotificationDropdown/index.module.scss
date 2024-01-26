@@ -1,0 +1,52 @@
+@use "src/app/colors";
+
+.container {
+  width: 360px;
+  z-index: 9999;
+  background-color: white;
+  border: 1px solid colors.$border-gray;
+  box-shadow: 0px 9px colors.$verylight-gray;
+
+  border-radius: 8px;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: colors.$font-lato;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 16px 24px;
+
+  border-bottom: 1px solid colors.$separator-gray;
+
+  .header {
+  }
+  .mark {
+    text-decoration: none;
+
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0em;  
+  }
+}
+.notificationSetion {
+  display: flex;
+  flex-direction: column;
+}
+.actionSection {
+  .view {
+    width: 100%;
+    font-family: colors.$font-lato;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0em;
+    color: colors.$ambank-red;
+
+    padding-top: 19px;
+    padding-bottom: 19px;
+  }
+}

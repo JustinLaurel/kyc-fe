@@ -1,17 +1,26 @@
 "use client";
-import { IconButton } from "@mui/material";
+import { Box, Card, Fade, IconButton, Popper } from "@mui/material";
 import styles from "./layout.module.scss";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Sidebar from "./layoutComponents/Sidebar";
+import NotificationDropdown from "./layoutComponents/NotificationDropdown";
 
 interface Props {
   children: React.ReactNode;
 }
 export default function Layout(props: Props) {
   const { children } = props;
+  const anchorElement = useRef(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isNotificationsDropdownOpen, setIsNotificationsDropdownOpen] =
+    useState(false);
+
+  function handleNotificationsClick() {
+    setIsNotificationsDropdownOpen((prevState) => !prevState);
+  }
+
   return (
     <html lang="en">
       <body className={styles.body}>
@@ -43,7 +52,7 @@ export default function Layout(props: Props) {
                 </IconButton>
               </section>
               <section className={styles.item}>
-                <IconButton>
+                <IconButton onClick={handleNotificationsClick}>
                   <Image
                     src={"/assets/images/icon_bell.png"}
                     alt={"Notification Icon"}
@@ -51,6 +60,11 @@ export default function Layout(props: Props) {
                     height={20}
                   />
                 </IconButton>
+                <NotificationDropdown
+                  isOpen={isNotificationsDropdownOpen}
+                  handleClose={() => setIsNotificationsDropdownOpen(false)}
+                  anchorElement={anchorElement?.current}
+                />
               </section>
               <section className={styles.item}>
                 <IconButton>
@@ -63,6 +77,10 @@ export default function Layout(props: Props) {
                   />
                 </IconButton>
               </section>
+              <div
+                style={{ marginLeft: "-16px", marginTop: "96px" }}
+                ref={anchorElement}
+              ></div>
             </div>
           </div>
         </section>
