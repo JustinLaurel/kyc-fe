@@ -32,7 +32,7 @@ export default function Dashboard() {
           <TaskView
             src={"/assets/images/icon_search_user.png"}
             buttonLabel={"Search User"}
-            onClick={() => router.push("/user/search")}
+            onClick={() => router.push("/user")}
           />
           <TaskView
             src={"/assets/images/icon_add_user.png"}

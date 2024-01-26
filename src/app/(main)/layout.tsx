@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import styles from "./layout.module.scss";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -39,32 +39,35 @@ export default function Layout(props: Props) {
                 <div className={styles.summaryRole}>Admin Approver</div>
               </section>
               <section className={styles.item}>
-                <Image
-                  src={"/assets/images/icon_burger.png"}
-                  alt={"Burger Icon"}
-                  className={styles.pointer}
-                  width={19}
-                  height={15}
-                  onClick={() => setIsSidebarOpen(true)}
-                />
+                <IconButton onClick={() => setIsSidebarOpen(true)}>
+                  <Image
+                    src={"/assets/images/icon_burger.png"}
+                    alt={"Burger Icon"}
+                    width={19}
+                    height={15}
+                  />
+                </IconButton>
               </section>
               <section className={styles.item}>
-                <Image
-                  src={"/assets/images/icon_bell.png"}
-                  alt={"Notification Icon"}
-                  className={styles.pointer}
-                  width={20}
-                  height={20}
-                />
+                <IconButton>
+                  <Image
+                    src={"/assets/images/icon_bell.png"}
+                    alt={"Notification Icon"}
+                    width={20}
+                    height={20}
+                  />
+                </IconButton>
               </section>
               <section className={styles.item}>
-                <Image
-                  src={"/assets/images/icon_user.png"}
-                  alt={"User Icon"}
-                  className={styles.pointer}
-                  width={40}
-                  height={40}
-                />
+                <IconButton>
+                  <Image
+                    src={"/assets/images/icon_user.png"}
+                    alt={"User Icon"}
+                    className={styles.pointer}
+                    width={40}
+                    height={40}
+                  />
+                </IconButton>
               </section>
             </div>
           </div>
@@ -91,14 +94,15 @@ function Sidebar(props: SidebarProps) {
       <div className={styles.userInfo}>
         <div className={styles.wrapper}>
           <div className={styles.closeButton}>
+            <IconButton onClick={handleClose}>
             <Image
               src={"/assets/images/icon_close.png"}
               alt={"Close sidebar"}
-              className={styles.pointer}
               width={24}
               height={24}
-              onClick={handleClose}
             />
+
+            </IconButton>
           </div>
           <section className={styles.infoSection}>
             <div className={styles.username}>john99doe</div>
@@ -125,7 +129,7 @@ function Sidebar(props: SidebarProps) {
             darkSrc="/assets/images/icon_user_management_dark.png"
             label={"User Management"}
             onClick={() => {
-              router.push("/user/search");
+              router.push("/user");
               handleClose();
             }}
           />
