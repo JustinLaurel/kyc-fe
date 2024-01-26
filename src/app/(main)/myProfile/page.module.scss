@@ -1,0 +1,41 @@
+@use "src/app/colors";
+
+.myProfile {
+  border: 1px solid colors.$separator-gray;
+  border-radius: 4px;
+}
+
+.myProfileItem {
+  display: flex;
+  align-items: center;
+  padding: 24px 40px;
+  column-gap: 10px;
+  overflow-wrap: anywhere;
+
+  font-family: colors.$font-lato;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0em;
+  color: colors.$dark-gray;
+
+  border-bottom: 1px solid colors.$separator-gray;
+  &:last-child {
+    border-bottom: none !important;
+  }
+
+  .title {
+    flex: 1;
+    font-weight: 700;
+  }
+  .labelWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+
+    flex: 2;
+    font-weight: 400;
+    .sublabel {
+      color: colors.$medium-gray;
+    }
+  }
+}
