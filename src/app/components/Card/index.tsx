@@ -10,6 +10,7 @@ interface CardProps {
     colorScheme: BUTTON_COLOR_SCHEMES;
   }[];
   header?: React.ReactNode | string;
+  subheader?: React.ReactNode | string;
   className?: string;
   hasSeparator?: boolean;
 }
@@ -18,6 +19,7 @@ export default function Card(props: CardProps) {
     children,
     buttons,
     header = null,
+    subheader = null,
     className,
     hasSeparator = true,
   } = props;
@@ -26,7 +28,10 @@ export default function Card(props: CardProps) {
     <main className={styles.card + (className ? ` ${className}` : "")}>
       {header && (
         <>
-          <section className={styles.headerSection}>{header}</section>
+          <section className={styles.headerSection}>
+            <div className={styles.header}>{header}</div>
+            {subheader && <div className={styles.subheader}>{subheader}</div>}
+          </section>
           {hasSeparator && <Separator />}
         </>
       )}

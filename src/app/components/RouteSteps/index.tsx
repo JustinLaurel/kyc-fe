@@ -10,16 +10,7 @@ interface Props {
   }[];
 }
 export default function RouteSteps(props: Props) {
-  // const {routeItems} = props;
-  const routeItems = [
-    {
-      label: "User Management",
-      onClick: () => {},
-    },
-    {
-      label: "Add User",
-    },
-  ];
+  const {routeItems} = props;
   return (
     <div className={styles.routeStepsContainer}>
       {routeItems.map((item, index) => {

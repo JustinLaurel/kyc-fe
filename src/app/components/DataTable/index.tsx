@@ -28,9 +28,9 @@ interface Props {
 /**
  * Standard table.
  *
- * @param {Record<string, string | CellButton | CellButton[]>[]} props.items - Items displayed in table body. Must be same array length as props.headers
- * @param {string[]} props.headers - Headers. Must be same array length as props.items
- * @param {number[]} props.colWidths - Width fraction occupied by each column. Must be same array length as props.items and props.headers
+ * @param {Record<string, string | CellButton | CellButton[]>[]} props.items - Items displayed in table body. items.length === headers.length MUST be true
+ * @param {string[]} props.headers - Headers. headers.length === items.length MUST be true
+ * @param {number[]} props.colWidths - Width fraction occupied by each column. colWidths.length === headers.length === items.length MUST be true
  */
 export default function DataTable(props: Props) {
   const { items, headers, colWidths = null } = props;

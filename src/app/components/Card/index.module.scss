@@ -37,17 +37,28 @@
   }
 
   .headerSection {
-    font-family: colors.$font-lato;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    letter-spacing: 0em;
-    color: rgba(35, 31, 32, 1);
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
     padding-left: $section-horizontal-padding;
     padding-right: $section-horizontal-padding;
     padding-top: $section-vertical-padding;
     padding-bottom: $section-vertical-padding;
+
+    font-family: colors.$font-lato;
+    font-weight: 700;
+    letter-spacing: 0em;
+
+    .header {
+      font-size: 20px;
+      line-height: 24px;
+      color: rgba(35, 31, 32, 1);
+    }
+    .subheader {
+      font-size: 16px;
+      line-height: 19px;
+      color: colors.$medium-gray;
+    }
   }
 
   .contentSection {

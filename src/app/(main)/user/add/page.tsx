@@ -6,6 +6,7 @@ import FieldInput from "@/components/FieldInput";
 import { useState } from "react";
 import FieldDropdown from "@/components/FieldDropdown";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import { useRouter } from "next/navigation";
 
 const routeItems = [
   {
@@ -60,11 +61,12 @@ function UserSearch(props: UserSearchProps) {
 
 interface UserAddProps {}
 function UserAdd(props: UserAddProps) {
+  const router = useRouter();
   return (
     <Card header={"User Details"} className={styles.userAddContainer} buttons={[
       {
         label: "Cancel",
-        onClick: () => {},
+        onClick: () => router.back(),
         colorScheme: BUTTON_COLOR_SCHEMES.GREY,
       },
       {

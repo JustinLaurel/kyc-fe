@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import styles from "./layout.module.scss";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
@@ -68,68 +69,87 @@ export default function Layout(props: Props) {
             </div>
           </div>
         </section>
-        <section
-          className={`${styles.sidebar} ${isSidebarOpen ? styles.active : ""}`}
-        >
-          <div className={styles.userInfo}>
-            <div className={styles.wrapper}>
-              <div className={styles.closeButton}>
-                <Image
-                  src={"/assets/images/icon_close.png"}
-                  alt={"Close sidebar"}
-                  className={styles.pointer}
-                  width={24}
-                  height={24}
-                  onClick={() => setIsSidebarOpen(false)}
-                />
-              </div>
-              <section className={styles.infoSection}>
-                <div className={styles.username}>john99doe</div>
-                <section className={styles.phoneEmailWrapper}>
-                  <div className={styles.phone}>+6012xxxx123</div>
-                  <div className={styles.email}>john99doe@youremail.com</div>
-                </section>
-              </section>
-            </div>
-          </div>
-          <div className={styles.actions}>
-            <div className={styles.wrapper}>
-              <SidebarButton
-                src="/assets/images/icon_dashboard.png"
-                darkSrc="/assets/images/icon_dashboard_dark.png"
-                label={"Dashboard"}
-                onClick={() => {}}
-              />
-              <SidebarButton
-                src="/assets/images/icon_user_management.png"
-                darkSrc="/assets/images/icon_user_management_dark.png"
-                label={"User Management"}
-                onClick={() => {}}
-              />
-              <SidebarButton
-                src="/assets/images/icon_notification.png"
-                darkSrc="/assets/images/icon_notification_dark.png"
-                label={"Notification"}
-                onClick={() => {}}
-              />
-              <SidebarButton
-                src="/assets/images/icon_my_profile.png"
-                darkSrc="/assets/images/icon_my_profile_dark.png"
-                label={"My Profile"}
-                onClick={() => {}}
-              />
-              <SidebarButton
-                src="/assets/images/icon_logout.png"
-                darkSrc="/assets/images/icon_logout_dark.png"
-                label={"Logout"}
-                onClick={() => {}}
-              />
-            </div>
-          </div>
-        </section>
         <section className={styles.content}>{children}</section>
+        <Sidebar
+          isOpen={isSidebarOpen}
+          handleClose={() => setIsSidebarOpen(false)}
+        />
       </body>
     </html>
+  );
+}
+
+interface SidebarProps {
+  isOpen: boolean;
+  handleClose: () => void;
+}
+function Sidebar(props: SidebarProps) {
+  const router = useRouter();
+  const { isOpen, handleClose } = props;
+  return (
+    <section className={`${styles.sidebar} ${isOpen ? styles.active : ""}`}>
+      <div className={styles.userInfo}>
+        <div className={styles.wrapper}>
+          <div className={styles.closeButton}>
+            <Image
+              src={"/assets/images/icon_close.png"}
+              alt={"Close sidebar"}
+              className={styles.pointer}
+              width={24}
+              height={24}
+              onClick={handleClose}
+            />
+          </div>
+          <section className={styles.infoSection}>
+            <div className={styles.username}>john99doe</div>
+            <section className={styles.phoneEmailWrapper}>
+              <div className={styles.phone}>+6012xxxx123</div>
+              <div className={styles.email}>john99doe@youremail.com</div>
+            </section>
+          </section>
+        </div>
+      </div>
+      <div className={styles.actions}>
+        <div className={styles.wrapper}>
+          <SidebarButton
+            src="/assets/images/icon_dashboard.png"
+            darkSrc="/assets/images/icon_dashboard_dark.png"
+            label={"Dashboard"}
+            onClick={() => {
+              router.push("/dashboard");
+              handleClose();
+            }}
+          />
+          <SidebarButton
+            src="/assets/images/icon_user_management.png"
+            darkSrc="/assets/images/icon_user_management_dark.png"
+            label={"User Management"}
+            onClick={() => {
+              router.push("/user/search");
+              handleClose();
+            }}
+          />
+          <SidebarButton
+            src="/assets/images/icon_notification.png"
+            darkSrc="/assets/images/icon_notification_dark.png"
+            label={"Notification"}
+            onClick={() => {}}
+          />
+          <SidebarButton
+            src="/assets/images/icon_my_profile.png"
+            darkSrc="/assets/images/icon_my_profile_dark.png"
+            label={"My Profile"}
+            onClick={() => {}}
+          />
+          <SidebarButton
+            src="/assets/images/icon_logout.png"
+            darkSrc="/assets/images/icon_logout_dark.png"
+            label={"Logout"}
+            onClick={() => {}}
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
