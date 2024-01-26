@@ -8,12 +8,12 @@ import {
 } from "./notificationTypes";
 import dayjs from "dayjs";
 
-interface NotificationDropdownProps {
+interface Props {
   isOpen: boolean;
   handleClose: () => void;
   anchorElement: HTMLElement | null;
 }
-export default function NotificationDropdown(props: NotificationDropdownProps) {
+export default function NotificationDropdown(props: Props) {
   const { isOpen, handleClose, anchorElement } = props;
   return isOpen && Boolean(anchorElement) ? (
     <Popper

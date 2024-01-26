@@ -1,6 +1,7 @@
 @use "src/app/colors";
 
 .container {
+  z-index: 999999999999999;
   display: flex;
   justify-content: center;
   align-items: center;

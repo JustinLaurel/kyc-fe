@@ -71,13 +71,19 @@ export default function Sidebar(props: Props) {
               src="/assets/images/icon_my_profile.png"
               darkSrc="/assets/images/icon_my_profile_dark.png"
               label={"My Profile"}
-              onClick={() => {}}
+              onClick={() => {
+                router.push("/myProfile");
+                handleClose();
+              }}
             />
             <SidebarButton
               src="/assets/images/icon_logout.png"
               darkSrc="/assets/images/icon_logout_dark.png"
               label={"Logout"}
-              onClick={() => {}}
+              onClick={() => {
+                router.push("/login");
+                handleClose();
+              }}
             />
           </div>
         </div>

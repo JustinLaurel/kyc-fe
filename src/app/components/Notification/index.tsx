@@ -4,7 +4,7 @@ import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 
 interface NotificationProps {
   children?: React.ReactNode;
-  isVisible: boolean;
+  isOpen: boolean;
   closeNotification: () => void;
   buttons?: {
     label: string;
@@ -15,7 +15,7 @@ interface NotificationProps {
 }
 export default function Notification(props: NotificationProps) {
   const {
-    isVisible,
+    isOpen,
     buttons,
     closeNotification,
     header = "Notification",
@@ -30,7 +30,7 @@ export default function Notification(props: NotificationProps) {
     }
   }
 
-  return isVisible ? (
+  return isOpen ? (
     <div
       className={styles.container}
       onClick={(event) => handleCloseNotification(event)}

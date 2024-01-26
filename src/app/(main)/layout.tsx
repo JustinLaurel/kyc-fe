@@ -1,10 +1,14 @@
 "use client";
-import { Box, Card, Fade, IconButton, Popper } from "@mui/material";
+import { IconButton } from "@mui/material";
 import styles from "./layout.module.scss";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import Sidebar from "./layoutComponents/Sidebar";
 import NotificationDropdown from "./layoutComponents/NotificationDropdown";
+import ProfileDropdown from "./layoutComponents/ProfileDropdown";
+import Notification from "@/components/Notification";
+import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import { useRouter } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
@@ -16,14 +20,41 @@ export default function Layout(props: Props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isNotificationsDropdownOpen, setIsNotificationsDropdownOpen] =
     useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isLogoutNotificationOpen, setIsLogoutNotificationOpen] =
+    useState(false);
+  const router = useRouter();
 
-  function handleNotificationsClick() {
+  function handleNotificationIconClick() {
     setIsNotificationsDropdownOpen((prevState) => !prevState);
+  }
+
+  function handleProfileIconClick() {
+    setIsProfileDropdownOpen((prevState) => !prevState);
+  }
+
+  function handleMyProfileClick() {
+    router.push("/myProfile");
+    setIsProfileDropdownOpen(false);
+  }
+
+  function handleLogoutClick() {
+    setIsLogoutNotificationOpen(true);
+    setIsProfileDropdownOpen(false);
   }
 
   return (
     <html lang="en">
       <body className={styles.body}>
+        <LogoutNotification
+          isOpen={isLogoutNotificationOpen}
+          handleNo={() => setIsLogoutNotificationOpen(false)}
+          handleYes={() => {
+            setIsLogoutNotificationOpen(false);
+            router.push("/login");
+          }}
+          handleClose={() => setIsLogoutNotificationOpen(false)}
+        />
         <section className={styles.controlbar}>
           <div className={styles.logoSection}>
             <Image
@@ -52,7 +83,7 @@ export default function Layout(props: Props) {
                 </IconButton>
               </section>
               <section className={styles.item}>
-                <IconButton onClick={handleNotificationsClick}>
+                <IconButton onClick={handleNotificationIconClick}>
                   <Image
                     src={"/assets/images/icon_bell.png"}
                     alt={"Notification Icon"}
@@ -67,7 +98,7 @@ export default function Layout(props: Props) {
                 />
               </section>
               <section className={styles.item}>
-                <IconButton>
+                <IconButton onClick={handleProfileIconClick}>
                   <Image
                     src={"/assets/images/icon_user.png"}
                     alt={"User Icon"}
@@ -76,6 +107,13 @@ export default function Layout(props: Props) {
                     height={40}
                   />
                 </IconButton>
+                <ProfileDropdown
+                  isOpen={isProfileDropdownOpen}
+                  anchorElement={anchorElement?.current}
+                  handleClose={() => setIsProfileDropdownOpen(false)}
+                  handleMyProfileClick={handleMyProfileClick}
+                  handleLogoutClick={handleLogoutClick}
+                />
               </section>
               <div
                 style={{ marginLeft: "-16px", marginTop: "96px" }}
@@ -91,5 +129,36 @@ export default function Layout(props: Props) {
         />
       </body>
     </html>
+  );
+}
+
+interface LogoutNotificationProps {
+  isOpen: boolean;
+  handleNo: () => void;
+  handleYes: () => void;
+  handleClose: () => void;
+}
+function LogoutNotification(props: LogoutNotificationProps) {
+  const { isOpen, handleNo, handleYes, handleClose } = props;
+
+  return (
+    <Notification
+      isOpen={isOpen}
+      buttons={[
+        {
+          label: "NO",
+          onClick: handleNo,
+          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+        },
+        {
+          label: "YES",
+          onClick: handleYes,
+          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+        },
+      ]}
+      closeNotification={handleClose}
+    >
+      Are you sure you want to logout?
+    </Notification>
   );
 }
