@@ -29,7 +29,10 @@
     .select {
       display: flex;
       align-items: center;
+      height: 100%;
 
+      box-sizing: border-box;
+      border-radius: inherit;
       background-color: inherit;
       font-family: colors.$font-lato;
       font-size: 16px;

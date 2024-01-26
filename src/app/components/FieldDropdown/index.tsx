@@ -12,17 +12,19 @@ interface Props {
 }
 export default function FieldDropdown(props: Props) {
   const { items, title, placeholder = "" } = props;
-  const [value, setValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
   return (
     <div className={styles.fieldContainer}>
       {title && <div className={styles.title}>{title}</div>}
       <Select
-        value={value}
-        onChange={(event) => setValue(event.target.value as string)}
+        value={selectedValue}
+        onChange={(event) => setSelectedValue(event.target.value as string)}
         disableUnderline
         displayEmpty
         renderValue={() =>
-          value || <div className={styles.placeholder}>{placeholder}</div>
+          items.find((item) => item.value === selectedValue)?.label || (
+            <div className={styles.placeholder}>{placeholder}</div>
+          )
         }
         variant={"standard"}
         classes={{

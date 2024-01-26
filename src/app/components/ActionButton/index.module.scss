@@ -22,4 +22,8 @@
     background-color: white;
     color: colors.$ambank-red;
   }
+  &.greyBtn {
+    background: linear-gradient(180deg, #97989A 0%, #5F6062 100%);
+    color: white;
+  }
 }

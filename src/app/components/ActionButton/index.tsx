@@ -10,12 +10,12 @@ export enum BUTTON_COLOR_SCHEMES {
 
 interface Props {
   children?: React.ReactNode;
-  colorScheme: BUTTON_COLOR_SCHEMES;
+  colorScheme?: BUTTON_COLOR_SCHEMES;
   onClick: () => void;
   className?: string;
 }
 export default function ActionButton(props: Props) {
-  const { colorScheme, onClick, className = null } = props;
+  const { colorScheme = BUTTON_COLOR_SCHEMES.RED, onClick, className = null } = props;
   return (
     <Button
       variant="contained"

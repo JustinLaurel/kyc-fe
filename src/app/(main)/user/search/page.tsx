@@ -7,7 +7,7 @@ import DataTable from "@/components/DataTable";
 import Card from "@/components/Card";
 import Notification from "@/components/Notification";
 
-export default function User() {
+export default function Search() {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   useEffect(() => {
     init();

@@ -1,0 +1,32 @@
+@use "src/app/colors";
+
+.routeStepsContainer {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  column-gap: 8px;
+
+  .route {
+    font-family: colors.$font-lato;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0em;
+
+    &.disabled {
+      color: colors.$medium-gray;
+      cursor: default;
+    }
+  }
+}
+
+.rightArrow {
+  color: colors.$dark-gray;
+  font-family: colors.$font-lato;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: right;
+  cursor: default;
+}
