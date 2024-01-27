@@ -10,24 +10,22 @@ export default function Layout(props: Props) {
   const { children } = props;
 
   return (
-    <html lang="en" style={{ height: "100%" }}>
-      <body className={styles.body}>
-        <section className={styles.controlbar}>
-          <div className={styles.logoHeader}>
-            <Image
-              priority
-              src={"/assets/images/logo_ambank.png"}
-              alt={"Ambank Logo"}
-              width={194}
-              height={40}
-            />
-          </div>
-          <div className={styles.actionsHeader}>
-            <div className={styles.header}>Universal KYC Onboarding</div>
-          </div>
-        </section>
-        <section className={styles.content}>{children}</section>
-      </body>
-    </html>
+    <main className={styles.loginLayoutContainer}>
+      <section className={styles.controlbar}>
+        <div className={styles.logoHeader}>
+          <Image
+            priority
+            src={"/assets/images/logo_ambank.png"}
+            alt={"Ambank Logo"}
+            width={194}
+            height={40}
+          />
+        </div>
+        <div className={styles.actionsHeader}>
+          <div className={styles.header}>Universal KYC Onboarding</div>
+        </div>
+      </section>
+      <section className={styles.content}>{children}</section>
+    </main>
   );
 }

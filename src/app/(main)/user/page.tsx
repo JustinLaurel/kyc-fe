@@ -99,12 +99,13 @@ export default function Search() {
     "Action",
   ]);
 
-  function handleViewUser(userId: string) {
-    router.push(`/user/view/${userId}`);
-  }
   const [items, setItems] = useState([]);
   const [colWidths, setColWidths] = useState([0.3, 3, 1.5, 2, 2, 2, 1, 1.5]);
   useEffect(() => {
+    function handleViewUser(userId: string) {
+      router.push(`/user/view/${userId}`);
+    }
+  
     const mappedItems = TABLE_ITEMS.map((item, index) => {
       return {
         no: item.no,
@@ -139,6 +140,8 @@ export default function Search() {
       };
     });
     setItems(mappedItems as any);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <section className={styles.userContainer}>
