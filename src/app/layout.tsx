@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   description: "Ambank KYC",
 };
 
-export const lato = Lato({
+const lato = Lato({
   weight: ["400", "700"],
   variable: "--font-lato",
   subsets: ["latin"],
   display: "swap",
 });
-export const inter = Inter({
+const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
