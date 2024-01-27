@@ -23,7 +23,7 @@ const SWIPE_INDEXES = {
   USER_ADD: 1,
 };
 
-export default function Add() {
+export default function UserAddPage() {
   const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_ADD);
 
   return (

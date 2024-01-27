@@ -1,7 +1,7 @@
 import styles from "./page.module.scss";
 import Card from "@/components/Card";
 
-export default function MyProfile() {
+export default function MyProfilePage() {
   return (
     <Card header={"My Profile"} hasSeparator={false}>
       <div className={styles.myProfile}>

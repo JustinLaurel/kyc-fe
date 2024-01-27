@@ -26,7 +26,7 @@ const routeItems = [
     label: "View User",
   },
 ];
-export default function View({ params }: Props) {
+export default function UserViewPage({ params }: Props) {
   const { userId } = params;
   const router = useRouter();
 

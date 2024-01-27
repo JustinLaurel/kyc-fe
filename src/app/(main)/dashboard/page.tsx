@@ -6,7 +6,7 @@ import Image from "next/image";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const router = useRouter();
 
   return (

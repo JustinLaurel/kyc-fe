@@ -18,7 +18,7 @@ const routeItems = [
   },
 ];
 
-export default function Delete() {
+export default function UserDeletePage() {
   return (
     <div className={styles.container}>
       <section className={styles.headerSection}>

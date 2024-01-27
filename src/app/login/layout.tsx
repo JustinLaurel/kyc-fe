@@ -6,7 +6,7 @@ import React, { useState } from "react";
 interface Props {
   children: React.ReactNode;
 }
-export default function Layout(props: Props) {
+export default function LoginPageLayout(props: Props) {
   const { children } = props;
 
   return (

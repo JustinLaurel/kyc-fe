@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 interface Props {
   children: React.ReactNode;
 }
-export default function Layout(props: Props) {
+export default function MainPageLayout(props: Props) {
   const { children } = props;
   const anchorElement = useRef(null);
 

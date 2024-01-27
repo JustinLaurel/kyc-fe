@@ -18,7 +18,7 @@ const routeItems = [
   },
 ];
 
-export default function Edit() {
+export default function UserEditPage() {
   return (
     <div className={styles.container}>
       <section className={styles.headerSection}>

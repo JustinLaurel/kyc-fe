@@ -10,7 +10,7 @@ const initialForm = {
   username: "",
   password: "",
 };
-export default function Login() {
+export default function LoginPage() {
   const [form, setForm] = useState({ ...initialForm });
   const router = useRouter();
 
