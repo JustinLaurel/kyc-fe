@@ -31,8 +31,6 @@
   display: flex;
   flex-direction: column;
   color: white;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-    sans-serif;
   font-weight: 400;
   font-size: 20px;
   letter-spacing: 0.5px;
@@ -133,7 +131,6 @@
           color: inherit;
         }
         .label {
-          font-family: colors.$font-lato;
           font-size: 14px;
           font-weight: 700;
           line-height: 17px;

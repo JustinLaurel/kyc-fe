@@ -1,25 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Lato } from "next/font/google";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import "./global.scss";
+
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+import { Inter, Lato } from "next/font/google";
+import theme from "@/theme";
 
 export const metadata: Metadata = {
   title: "Ambank KYC",
   description: "Ambank KYC",
 };
 
-const lato = Lato({
+export const lato = Lato({
   weight: ["400", "700"],
   variable: "--font-lato",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
 });
-const inter = Inter({
+export const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
 });
 
 export default function RootLayout({
@@ -28,13 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${lato.variable} ${inter.variable}`}
-    >
+    <html lang="en" className={`${lato.variable} ${inter.variable}`}>
       <body style={{ margin: 0 }}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          {children}
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
