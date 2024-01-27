@@ -1,0 +1,6 @@
+@use 'src/app/colors';
+
+.htmlGlobal {
+  min-height: 100%;
+  background-color: colors.$ultralight-gray;
+}

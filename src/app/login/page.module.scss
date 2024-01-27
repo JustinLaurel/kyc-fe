@@ -1,7 +1,7 @@
 @use 'src/app/colors';
 
 .container {
-  height: 100%;
+  height: calc(100% - colors.$ambank-footer-height);
   margin: 0;
   padding: 0;
   background-image: url("/assets/images/building_reflection.png");

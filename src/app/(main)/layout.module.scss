@@ -2,10 +2,10 @@
 
 .mainLayoutContainer {
   margin: 0;
-  background-color: colors.$ultralight-gray;
 
   display: flex;
   flex-direction: column;
+  padding-bottom: colors.$ambank-footer-height;
 
   .controlbar {
     display: flex;

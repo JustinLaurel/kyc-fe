@@ -1,0 +1,25 @@
+@use 'src/app/colors';
+
+.ambankFooterContainer {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  box-sizing: border-box;
+  border-top: 1px solid colors.$separator-gray;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  font-family: colors.$font-lato;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  height: colors.$ambank-footer-height;
+  background-color: white;
+  
+  .text {
+    text-align: center;
+  }
+}

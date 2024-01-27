@@ -9,6 +9,7 @@ import ProfileDropdown from "./layoutComponents/ProfileDropdown";
 import Notification from "@/components/Notification";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
+import AmbankFooter from "@/components/AmbankFooter";
 
 interface Props {
   children: React.ReactNode;
@@ -130,6 +131,7 @@ export default function MainPageLayout(props: Props) {
         isOpen={isSidebarOpen}
         handleClose={() => setIsSidebarOpen(false)}
       />
+      <AmbankFooter />
     </main>
   );
 }

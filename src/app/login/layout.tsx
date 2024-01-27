@@ -1,4 +1,5 @@
 "use client";
+import AmbankFooter from "@/components/AmbankFooter";
 import styles from "./layout.module.scss";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -26,6 +27,7 @@ export default function LoginPageLayout(props: Props) {
         </div>
       </section>
       <section className={styles.content}>{children}</section>
+      <AmbankFooter />
     </main>
   );
 }
