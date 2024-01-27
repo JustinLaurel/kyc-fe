@@ -5,7 +5,6 @@ import SearchBar from "./components/SearchBar";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import DataTable from "@/components/DataTable";
 import Card from "@/components/Card";
-import Notification from "@/components/Notification";
 import { useRouter } from "next/navigation";
 
 const TABLE_ITEMS = [
@@ -143,24 +142,6 @@ export default function Search() {
   }, []);
   return (
     <section className={styles.userContainer}>
-      {/* <Notification
-        isVisible={isNotificationVisible}
-        closeNotification={() => setIsNotificationVisible(false)}
-        buttons={[
-          {
-            label: "Clear",
-            onClick: () => console.log("clear"),
-            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-          },
-          {
-            label: "Log In",
-            onClick: () => console.log("login"),
-            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-          },
-        ]}
-      >
-        This User ID does not exist in the system, please contact your administrator for further assistance.
-      </Notification> */}
       <div className={styles.headerSection}>
         <div>User Management</div>
         <ActionButton

@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 import Sidebar from "./layoutComponents/Sidebar";
 import NotificationDropdown from "./layoutComponents/NotificationDropdown";
 import ProfileDropdown from "./layoutComponents/ProfileDropdown";
-import Notification from "@/components/Notification";
+import { MessageModalYesNo } from "@/components/MessageModal";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
 import AmbankFooter from "@/components/AmbankFooter";
@@ -46,15 +46,6 @@ export default function MainPageLayout(props: Props) {
 
   return (
     <main className={styles.mainLayoutContainer}>
-      <LogoutNotification
-        isOpen={isLogoutNotificationOpen}
-        handleNo={() => setIsLogoutNotificationOpen(false)}
-        handleYes={() => {
-          setIsLogoutNotificationOpen(false);
-          router.push("/login");
-        }}
-        handleClose={() => setIsLogoutNotificationOpen(false)}
-      />
       <section className={styles.controlbar}>
         <div className={styles.logoSection}>
           <Image
@@ -135,37 +126,18 @@ export default function MainPageLayout(props: Props) {
         handleClose={() => setIsSidebarOpen(false)}
       />
       <AmbankFooter />
+
+      <MessageModalYesNo
+        isOpen={isLogoutNotificationOpen}
+        handleNo={() => setIsLogoutNotificationOpen(false)}
+        handleYes={() => {
+          setIsLogoutNotificationOpen(false);
+          router.push("/login");
+        }}
+        handleClose={() => setIsLogoutNotificationOpen(false)}
+      >
+        Are you sure you want to logout?
+      </MessageModalYesNo>
     </main>
-  );
-}
-
-interface LogoutNotificationProps {
-  isOpen: boolean;
-  handleNo: () => void;
-  handleYes: () => void;
-  handleClose: () => void;
-}
-function LogoutNotification(props: LogoutNotificationProps) {
-  const { isOpen, handleNo, handleYes, handleClose } = props;
-
-  return (
-    <Notification
-      isOpen={isOpen}
-      buttons={[
-        {
-          label: "NO",
-          onClick: handleNo,
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        },
-        {
-          label: "YES",
-          onClick: handleYes,
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        },
-      ]}
-      closeNotification={handleClose}
-    >
-      Are you sure you want to logout?
-    </Notification>
   );
 }
