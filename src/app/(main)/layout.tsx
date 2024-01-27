@@ -135,9 +135,8 @@ export default function MainPageLayout(props: Props) {
           router.push("/login");
         }}
         handleClose={() => setIsLogoutNotificationOpen(false)}
-      >
-        Are you sure you want to logout?
-      </MessageModalYesNo>
+        message={"Are you sure you want to logout?"}
+      />
     </main>
   );
 }

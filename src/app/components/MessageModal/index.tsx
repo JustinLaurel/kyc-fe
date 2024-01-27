@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 
 interface BaseMessageModalProps {
-  children?: React.ReactNode;
+  message?: string | React.ReactNode;
   isOpen: boolean;
   handleClose: () => void;
   header?: string;
@@ -19,6 +19,7 @@ function MessageModal(props: Props) {
   const {
     isOpen,
     buttons,
+    message = "",
     handleClose,
     header = "Notification",
   } = props;
@@ -39,7 +40,7 @@ function MessageModal(props: Props) {
     >
       <div className={styles.wrapper}>
         <section className={styles.headerSection}>{header}</section>
-        <section className={styles.contentSection}>{props.children}</section>
+        <section className={styles.contentSection}>{message}</section>
         {buttons && buttons.length && (
           <section className={styles.buttonSection}>
             {buttons.map((button, index) => (
@@ -64,7 +65,7 @@ interface MessageModalYesNo extends BaseMessageModalProps {
   handleYes: () => void;
 }
 function MessageModalYesNo(props: MessageModalYesNo) {
-  const { isOpen, handleNo, handleYes, handleClose } = props;
+  const { isOpen, message, handleNo, handleYes, handleClose } = props;
 
   return (
     <MessageModal
@@ -81,10 +82,9 @@ function MessageModalYesNo(props: MessageModalYesNo) {
           colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
         },
       ]}
+      message={message}
       handleClose={handleClose}
-    >
-      {props.children}
-    </MessageModal>
+    />
   );
 }
 
@@ -92,7 +92,7 @@ interface MessageModalOk extends BaseMessageModalProps {
   handleOk: () => void;
 }
 function MessageModalOk(props: MessageModalOk) {
-  const { isOpen, handleOk, handleClose } = props;
+  const { isOpen, message, handleOk, handleClose } = props;
 
   return (
     <MessageModal
@@ -105,9 +105,8 @@ function MessageModalOk(props: MessageModalOk) {
         },
       ]}
       handleClose={handleClose}
-    >
-      {props.children}
-    </MessageModal>
+      message={message}
+    />
   );
 }
 
@@ -116,7 +115,7 @@ interface MessageModalCancelConfirm extends BaseMessageModalProps {
   handleConfirm: () => void;
 }
 function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
-  const { isOpen, handleCancel, handleConfirm, handleClose } = props;
+  const { isOpen, message, handleCancel, handleConfirm, handleClose } = props;
 
   return (
     <MessageModal
@@ -134,9 +133,8 @@ function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
         },
       ]}
       handleClose={handleClose}
-    >
-      {props.children}
-    </MessageModal>
+      message={message}
+    />
   );
 }
 

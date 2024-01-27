@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import { BUTTON_COLOR_SCHEMES } from "../components/ActionButton";
 import { routes, post } from "../services/api";
 import { useRouter } from "next/navigation";
+import { MessageModalOk } from "@/components/MessageModal";
 
 const initialForm = {
   username: "",
@@ -12,6 +13,8 @@ const initialForm = {
 };
 export default function LoginPage() {
   const [form, setForm] = useState({ ...initialForm });
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState(null);
   const router = useRouter();
 
   async function handleLogin() {
@@ -20,7 +23,7 @@ export default function LoginPage() {
         username: form.username,
         password: form.password,
       });
-      
+
       if (response.authToken) {
         router.push("/dashboard");
         alert("Login successful");
@@ -32,6 +35,11 @@ export default function LoginPage() {
 
   async function handleClear() {
     setForm({ ...initialForm });
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
+    setModalMessage(null);
   }
 
   return (
@@ -74,6 +82,12 @@ export default function LoginPage() {
           </section>
         </div>
       </Card>
+      <MessageModalOk
+        isOpen={showModal}
+        message={modalMessage}
+        handleOk={handleCloseModal}
+        handleClose={handleCloseModal}
+      />
     </div>
   );
 }
