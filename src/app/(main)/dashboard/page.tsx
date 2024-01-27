@@ -62,7 +62,6 @@ function TaskView(props: TaskViewProps) {
         height={84}
       />
       <ActionButton
-        colorScheme={BUTTON_COLOR_SCHEMES.RED}
         className={styles.taskButton}
         onClick={onClick}
       >

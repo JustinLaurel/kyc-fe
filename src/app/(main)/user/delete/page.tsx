@@ -107,7 +107,6 @@ function ReviewTable(props: ReviewTableProps) {
         },
         {
           label: "Update",
-          colorScheme: BUTTON_COLOR_SCHEMES.RED,
           onClick: () => {},
         },
       ]}

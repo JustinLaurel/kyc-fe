@@ -129,13 +129,11 @@ export default function Search() {
                 {
                   label: "Delete",
                   onClick: () => {},
-                  colorScheme: BUTTON_COLOR_SCHEMES.RED,
                 },
               ]
             : {
                 label: "Review",
                 onClick: () => {},
-                colorScheme: BUTTON_COLOR_SCHEMES.RED,
               },
       };
     });
@@ -166,7 +164,6 @@ export default function Search() {
       <div className={styles.headerSection}>
         <div>User Management</div>
         <ActionButton
-          colorScheme={BUTTON_COLOR_SCHEMES.RED}
           onClick={() => router.push("/user/add")}
           className={styles.createButton}
         >

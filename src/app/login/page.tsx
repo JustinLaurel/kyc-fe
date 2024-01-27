@@ -46,7 +46,6 @@ export default function LoginPage() {
           {
             label: "Log In",
             onClick: () => handleLogin(),
-            colorScheme: BUTTON_COLOR_SCHEMES.RED,
           },
         ]}
         hasSeparator={false}

@@ -19,7 +19,6 @@ export default function SearchBar() {
         {
           label: "Search",
           onClick: () => {},
-          colorScheme: BUTTON_COLOR_SCHEMES.RED,
         },
       ]}
     >

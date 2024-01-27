@@ -7,7 +7,7 @@ interface CardProps {
   buttons?: {
     label: string;
     onClick: () => void;
-    colorScheme: BUTTON_COLOR_SCHEMES;
+    colorScheme?: BUTTON_COLOR_SCHEMES; // Defaults red. See ActionButton
   }[];
   header?: React.ReactNode | string;
   subheader?: React.ReactNode | string;

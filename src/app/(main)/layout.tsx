@@ -79,6 +79,7 @@ export default function MainPageLayout(props: Props) {
                   alt={"Burger Icon"}
                   width={19}
                   height={15}
+                  draggable={false}
                 />
               </IconButton>
             </section>
@@ -89,6 +90,7 @@ export default function MainPageLayout(props: Props) {
                   alt={"Notification Icon"}
                   width={20}
                   height={20}
+                  draggable={false}
                 />
               </IconButton>
               <NotificationDropdown
@@ -109,6 +111,7 @@ export default function MainPageLayout(props: Props) {
                   className={styles.pointer}
                   width={40}
                   height={40}
+                  draggable={false}
                 />
               </IconButton>
               <ProfileDropdown

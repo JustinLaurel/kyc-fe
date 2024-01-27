@@ -72,7 +72,6 @@ function UserAdd(props: UserAddProps) {
       {
         label: "Submit",
         onClick: () => {},
-        colorScheme: BUTTON_COLOR_SCHEMES.RED,
       },
     ]}>
       <div className={styles.addWrapper}>
