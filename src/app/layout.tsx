@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import styles from "./global.module.scss";
+import "./global.scss";
 
 export const metadata: Metadata = {
   title: "Ambank KYC",
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lato.variable} ${inter.variable} ${styles.htmlGlobal}`}
+      className={`${lato.variable} ${inter.variable}`}
     >
       <body style={{ margin: 0 }}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>

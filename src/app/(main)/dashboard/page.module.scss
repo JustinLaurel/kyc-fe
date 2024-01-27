@@ -7,10 +7,9 @@
 }
 
 .infoSection {
-  background-color: colors.$ambank-red;
+  background-color: colors.$ambank-red !important;
   color: white;
-  font-family: colors.$font-lato;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.05em !important;
 
   .infoWrapper {
     display: flex;

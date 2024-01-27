@@ -3,7 +3,7 @@
 import Card from "@/components/Card";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import ActionButton from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
@@ -11,7 +11,7 @@ export default function DashboardPage() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <Card className={styles.infoSection}>
+      <Card className={styles.infoSection} key={1}>
         <div className={styles.infoWrapper}>
           <div className={styles.role}>ADMIN MAKER</div>
           <div className={styles.detailsWrapper}>
@@ -25,6 +25,7 @@ export default function DashboardPage() {
 
       <Card
         className={styles.taskSection}
+        key={2}
         header={"My Task"}
         hasSeparator={false}
       >
