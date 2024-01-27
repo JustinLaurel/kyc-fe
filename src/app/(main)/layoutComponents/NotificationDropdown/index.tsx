@@ -11,10 +11,11 @@ import dayjs from "dayjs";
 interface Props {
   isOpen: boolean;
   handleClose: () => void;
+  handleViewAll: () => void;
   anchorElement: HTMLElement | null;
 }
 export default function NotificationDropdown(props: Props) {
-  const { isOpen, handleClose, anchorElement } = props;
+  const { isOpen, handleClose, handleViewAll, anchorElement } = props;
   return isOpen && Boolean(anchorElement) ? (
     <Popper
       open={isOpen}
@@ -61,7 +62,9 @@ export default function NotificationDropdown(props: Props) {
                 />
               </section>
               <section className={styles.actionSection}>
-                <Button className={styles.view}>VIEW ALL NOTIFICATIONS</Button>
+                <Button className={styles.view} onClick={handleViewAll}>
+                  VIEW ALL NOTIFICATIONS
+                </Button>
               </section>
             </div>
           </Fade>

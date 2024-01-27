@@ -65,7 +65,10 @@ export default function Sidebar(props: Props) {
               src="/assets/images/icon_notification.png"
               darkSrc="/assets/images/icon_notification_dark.png"
               label={"Notification"}
-              onClick={() => {}}
+              onClick={() => {
+                router.push("/notification");
+                handleClose();
+              }}
             />
             <SidebarButton
               src="/assets/images/icon_my_profile.png"

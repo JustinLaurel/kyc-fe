@@ -93,6 +93,10 @@ export default function Layout(props: Props) {
               <NotificationDropdown
                 isOpen={isNotificationsDropdownOpen}
                 handleClose={() => setIsNotificationsDropdownOpen(false)}
+                handleViewAll={() => {
+                  setIsNotificationsDropdownOpen(false);
+                  router.push("/notification");
+                }}
                 anchorElement={anchorElement?.current}
               />
             </section>
