@@ -15,14 +15,12 @@ async function post(url: string, payload?: Record<string, string>) {
     });
 
     const json = await response.json();
-    console.log(`json`, json);
     if (json.error) {
       throw new Error(json.error);
     }
     return json;
   } catch (error) {
-    console.log(`error`, error);
-    throw new Error(String(error));
+    throw error;
   }
 }
 

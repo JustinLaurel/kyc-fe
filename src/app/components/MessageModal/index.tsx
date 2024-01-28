@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 interface BaseMessageModalProps {
   message?: string | React.ReactNode;
@@ -34,10 +35,8 @@ function MessageModal(props: Props) {
   }
 
   return isOpen ? (
-    <div
-      className={styles.container}
-      onClick={(event) => handleCloseModal(event)}
-    >
+    <div className={styles.container}>
+      <Backdrop open={isOpen} className={styles.dimmingOverlay} onClick={handleCloseModal}/>
       <div className={styles.wrapper}>
         <section className={styles.headerSection}>{header}</section>
         <section className={styles.contentSection}>{message}</section>

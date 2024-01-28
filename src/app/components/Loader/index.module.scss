@@ -1,0 +1,18 @@
+@use "src/app/colors";
+
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 6;
+
+  .loader {
+    z-index: 7;
+    color: colors.$ambank-red;
+  }
+}

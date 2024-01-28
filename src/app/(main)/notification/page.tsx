@@ -11,6 +11,7 @@ import {
 import dayjs from "dayjs";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader";
 
 export default function NotificationPage() {
   const router = useRouter();

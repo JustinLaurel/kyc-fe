@@ -2,7 +2,7 @@
 
 .profileDropdown {
   background-color: white;
-  z-index: 9999;
+  z-index: 2;
   border-radius: 8px;
   border: 1px solid colors.$border-gray;
   padding: 8px;
@@ -21,7 +21,6 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 17px;
-  letter-spacing: 0em;
 
   color: colors.$ambank-red;
   border-bottom: 1px solid colors.$separator-gray;

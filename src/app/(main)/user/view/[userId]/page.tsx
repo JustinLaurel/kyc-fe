@@ -54,7 +54,7 @@ function UserDetailsView(props: UserDetailsProps) {
     <Card header={"User Details"} className={styles.userDetailsContainer}>
       <div className={styles.detailsWrapper}>
         <FieldInput
-          title={"User ID*"}
+          label={"User ID*"}
           onButtonClick={() => {}}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
@@ -73,7 +73,7 @@ function UserDetailsView(props: UserDetailsProps) {
           title={"Department/Branch*"}
           placeholder={"Please Select"}
         />
-        <FieldInput title={"Name*"} placeholder={"Enter Name here"} />
+        <FieldInput label={"Name*"} placeholder={"Enter Name here"} />
         <FieldDropdown
           items={[
             {
@@ -88,7 +88,7 @@ function UserDetailsView(props: UserDetailsProps) {
           title={"User Role*"}
           placeholder={"Please Select"}
         />
-        <FieldInput title={"Email ID*"} placeholder={"Enter Email ID here"} />
+        <FieldInput label={"Email ID*"} placeholder={"Enter Email ID here"} />
         <FieldDropdown
           title={"Approver Group*"}
           items={[

@@ -18,7 +18,6 @@ $column-gap: 8px;
     font-size: 16px;
     font-weight: 700;
     line-height: 19px;
-    letter-spacing: 0em;
     text-align: left;
 
     .headerCell {
@@ -49,7 +48,6 @@ $column-gap: 8px;
       font-size: 16px;
       line-height: 19px;
       font-weight: 400;
-      letter-spacing: 0em;
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid colors.$separator-gray;
       &.even {

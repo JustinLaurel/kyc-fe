@@ -1,28 +1,81 @@
+import { PartialRecord } from "@/util";
 import styles from "./index.module.scss";
 import ActionButton from "@/components/ActionButton";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import React, { HTMLInputTypeAttribute } from "react";
 
-interface Props {
-  title: string;
-  placeholder?: string;
-  type?: string;
+const StylingClasses = {
+  container: "container",
+  label: "label",
+  inputWrapper: "inputWrapper",
+  input: "input",
+  button: "button",
+} as const;
+interface FieldInputProps {
+  label: string;
+  type?: HTMLInputTypeAttribute;
   onButtonClick?: () => void;
   buttonLabel?: string;
+  classes?: PartialRecord<keyof typeof StylingClasses, string>;
+  error?: FieldError;
+  ref?: React.Ref<HTMLInputElement>;
 }
-export default function FieldInput(props: Props) {
-  const {
-    title,
-    placeholder = "",
-    type = "text",
-    onButtonClick = null,
-    buttonLabel = null,
-  } = props;
-  return (
-    <section className={styles.fieldContainer}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.inputWrapper}>
-        <input className={styles.input} placeholder={placeholder} type={type} />
-        {onButtonClick && buttonLabel && (<ActionButton className={styles.button} onClick={onButtonClick}>{buttonLabel}</ActionButton>)}
-      </div>
-    </section>
-  );
-}
+
+const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
+  (props: FieldInputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+    const {
+      label,
+      type = "text",
+      onButtonClick = null,
+      buttonLabel = null,
+      classes = {} as PartialRecord<keyof typeof StylingClasses, string>,
+      error = null,
+      ...inputProps
+    } = props;
+    return (
+      <section
+        className={
+          styles.fieldContainer +
+          (classes.container ? ` ${classes.container}` : "")
+        }
+      >
+        <label
+          className={styles.label + (classes.label ? ` ${classes.label}` : "")}
+          htmlFor={label}
+        >
+          {label}
+        </label>
+        <div
+          className={
+            styles.inputWrapper +
+            (classes.inputWrapper ? ` ${classes.inputWrapper}` : "")
+          }
+        >
+          <input
+            id={label}
+            className={
+              styles.input +
+              (error ? ` ${styles.hasError}` : "") +
+              (classes.input ? ` ${classes.input}` : "")
+            }
+            type={type}
+            ref={ref}
+            {...inputProps}
+          />
+          {onButtonClick && buttonLabel && (
+            <ActionButton
+              className={
+                styles.button + (classes.button ? ` ${classes.button}` : "")
+              }
+              onClick={onButtonClick}
+            >
+              {buttonLabel}
+            </ActionButton>
+          )}
+        </div>
+      </section>
+    );
+  }
+);
+
+export default FieldInput;

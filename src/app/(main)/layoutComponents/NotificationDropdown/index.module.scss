@@ -2,7 +2,7 @@
 
 .container {
   width: 360px;
-  z-index: 9999;
+  z-index: 2;
   background-color: white;
   border: 1px solid colors.$border-gray;
   box-shadow: 0px 9px 9px 0px colors.$verylight-gray;
@@ -28,7 +28,6 @@
 
     font-size: 14px;
     line-height: 17px;
-    letter-spacing: 0em;  
   }
 }
 .notificationSetion {

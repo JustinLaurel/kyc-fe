@@ -1,20 +1,9 @@
 @use "src/app/colors";
 
 .dimmingOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: colors.$dimmed-gray;
-  z-index: 500;
-
-  &.active {
-    display: block;
-  }
+  color: colors.$dimmed-gray;
+  z-index: 3;
 }
-
 
 .sidebar {
   // Positioning CSS
@@ -25,7 +14,7 @@
   height: 100%;
   background: #333;
   transition: right 0.3s;
-  z-index: 1000;
+  z-index: 4;
   // Positioning CSS end
 
   display: flex;
@@ -33,7 +22,6 @@
   color: white;
   font-weight: 400;
   font-size: 20px;
-  letter-spacing: 0.5px;
 
   &.active {
     right: 0;
@@ -67,7 +55,6 @@
         padding-right: 16px;
 
         font-family: colors.$font-inter;
-        letter-spacing: 0em;
 
         .username {
           font-size: 18px;

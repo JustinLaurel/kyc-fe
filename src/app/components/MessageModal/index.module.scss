@@ -1,28 +1,23 @@
 @use "src/app/colors";
 
 .container {
-  z-index: 999999999999999;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-
-  // Position at center CSS start
+  width: 100vw;
+  height: 100vh;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: colors.$dimmed-gray;
-  height: 100%;
-  // Position at center CSS end
+
+  .dimmingOverlay {
+    color: colors.$dimmed-gray;
+  }
 
   .wrapper {
-    z-index: 999;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     row-gap: 32px;
     width: 300px;
-    max-width: max-content;
     background-color: white;
     padding: 30px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -34,14 +29,12 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  letter-spacing: 0em;
   text-align: left;
 }
 .contentSection {
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
-  letter-spacing: 0em;
   text-align: left;
   color: colors.$medium-gray;
 }

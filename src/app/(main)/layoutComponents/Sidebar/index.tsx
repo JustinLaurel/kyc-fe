@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import styles from "./index.module.scss";
-import { Button, IconButton } from "@mui/material";
+import { Backdrop, Button, IconButton } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -13,12 +13,7 @@ export default function Sidebar(props: Props) {
   const { isOpen, handleClose } = props;
   return (
     <>
-      <section
-        className={`${styles.dimmingOverlay} ${
-          isOpen ? styles.active : ""
-        }`}
-        onClick={handleClose}
-      />
+      <Backdrop open={isOpen} className={styles.dimmingOverlay} onClick={handleClose}/>
       <section className={`${styles.sidebar} ${isOpen ? styles.active : ""}`}>
         <div className={styles.userInfo}>
           <div className={styles.wrapper}>

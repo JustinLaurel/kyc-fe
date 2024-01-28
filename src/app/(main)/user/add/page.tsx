@@ -49,7 +49,7 @@ function UserSearch(props: UserSearchProps) {
     <Card header={"User Details"} className={styles.userSearchContainer}>
       <div className={styles.searchWrapper}>
         <FieldInput
-          title={"User ID*"}
+          label={"User ID*"}
           placeholder={"Enter User ID here"}
           onButtonClick={onClick}
           buttonLabel={"Search"}
@@ -76,7 +76,7 @@ function UserAdd(props: UserAddProps) {
     ]}>
       <div className={styles.addWrapper}>
         <FieldInput
-          title={"User ID*"}
+          label={"User ID*"}
           onButtonClick={() => {}}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
@@ -95,7 +95,7 @@ function UserAdd(props: UserAddProps) {
           title={"Department/Branch*"}
           placeholder={"Please Select"}
         />
-        <FieldInput title={"Name*"} placeholder={"Enter Name here"} />
+        <FieldInput label={"Name*"} placeholder={"Enter Name here"} />
         <FieldDropdown
           items={[
             {
@@ -110,7 +110,7 @@ function UserAdd(props: UserAddProps) {
           title={"User Role*"}
           placeholder={"Please Select"}
         />
-        <FieldInput title={"Email ID*"} placeholder={"Enter Email ID here"} />
+        <FieldInput label={"Email ID*"} placeholder={"Enter Email ID here"} />
         <FieldDropdown
           title={"Approver Group*"}
           items={[

@@ -23,7 +23,7 @@ export default function SearchBar() {
       ]}
     >
       <section className={styles.fieldsSection}>
-        <FieldInput title={"Name"} placeholder={"Search by name"} />
+        <FieldInput label={"Name"} placeholder={"Search by name"} />
         <FieldDropdown
           items={[
             {
@@ -38,7 +38,7 @@ export default function SearchBar() {
           title={"User Role"}
           placeholder={"Please Select"}
         />
-        <FieldInput title={"User ID"} placeholder={"Search by user ID"} />
+        <FieldInput label={"User ID"} placeholder={"Search by user ID"} />
         <FieldAutocomplete
           items={[
             {
