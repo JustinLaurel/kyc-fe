@@ -18,11 +18,12 @@ interface FieldInputProps {
   buttonLabel?: string;
   classes?: PartialRecord<keyof typeof StylingClasses, string>;
   error?: FieldError;
+  placeholder?: string;
   ref?: React.Ref<HTMLInputElement>;
 }
 
 const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
-  (props: FieldInputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+  function FieldInputInternal(props: FieldInputProps, ref: React.ForwardedRef<HTMLInputElement>) {
     const {
       label,
       type = "text",
