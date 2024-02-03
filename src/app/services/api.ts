@@ -1,3 +1,5 @@
+import { ExceptionFactory } from "@/config/errors";
+
 const base = "http://localhost:8080";
 const routes = {
   login: `${base}/auth/login`,
@@ -16,7 +18,7 @@ async function post(url: string, payload?: Record<string, string>) {
 
     const json = await response.json();
     if (json.error) {
-      throw new Error(json.error);
+      throw ExceptionFactory.create(json.error, json.message);
     }
     return json;
   } catch (error) {

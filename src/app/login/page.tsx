@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import FieldInput from "@/components/FieldInput";
 import { CircularProgress } from "@mui/material";
 import Loader from "@/components/Loader";
+import { UnauthorizedException } from "@/config/errors";
 
 const initialForm = {
   username: "",
@@ -44,12 +45,11 @@ export default function LoginPage() {
         router.push("/dashboard");
       }
     } catch (error: any) {
-      const message =
-        error.message === "ERR_LOGIN_INVALID"
+      const message = error instanceof UnauthorizedException
           ? "The User ID or password you entered is incorrect."
           : "Failed to login";
       setError("root.serverError", {
-        type: error.message,
+        type: error.code,
         message: message,
       });
       Object.keys(form).forEach((key) => {
