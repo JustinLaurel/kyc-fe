@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Card from "../components/Card";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../components/ActionButton";
-import { routes, post } from "@/services/api";
+import { post } from "@/services/api";
+import { routes } from "@/config/routes";
 import { useRouter } from "next/navigation";
 import { MessageModalOk } from "@/components/MessageModal";
 
@@ -13,7 +14,7 @@ import { CircularProgress } from "@mui/material";
 import Loader from "@/components/Loader";
 import { UnauthorizedException } from "@/config/errors";
 
-const initialForm = {
+const INITIAL_FORM = {
   username: "",
   password: "",
 } as const;
@@ -24,9 +25,9 @@ export default function LoginPage() {
     formState: { errors },
     reset,
     setError,
-  } = useForm<typeof initialForm>({
+  } = useForm<typeof INITIAL_FORM>({
     defaultValues: {
-      ...initialForm,
+      ...INITIAL_FORM,
     },
   });
 
@@ -34,7 +35,7 @@ export default function LoginPage() {
   const [modalMessage, setModalMessage] = useState(null);
   const router = useRouter();
 
-  async function handleLogin(form: typeof initialForm) {
+  async function handleLogin(form: typeof INITIAL_FORM) {
     try {
       const response = await post(routes.login, {
         username: form.username,
@@ -59,7 +60,7 @@ export default function LoginPage() {
   }
 
   async function handleClear() {
-    reset({ ...initialForm });
+    reset({ ...INITIAL_FORM });
   }
 
   function handleCloseModal() {

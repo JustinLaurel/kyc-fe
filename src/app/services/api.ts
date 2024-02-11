@@ -1,12 +1,5 @@
 import { ExceptionFactory } from "@/config/errors";
 
-const base = "http://localhost:8080";
-const routes = {
-  login: `${base}/auth/login`,
-  getListDepartments: `${base}/constant/list/departments`,
-  getListApproverGroups: `${base}/constant/list/approver-groups`,
-};
-
 async function post(
   url: string,
   payload?: Record<string, string>,
@@ -74,4 +67,4 @@ async function postForm(url: string, formData: FormData) {
   }
 }
 
-export { routes, post, get, postForm };
+export { post, get, postForm };

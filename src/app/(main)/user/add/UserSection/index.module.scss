@@ -1,12 +1,12 @@
 @use 'src/app/colors';
 
-.userSearchContainer {
+.searchView {
   .searchWrapper {
     display: flex;
   }
 }
 
-.userAddContainer {
+.addView {
   .addWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;

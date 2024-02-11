@@ -3,7 +3,7 @@ import styles from "./page.module.scss";
 import SearchBar from "./components/SearchBar";
 import SearchTable from "./components/SearchTable";
 import Header from "./components/Header";
-import { routes } from "@/services/api";
+import { routes } from "@/config/routes";
 import { getServer } from "@/services/serverApi";
 
 const TABLE_ITEMS = [

@@ -1,6 +1,6 @@
 "use client";
 import RouteSteps from "@/components/RouteSteps";
-import styles from "./headersection.module.scss";
+import styles from "./index.module.scss";
 
 const routeItems = [
   {
