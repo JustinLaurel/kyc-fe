@@ -1,0 +1,16 @@
+@use 'src/app/colors';
+
+.userSearchContainer {
+  .searchWrapper {
+    display: flex;
+  }
+}
+
+.userAddContainer {
+  .addWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    row-gap: 16px;
+  }
+}

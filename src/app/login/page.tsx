@@ -77,7 +77,7 @@ export default function LoginPage() {
               error={errors.username}
               {...register("username", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 14,
               })}
             />
@@ -87,7 +87,7 @@ export default function LoginPage() {
               error={errors.password}
               {...register("password", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 14,
               })}
             />

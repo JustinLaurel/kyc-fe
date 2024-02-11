@@ -5,31 +5,3 @@
   flex-direction: column;
   row-gap: 24px;
 }
-
-.headerSection {
-  display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-
-  .header {
-    color: colors.$dark-gray;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 29px;
-  }
-}
-
-.userSearchContainer {
-  .searchWrapper {
-    display: flex;
-  }
-}
-
-.userAddContainer {
-  .addWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 40px;
-    row-gap: 16px;
-  }
-}

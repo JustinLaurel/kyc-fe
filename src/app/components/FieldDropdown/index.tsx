@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
 import styles from "./index.module.scss";

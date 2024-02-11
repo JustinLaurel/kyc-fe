@@ -1,11 +1,10 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./page.module.scss";
 import SearchBar from "./components/SearchBar";
-import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
-import DataTable from "@/components/DataTable";
-import Card from "@/components/Card";
-import { useRouter } from "next/navigation";
+import SearchTable from "./components/SearchTable";
+import Header from "./components/Header";
+import { routes } from "@/services/api";
+import { getServer } from "@/services/serverApi";
 
 const TABLE_ITEMS = [
   {
@@ -55,106 +54,16 @@ const TABLE_ITEMS = [
   },
 ];
 
-export default function Search() {
-  const router = useRouter();
-  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-  useEffect(() => {
-    init();
-  }, []);
+export default async function SearchPage() {
+  const departmentList = await getServer(routes.getListDepartments);
 
-  const init = async () => {
-    try {
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const [headers, setHeaders] = useState([
-    "No",
-    {
-      label: "Name",
-      onClick: () => {},
-    },
-    {
-      label: "User ID",
-      onClick: () => {},
-    },
-    {
-      label: "Department/Branch",
-      onClick: () => {},
-    },
-    {
-      label: "User Role",
-      onClick: () => {},
-    },
-    {
-      label: "Activity",
-      onClick: () => {},
-    },
-    {
-      label: "Status",
-      onClick: () => {},
-    },
-    "Action",
-  ]);
-
-  const [items, setItems] = useState([]);
-  const [colWidths, setColWidths] = useState([0.3, 3, 1.5, 2, 2, 2, 1, 1.5]);
-  useEffect(() => {
-    function handleViewUser(userId: string) {
-      router.push(`/user/view/${userId}`);
-    }
-  
-    const mappedItems = TABLE_ITEMS.map((item, index) => {
-      return {
-        no: item.no,
-        name: {
-          label: item.name,
-          onClick: () => handleViewUser(item.userId),
-        },
-        userId: item.userId,
-        department: item.department,
-        userRole: item.userRole,
-        activity: item.activity,
-        status: item.status,
-        action:
-          index % 2 === 0
-            ? [
-                {
-                  label: "Edit",
-                  onClick: () => {},
-                  colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-                },
-                {
-                  label: "Delete",
-                  onClick: () => {},
-                },
-              ]
-            : {
-                label: "Review",
-                onClick: () => {},
-              },
-      };
-    });
-    setItems(mappedItems as any);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <section className={styles.userContainer}>
-      <div className={styles.headerSection}>
-        <div>User Management</div>
-        <ActionButton
-          onClick={() => router.push("/user/add")}
-          className={styles.createButton}
-        >
-          Create New
-        </ActionButton>
-      </div>
-      <SearchBar />
-      <Card header="Search Result">
-        <DataTable items={items} headers={headers} colWidths={colWidths} />
-      </Card>
+      <Header />
+      <SearchBar 
+        departmentList={departmentList}
+        />
+      <SearchTable users={TABLE_ITEMS} />
     </section>
   );
 }

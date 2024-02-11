@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import styles from "./searchbar.module.scss";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import Card from "@/components/Card";
@@ -6,7 +7,12 @@ import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  departmentList: ListItem[];
+}
+export default function SearchBar(props: SearchBarProps) {
+  const { departmentList } = props;
+
   return (
     <Card
       header="Search"
@@ -54,12 +60,7 @@ export default function SearchBar() {
           placeholder={"Search by status"}
         />
         <FieldAutocomplete
-          items={[
-            {
-              label: "Lorem Ipsum",
-              value: "Lorem Ipsum",
-            },
-          ]}
+          items={departmentList}
           title={"Department"}
           placeholder={"Search by department/branch"}
         />
