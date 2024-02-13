@@ -1,9 +1,8 @@
 "use client";
-import { useState } from "react";
-import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import { Select, MenuItem } from "@mui/material";
 import styles from "./index.module.scss";
 import React from "react";
-import { FieldError } from "react-hook-form";
+import { Control, Controller, FieldError } from "react-hook-form";
 
 interface FieldDropdownProps {
   items: {
@@ -13,69 +12,69 @@ interface FieldDropdownProps {
   title?: string;
   placeholder?: string;
   error?: FieldError;
-  ref?: React.Ref<HTMLInputElement>;
+  name: string; // From react-hook-form's "{...register()}" call
+  control: Control<any, any>;
 }
+// To suppress warning from react-hook-form's register trying to pass a ref to a functional component
 const FieldDropdown = React.forwardRef<HTMLSelectElement, FieldDropdownProps>(
-  function FieldDropdownInternal(
-    props: FieldDropdownProps,
-    ref: React.ForwardedRef<HTMLSelectElement>
-  ) {
+  function FieldDropdownInternal(props, ref) {
     const {
       items,
       title,
       placeholder = "",
       error = null,
+      control,
       ...registerProps
     } = props;
-    const [selectedValue, setSelectedValue] = useState("");
-
-    function handleChange(event: SelectChangeEvent<string>) {
-      setSelectedValue(event.target.value);
-    }
 
     return (
       <div className={styles.fieldContainer}>
         {title && <div className={styles.title}>{title}</div>}
-        <Select
-          id={title}
-          disableUnderline
-          displayEmpty
-          variant={"standard"}
-          classes={{
-            root: styles.root + (error ? ` ${styles.hasError}` : ""),
-            select: styles.select,
-            outlined: styles.outlined,
-            icon: styles.icon,
-          }}
-          ref={ref}
-          value={selectedValue}
+        <Controller
+          control={control}
           {...registerProps}
-          onChange={handleChange}
-        >
-          {selectedValue === "" && (
-            <MenuItem
-              disabled
-              value=""
-              className={styles.placeholder}
-              style={{ display: "none" }}
-            >
-              <div className={styles.placeholder}>{placeholder}</div>
-            </MenuItem>
-          )}
-          {Array.isArray(items) &&
-            items.length > 0 &&
-            items.map((item, index) => {
-              return (
-                <MenuItem
-                  key={index}
-                  value={item.value}
-                  className={styles.dropdownItem}
-                >
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-        </Select>
+          render={({ field: { onChange, onBlur, value, ref } }) => {
+            return (
+              <Select
+                id={title}
+                disableUnderline
+                displayEmpty
+                renderValue={() =>
+                  items.find((item) => item.value === value)?.label || (
+                    <div className={styles.placeholder}>{placeholder}</div>
+                  )
+                }
+                variant={"standard"}
+                classes={{
+                  root: styles.root + (error ? ` ${styles.hasError}` : ""),
+                  select: styles.select,
+                  outlined: styles.outlined,
+                  icon: styles.icon,
+                }}
+                ref={ref}
+                value={value}
+                onChange={(event) => {
+                  onChange(event);
+                }}
+                onBlur={onBlur}
+              >
+                {Array.isArray(items) &&
+                  items.length > 0 &&
+                  items.map((item, index) => {
+                    return (
+                      <MenuItem
+                        key={index}
+                        value={item.value}
+                        className={styles.dropdownItem}
+                      >
+                        {item.label}
+                      </MenuItem>
+                    );
+                  })}
+              </Select>
+            );
+          }}
+        />
       </div>
     );
   }

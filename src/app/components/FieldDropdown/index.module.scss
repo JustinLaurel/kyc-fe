@@ -58,8 +58,6 @@
 }
 .placeholder {
   color: colors.$medium-gray;
-  position: absolute;
-  z-index: 1;
 }
 .hasError {
   border: 1px solid colors.$ambank-red !important;

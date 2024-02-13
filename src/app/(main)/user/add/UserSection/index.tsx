@@ -30,17 +30,6 @@ export default function UserSection(props: UserSectionProps) {
     }
   }
 
-  async function submitStaff(form: typeof INITIAL_ADD_FORM) {
-    const response = await postClient(routes.submitAddUser, {
-      staffId: form.staffId,
-      name: form.name,
-      email: form.email,
-      department: form.department,
-      role: form.role,
-      approverGroup: form.approverGroup,
-    });
-  }
-
   return (
     <>
       {swipeIndex === SWIPE_INDEXES.USER_SEARCH && (

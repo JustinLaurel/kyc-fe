@@ -66,6 +66,7 @@ export default function AddView(props: AddViewProps) {
     trigger,
     getValues,
     reset,
+    control
   } = useForm<typeof INITIAL_ADD_FORM>({
     defaultValues: {
       ...(staff ? staff : INITIAL_ADD_FORM),
@@ -178,7 +179,8 @@ export default function AddView(props: AddViewProps) {
           title={"Department/Branch*"}
           placeholder={"Please Select"}
           error={errors.department}
-          {...register("department", VALIDATION_RULES.department)}
+          name={"department"}
+          control={control}
         />
         <FieldInput
           label={"Name*"}
@@ -200,6 +202,7 @@ export default function AddView(props: AddViewProps) {
           title={"User Role*"}
           placeholder={"Please Select"}
           error={errors.role}
+          control={control}
           {...register("role", VALIDATION_RULES.role)}
         />
         <FieldInput
@@ -213,6 +216,7 @@ export default function AddView(props: AddViewProps) {
           items={approverGroupList}
           placeholder={"Please Select"}
           error={errors.approverGroup}
+          control={control}
           {...register("approverGroup", VALIDATION_RULES.approverGroup)}
         />
       </div>
