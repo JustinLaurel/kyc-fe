@@ -10,73 +10,99 @@ import {
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { forwardRef } from "react";
+import { Control, Controller, FieldError } from "react-hook-form";
+import React from "react";
 
-interface Props {
-  items: {
-    label: string;
-    value: string;
-  }[];
+interface FieldAutocompleteProps {
+  items: ListItem[];
   title?: string;
   placeholder?: string;
+  error?: FieldError;
+  name: string;
+  control: Control<any, any>;
 }
-export default function FieldAutocomplete(props: Props) {
-  const { items, title, placeholder = "" } = props;
+const FieldAutocomplete = React.forwardRef<
+  HTMLSelectElement,
+  FieldAutocompleteProps
+>(function FieldAutocompleteInternal(props, ref) {
+  const {
+    items,
+    title,
+    placeholder = "",
+    error = null,
+    control,
+    ...registerProps
+  } = props;
 
   return (
     <div className={styles.fieldContainer}>
       {title && <div className={styles.title}>{title}</div>}
-      <Autocomplete
-        options={items}
-        classes={{
-          root: styles.root,
-          input: styles.input,
-          endAdornment: styles.endAdornment,
-        }}
-        PaperComponent={PaperComponentForward}
-        disablePortal
-        renderInput={(params) => {
+      <Controller
+        control={control}
+        {...registerProps}
+        render={({ field: { onChange, onBlur, value, ref } }) => {
           return (
-            <TextField
-              {...params}
-              variant={"standard"}
-              placeholder={placeholder}
-              InputProps={{
-                ...params.InputProps,
-                disableUnderline: true,
-                startAdornment: (
-                  <InputAdornment
-                    position="start"
-                    className={styles.searchIcon}
+            <Autocomplete
+              ref={ref}
+              options={items}
+              classes={{
+                root: styles.root,
+                input: styles.input,
+                endAdornment: styles.endAdornment,
+              }}
+              PaperComponent={PaperComponentForward}
+              disablePortal
+              value={value?.value}
+              onChange={(event, selectedOptions) => {
+                onChange(selectedOptions);
+              }}
+              onBlur={onBlur}
+              renderInput={(params) => {
+                return (
+                  <TextField
+                    {...params}
+                    variant={"standard"}
+                    placeholder={placeholder}
+                    InputProps={{
+                      ...params.InputProps,
+                      disableUnderline: true,
+                      startAdornment: (
+                        <InputAdornment
+                          position="start"
+                          className={styles.searchIcon}
+                        >
+                          <Image
+                            src={`/assets/images/icon_search.png`}
+                            alt={"Search Icon"}
+                            width={24}
+                            height={24}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                );
+              }}
+              renderOption={(props, option) => {
+                return (
+                  <MenuItem
+                    {...props}
+                    key={(props as any).key}
+                    classes={{
+                      root: styles.dropdownItem,
+                    }}
                   >
-                    <Image
-                      src={`/assets/images/icon_search.png`}
-                      alt={"Search Icon"}
-                      width={24}
-                      height={24}
-                    />
-                  </InputAdornment>
-                ),
+                    {option.label}
+                  </MenuItem>
+                );
               }}
             />
-          );
-        }}
-        renderOption={(props, option, state) => {
-          return (
-            <MenuItem
-              {...props}
-              key={(props as any).key}
-              classes={{
-                root: styles.dropdownItem,
-              }}
-            >
-              {option.label}
-            </MenuItem>
           );
         }}
       />
     </div>
   );
-}
+});
 
 // Required for popper dropdown animation. See: https://github.com/mui/material-ui/issues/19262
 function PaperComponent(paperProps: any, ref: any) {
@@ -87,3 +113,5 @@ function PaperComponent(paperProps: any, ref: any) {
   );
 }
 const PaperComponentForward = forwardRef(PaperComponent);
+
+export default FieldAutocomplete;

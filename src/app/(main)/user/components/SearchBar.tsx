@@ -6,14 +6,14 @@ import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export const INITIAL_SEARCH_FORM = {
   name: "",
   role: "",
   staffId: "",
-  status: "",
-  department: "",
+  status: null,
+  department: null,
 };
 
 interface SearchBarProps {
@@ -95,11 +95,15 @@ export default function SearchBar(props: SearchBarProps) {
           ]}
           title={"Status"}
           placeholder={"Search by status"}
+          control={control}
+          {...register("status")}
         />
         <FieldAutocomplete
           items={departmentList}
           title={"Department"}
           placeholder={"Search by department/branch"}
+          control={control}
+          {...register("department")}
         />
       </section>
     </Card>
