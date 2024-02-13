@@ -6,12 +6,39 @@ import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+export const INITIAL_SEARCH_FORM = {
+  name: "",
+  role: "",
+  staffId: "",
+  status: "",
+  department: "",
+};
 
 interface SearchBarProps {
   departmentList: ListItem[];
+  onSubmit: () => void;
 }
 export default function SearchBar(props: SearchBarProps) {
-  const { departmentList } = props;
+  const { departmentList, onSubmit } = props;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    getValues,
+    reset,
+    control,
+  } = useForm<typeof INITIAL_SEARCH_FORM>({
+    defaultValues: {
+      ...INITIAL_SEARCH_FORM,
+    },
+  });
+
+  function handleClear() {
+    reset({ ...INITIAL_SEARCH_FORM });
+  }
 
   return (
     <Card
@@ -19,17 +46,21 @@ export default function SearchBar(props: SearchBarProps) {
       buttons={[
         {
           label: "Clear",
-          onClick: () => {},
+          onClick: handleClear,
           colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
         },
         {
           label: "Search",
-          onClick: () => {},
+          onClick: handleSubmit(onSubmit),
         },
       ]}
     >
       <section className={styles.fieldsSection}>
-        <FieldInput label={"Name"} placeholder={"Search by name"} />
+        <FieldInput
+          label={"Name"}
+          placeholder={"Search by name"}
+          {...register("name")}
+        />
         <FieldDropdown
           items={[
             {
@@ -43,8 +74,14 @@ export default function SearchBar(props: SearchBarProps) {
           ]}
           title={"User Role"}
           placeholder={"Please Select"}
+          {...register("role")}
+          control={control}
         />
-        <FieldInput label={"User ID"} placeholder={"Search by user ID"} />
+        <FieldInput
+          label={"User ID"}
+          placeholder={"Search by user ID"}
+          {...register("staffId")}
+        />
         <FieldAutocomplete
           items={[
             {

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./header.module.scss";
+import styles from "./headersection.module.scss";
 import ActionButton from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
 
