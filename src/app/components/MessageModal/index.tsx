@@ -1,22 +1,23 @@
 import React from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Backdrop } from "@mui/material";
+import { MODAL_TYPE } from "./type";
 
-interface BaseMessageModalProps {
+interface BaseProps {
   message?: string | React.ReactNode;
   isOpen: boolean;
   handleClose: () => void;
   header?: string;
 }
-interface Props extends BaseMessageModalProps {
+interface MessageModalProps extends BaseProps {
   buttons?: {
     label: string;
     onClick: () => void;
     colorScheme: BUTTON_COLOR_SCHEMES;
   }[];
 }
-function MessageModal(props: Props) {
+function BaseMessageModal(props: MessageModalProps) {
   const {
     isOpen,
     buttons,
@@ -36,7 +37,11 @@ function MessageModal(props: Props) {
 
   return isOpen ? (
     <div className={styles.container}>
-      <Backdrop open={isOpen} className={styles.dimmingOverlay} onClick={handleCloseModal}/>
+      <Backdrop
+        open={isOpen}
+        className={styles.dimmingOverlay}
+        onClick={handleCloseModal}
+      />
       <div className={styles.wrapper}>
         <section className={styles.headerSection}>{header}</section>
         <section className={styles.contentSection}>{message}</section>
@@ -59,7 +64,8 @@ function MessageModal(props: Props) {
   ) : null;
 }
 
-interface MessageModalYesNo extends BaseMessageModalProps {
+interface MessageModalYesNo extends BaseProps {
+  type: MODAL_TYPE.YES_NO;
   handleNo: () => void;
   handleYes: () => void;
 }
@@ -67,7 +73,7 @@ function MessageModalYesNo(props: MessageModalYesNo) {
   const { isOpen, message, handleNo, handleYes, handleClose } = props;
 
   return (
-    <MessageModal
+    <BaseMessageModal
       isOpen={isOpen}
       buttons={[
         {
@@ -87,14 +93,15 @@ function MessageModalYesNo(props: MessageModalYesNo) {
   );
 }
 
-interface MessageModalOk extends BaseMessageModalProps {
+interface MessageModalOk extends BaseProps {
+  type: MODAL_TYPE.OK;
   handleOk: () => void;
 }
 function MessageModalOk(props: MessageModalOk) {
   const { isOpen, message, handleOk, handleClose } = props;
 
   return (
-    <MessageModal
+    <BaseMessageModal
       isOpen={isOpen}
       buttons={[
         {
@@ -109,7 +116,8 @@ function MessageModalOk(props: MessageModalOk) {
   );
 }
 
-interface MessageModalCancelConfirm extends BaseMessageModalProps {
+interface MessageModalCancelConfirm extends BaseProps {
+  type: MODAL_TYPE.CANCEL_CONFIRM;
   handleCancel: () => void;
   handleConfirm: () => void;
 }
@@ -117,7 +125,7 @@ function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
   const { isOpen, message, handleCancel, handleConfirm, handleClose } = props;
 
   return (
-    <MessageModal
+    <BaseMessageModal
       isOpen={isOpen}
       buttons={[
         {
@@ -137,9 +145,19 @@ function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
   );
 }
 
-export {
-  MessageModal,
-  MessageModalYesNo,
-  MessageModalOk,
-  MessageModalCancelConfirm,
+function MessageModal(
+  props: MessageModalYesNo | MessageModalOk | MessageModalCancelConfirm
+) {
+  switch (props.type) {
+    case MODAL_TYPE.YES_NO:
+      return <MessageModalYesNo {...props} />;
+    case MODAL_TYPE.OK:
+      return <MessageModalOk {...props} />;
+    case MODAL_TYPE.CANCEL_CONFIRM:
+      return <MessageModalCancelConfirm {...props} />;
+    default:
+      return <></>;
+  }
 }
+
+export default MessageModal;

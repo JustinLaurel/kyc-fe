@@ -6,10 +6,10 @@ import React, { useRef, useState } from "react";
 import Sidebar from "./layoutComponents/Sidebar";
 import NotificationDropdown from "./layoutComponents/NotificationDropdown";
 import ProfileDropdown from "./layoutComponents/ProfileDropdown";
-import { MessageModalYesNo } from "@/components/MessageModal";
-import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import MessageModal from "@/components/MessageModal";
 import { useRouter } from "next/navigation";
 import AmbankFooter from "@/components/AmbankFooter";
+import { MODAL_TYPE } from "@/components/MessageModal/type";
 
 interface Props {
   children: React.ReactNode;
@@ -127,7 +127,8 @@ export default function MainPageLayout(props: Props) {
       />
       <AmbankFooter />
 
-      <MessageModalYesNo
+      <MessageModal
+        type={MODAL_TYPE.YES_NO}
         isOpen={isLogoutNotificationOpen}
         handleNo={() => setIsLogoutNotificationOpen(false)}
         handleYes={() => {

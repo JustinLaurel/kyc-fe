@@ -16,7 +16,8 @@ interface UserSectionProps {
 }
 export default function UserSection(props: UserSectionProps) {
   const { departmentList, approverGroupList } = props;
-  const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_SEARCH);
+  // const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_SEARCH);
+  const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_ADD);
   const [queriedStaff, setQueriedStaff] = useState(null);
 
   async function searchStaff({ staffId }: typeof INITIAL_SEARCH_FORM) {

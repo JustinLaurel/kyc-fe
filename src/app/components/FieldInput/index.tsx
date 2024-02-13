@@ -1,7 +1,7 @@
 import { PartialRecord } from "@/util";
 import styles from "./index.module.scss";
 import ActionButton from "@/components/ActionButton";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 import React, { HTMLInputTypeAttribute } from "react";
 
 const StylingClasses = {

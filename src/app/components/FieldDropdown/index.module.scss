@@ -20,8 +20,10 @@
     align-items: center;
     border-radius: 4px;
     box-sizing: border-box;
+    width: 100%;
+
     &:focus-within {
-      outline: -webkit-focus-ring-color auto 1px
+      outline: -webkit-focus-ring-color auto 1px;
     }
 
     .select {
@@ -38,9 +40,6 @@
       padding-left: 16px;
       padding-right: 16px;
     }
-    .placeholder {
-      color: colors.$medium-gray;
-    }
     .icon {
       box-sizing: content-box;
       padding-right: 16px;
@@ -56,4 +55,13 @@
   font-weight: 400;
   line-height: 14px;
   height: 40px;
+}
+.placeholder {
+  color: colors.$medium-gray;
+  position: absolute;
+  z-index: 1;
+}
+.hasError {
+  border: 1px solid colors.$ambank-red !important;
+  outline: none !important;
 }

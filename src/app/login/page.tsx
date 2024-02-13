@@ -6,13 +6,14 @@ import ActionButton, { BUTTON_COLOR_SCHEMES } from "../components/ActionButton";
 import { post } from "@/services/api";
 import { routes } from "@/config/routes";
 import { useRouter } from "next/navigation";
-import { MessageModalOk } from "@/components/MessageModal";
+import MessageModal from "@/components/MessageModal";
 
 import { useForm } from "react-hook-form";
 import FieldInput from "@/components/FieldInput";
 import { CircularProgress } from "@mui/material";
 import Loader from "@/components/Loader";
 import { UnauthorizedException } from "@/config/errors";
+import { MessageManager } from "@/components/MessageModal/type";
 
 const INITIAL_FORM = {
   username: "",
@@ -31,8 +32,7 @@ export default function LoginPage() {
     },
   });
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState(null);
+  const [messageModal, setMessageModal] = useState<MessageManager | null>(null);
   const router = useRouter();
 
   async function handleLogin(form: typeof INITIAL_FORM) {
@@ -46,7 +46,8 @@ export default function LoginPage() {
         router.push("/dashboard");
       }
     } catch (error: any) {
-      const message = error instanceof UnauthorizedException
+      const message =
+        error instanceof UnauthorizedException
           ? "The User ID or password you entered is incorrect."
           : "Failed to login";
       setError("root.serverError", {
@@ -64,8 +65,7 @@ export default function LoginPage() {
   }
 
   function handleCloseModal() {
-    setShowModal(false);
-    setModalMessage(null);
+    setMessageModal(null);
   }
 
   return (
@@ -111,12 +111,7 @@ export default function LoginPage() {
           </section>
         </main>
       </Card>
-      <MessageModalOk
-        isOpen={showModal}
-        message={modalMessage}
-        handleOk={handleCloseModal}
-        handleClose={handleCloseModal}
-      />
+      {messageModal && <MessageModal {...messageModal} />}
     </div>
   );
 }

@@ -3,10 +3,10 @@ interface ListItem {
   value: string;
 }
 interface SimpleStaff {
-  approverGroupName?: string;
-  departmentName?: string;
+  approverGroup?: string;
+  department?: string;
   email: string;
   name: string;
   staffId: string;
-  userRole?: string;
+  role?: string;
 }

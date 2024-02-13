@@ -6,10 +6,13 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  left: 0;
+  top: 0;
   position: absolute;
 
   .dimmingOverlay {
     color: colors.$dimmed-gray;
+    z-index: 4;
   }
 
   .wrapper {
@@ -17,7 +20,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 32px;
-    width: 300px;
+    width: 360px;
     background-color: white;
     padding: 30px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -41,6 +44,10 @@
 .buttonSection {
   display: flex;
   justify-content: space-between;
+
+  :only-child {
+    margin-left: auto;
+  }
   .notificationButton {
     width: 125px !important;
   }

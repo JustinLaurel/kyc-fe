@@ -4,7 +4,7 @@ const routes = {
   getListDepartments: `${base}/constant/list/departments`,
   getListApproverGroups: `${base}/constant/list/approver-groups`,
   getStaffSimple: `${base}/staff/simple/{STAFF_ID}`,
-  submitAddUser: `${base}/staff/add`,
+  submitAddStaff: `${base}/staff/add`,
 };
 
 export { routes };

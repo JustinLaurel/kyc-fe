@@ -19,8 +19,13 @@ async function post(
     }
 
     const response = await fetch(url, options);
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      return null;
+    }
 
-    const json = await response.json();
     if (json.error) {
       throw ExceptionFactory.create(json.error, json.message);
     }
@@ -48,7 +53,21 @@ async function get(
       };
     }
     const response = await fetch(withParams, options);
-    return response.json();
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      return null;
+    }
+
+    if (json.error) {
+      throw ExceptionFactory.create(json.error, json.message);
+    }
+    return json;
   } catch (error) {
     throw new Error(String(error));
   }
