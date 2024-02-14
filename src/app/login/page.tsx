@@ -71,8 +71,11 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Card hasSeparator={false}>
-        <main className={styles.contentContainer}>
-          <form className={styles.formSection}>
+        <form
+          className={styles.contentContainer}
+          onSubmit={handleSubmit(handleLogin)}
+        >
+          <section className={styles.formSection}>
             <FieldInput
               label={"User ID"}
               error={errors.username}
@@ -92,7 +95,7 @@ export default function LoginPage() {
                 maxLength: 14,
               })}
             />
-          </form>
+          </section>
           <section className={styles.bottomSection}>
             <div className={styles.buttonWrapper}>
               <ActionButton
@@ -101,7 +104,7 @@ export default function LoginPage() {
               >
                 Clear
               </ActionButton>
-              <ActionButton onClick={handleSubmit(handleLogin)}>
+              <ActionButton isSubmit={true}>
                 Log In
               </ActionButton>
             </div>
@@ -109,7 +112,7 @@ export default function LoginPage() {
               {errors.root?.serverError?.message}
             </div>
           </section>
-        </main>
+        </form>
       </Card>
       {messageModal && <MessageModal {...messageModal} />}
     </div>

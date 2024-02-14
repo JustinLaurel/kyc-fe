@@ -23,7 +23,10 @@ interface FieldInputProps {
 }
 
 const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
-  function FieldInputInternal(props: FieldInputProps, ref: React.ForwardedRef<HTMLInputElement>) {
+  function FieldInputInternal(
+    props: FieldInputProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) {
     const {
       label,
       type = "text",
@@ -53,6 +56,7 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
           }
         >
           <input
+            autoComplete={"on"}
             id={label}
             className={
               styles.input +

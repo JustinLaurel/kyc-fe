@@ -6,7 +6,7 @@ import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 export const INITIAL_SEARCH_FORM = {
   name: "",
@@ -15,10 +15,21 @@ export const INITIAL_SEARCH_FORM = {
   status: null,
   department: null,
 };
+const VALIDATION_RULES = {
+  name: {
+    minLength: 6,
+  },
+  staffId: {
+    minLength: 5,
+  },
+  status: {
+    minLength: 1,
+  },
+};
 
 interface SearchBarProps {
   departmentList: ListItem[];
-  onSubmit: () => void;
+  onSubmit: SubmitHandler<any>;
 }
 export default function SearchBar(props: SearchBarProps) {
   const { departmentList, onSubmit } = props;
@@ -52,6 +63,7 @@ export default function SearchBar(props: SearchBarProps) {
         {
           label: "Search",
           onClick: handleSubmit(onSubmit),
+          isSubmit: true,
         },
       ]}
     >
@@ -59,17 +71,17 @@ export default function SearchBar(props: SearchBarProps) {
         <FieldInput
           label={"Name"}
           placeholder={"Search by name"}
-          {...register("name")}
+          {...register("name", VALIDATION_RULES.name)}
         />
         <FieldDropdown
           items={[
             {
               label: "Role 1",
-              value: "Role 1",
+              value: "role1",
             },
             {
               label: "Role 2",
-              value: "Role 2",
+              value: "role2",
             },
           ]}
           title={"User Role"}
@@ -80,23 +92,23 @@ export default function SearchBar(props: SearchBarProps) {
         <FieldInput
           label={"User ID"}
           placeholder={"Search by user ID"}
-          {...register("staffId")}
+          {...register("staffId", VALIDATION_RULES.staffId)}
         />
         <FieldAutocomplete
           items={[
             {
               label: "Status 1",
-              value: "Status 1",
+              value: "one",
             },
             {
               label: "Status 2",
-              value: "Status 2",
+              value: "two",
             },
           ]}
           title={"Status"}
           placeholder={"Search by status"}
           control={control}
-          {...register("status")}
+          {...register("status", VALIDATION_RULES.status)}
         />
         <FieldAutocomplete
           items={departmentList}

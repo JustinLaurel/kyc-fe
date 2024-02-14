@@ -1,22 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import SearchBar from "./SearchBar";
+import SearchCard from "./SearchCard";
 import SearchTable from "./SearchTable";
 
-const VALIDATION_RULES = {
-  name: {
-    minLength: 6,
-  },
-  staffId: {
-    minLength: 5,
-  },
-  status: {
-    minLength: 1,
-  },
-};
 
-interface SearchSectionProps {
+interface ContentSectionProps {
   departmentList: ListItem[];
   users: {
     no: string;
@@ -28,16 +16,17 @@ interface SearchSectionProps {
     status: string;
   }[];
 }
-export default function SearchSection(props: SearchSectionProps) {
+export default function ContentSection(props: ContentSectionProps) {
   const { departmentList, users } = props;
 
 
-  async function handleSearchUser() {}
-
+  async function handleSearchUser(queryParams: Record<string, string>) {
+    console.log(`queryParams`, queryParams);
+  }
 
   return (
     <>
-      <SearchBar
+      <SearchCard
         departmentList={departmentList}
         onSubmit={handleSearchUser}
       />

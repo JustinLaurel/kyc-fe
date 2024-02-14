@@ -40,6 +40,7 @@ const FieldAutocomplete = React.forwardRef<
       <Controller
         control={control}
         {...registerProps}
+        defaultValue={null}
         render={({ field: { onChange, onBlur, value, ref } }) => {
           return (
             <Autocomplete
@@ -52,9 +53,13 @@ const FieldAutocomplete = React.forwardRef<
               }}
               PaperComponent={PaperComponentForward}
               disablePortal
-              value={value?.value}
-              onChange={(event, selectedOptions) => {
-                onChange(selectedOptions);
+              value={
+                items
+                  ? items.find((item) => item.value === value) ?? null
+                  : null
+              }
+              onChange={(_, selectedItem) => {
+                onChange(selectedItem ? selectedItem.value : null);
               }}
               onBlur={onBlur}
               renderInput={(params) => {

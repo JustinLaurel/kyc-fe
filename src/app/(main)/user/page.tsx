@@ -1,11 +1,9 @@
 import React from "react";
 import styles from "./page.module.scss";
-import SearchBar from "./components/SearchBar";
-import SearchTable from "./components/SearchTable";
 import { routes } from "@/config/routes";
 import { getServer } from "@/services/serverApi";
 import HeaderSection from "./components/HeaderSection";
-import SearchSection from "./components/SearchSection";
+import ContentSection from "./components/ContentSection";
 
 const TABLE_ITEMS = [
   {
@@ -61,7 +59,7 @@ export default async function SearchPage() {
   return (
     <section className={styles.userContainer}>
       <HeaderSection />
-      <SearchSection departmentList={departmentList} users={TABLE_ITEMS} />
+      <ContentSection departmentList={departmentList} users={TABLE_ITEMS} />
     </section>
   );
 }

@@ -11,11 +11,17 @@ export enum BUTTON_COLOR_SCHEMES {
 interface Props {
   children?: React.ReactNode;
   colorScheme?: BUTTON_COLOR_SCHEMES;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
+  isSubmit?: boolean;
 }
 export default function ActionButton(props: Props) {
-  const { colorScheme = BUTTON_COLOR_SCHEMES.RED, onClick, className = null } = props;
+  const {
+    colorScheme = BUTTON_COLOR_SCHEMES.RED,
+    onClick = () => {},
+    className = null,
+    isSubmit = false,
+  } = props;
   return (
     <Button
       variant="contained"
@@ -26,7 +32,8 @@ export default function ActionButton(props: Props) {
         styles[colorScheme] +
         (className ? ` ${className}` : "")
       }
-      onClick={() => onClick()}
+      onClick={isSubmit ? () => {} : onClick}
+      type={isSubmit ? "submit" : "button"}
     >
       {props.children}
     </Button>
