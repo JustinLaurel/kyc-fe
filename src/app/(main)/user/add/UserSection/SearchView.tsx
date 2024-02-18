@@ -11,7 +11,7 @@ import { routes } from "@/config/routes";
 import { useForm } from "react-hook-form";
 
 export const INITIAL_SEARCH_FORM = {
-  staffId: "",
+  userId: "",
 };
 
 interface SearchViewProps {
@@ -34,7 +34,7 @@ export default function SearchView(props: SearchViewProps) {
           placeholder={"Enter User ID here"}
           onButtonClick={handleSubmit(onClick)}
           buttonLabel={"Search"}
-          {...register("staffId")}
+          {...register("userId")}
         />
       </div>
     </Card>

@@ -20,11 +20,11 @@ export default function UserSection(props: UserSectionProps) {
   const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_ADD);
   const [queriedStaff, setQueriedStaff] = useState(null);
 
-  async function searchStaff({ staffId }: typeof INITIAL_SEARCH_FORM) {
+  async function searchStaff({ userId }: typeof INITIAL_SEARCH_FORM) {
     const staffData = await getClient(
-      routes.getStaffSimple.replace("{STAFF_ID}", staffId)
+      routes.getStaffSimple.replace("{USER_ID}", userId)
     );
-    if (staffData.staffId) {
+    if (staffData.userId) {
       setQueriedStaff(staffData);
       setSwipeIndex(SWIPE_INDEXES.USER_ADD);
     }

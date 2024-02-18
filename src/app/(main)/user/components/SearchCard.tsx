@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 export const INITIAL_SEARCH_FORM = {
   name: "",
   role: "",
-  staffId: "",
+  userId: "",
   status: null,
   department: null,
 };
@@ -19,7 +19,7 @@ const VALIDATION_RULES = {
   name: {
     minLength: 6,
   },
-  staffId: {
+  userId: {
     minLength: 5,
   },
   status: {
@@ -92,7 +92,7 @@ export default function SearchBar(props: SearchBarProps) {
         <FieldInput
           label={"User ID"}
           placeholder={"Search by user ID"}
-          {...register("staffId", VALIDATION_RULES.staffId)}
+          {...register("userId", VALIDATION_RULES.userId)}
         />
         <FieldAutocomplete
           items={[

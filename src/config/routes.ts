@@ -3,7 +3,7 @@ const routes = {
   login: `${base}/auth/login`,
   getListDepartments: `${base}/constant/list/departments`,
   getListApproverGroups: `${base}/constant/list/approver-groups`,
-  getStaffSimple: `${base}/staff/simple/{STAFF_ID}`,
+  getStaffSimple: `${base}/staff/simple/{USER_ID}`,
   submitAddStaff: `${base}/staff/add`,
 };
 

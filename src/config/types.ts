@@ -7,6 +7,6 @@ interface SimpleStaff {
   department?: string;
   email: string;
   name: string;
-  staffId: string;
+  userId: string;
   role?: string;
 }

@@ -14,7 +14,7 @@ import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
 import Loader from "@/components/Loader";
 
 export const INITIAL_ADD_FORM = {
-  staffId: "",
+  userId: "",
   name: "",
   email: "",
   department: "",
@@ -22,7 +22,7 @@ export const INITIAL_ADD_FORM = {
   approverGroup: "",
 };
 const VALIDATION_RULES = {
-  staffId: {
+  userId: {
     required: true,
     minLength: 5,
   },
@@ -121,10 +121,10 @@ export default function AddView(props: AddViewProps) {
   }
 
   async function handleClickSearch() {
-    const isValidStaffId = await trigger("staffId");
+    const isValidStaffId = await trigger("userId");
     if (isValidStaffId) {
       const staffData = await getClient(
-        routes.getStaffSimple.replace("{STAFF_ID}", getValues("staffId"))
+        routes.getStaffSimple.replace("{STAFF_ID}", getValues("userId"))
       );
       const modal = {
         type: MODAL_TYPE.OK as const,
@@ -132,7 +132,7 @@ export default function AddView(props: AddViewProps) {
         handleClose: () => setMessageModal(null),
         handleOk: () => setMessageModal(null),
       };
-      if (staffData?.staffId) {
+      if (staffData?.userId) {
         setMessageModal({
           ...modal,
           message: "This User ID exists in the system.",
@@ -171,8 +171,8 @@ export default function AddView(props: AddViewProps) {
           onButtonClick={() => handleClickSearch()}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
-          error={errors.staffId}
-          {...register("staffId", VALIDATION_RULES.staffId)}
+          error={errors.userId}
+          {...register("userId", VALIDATION_RULES.userId)}
         />
         <FieldDropdown
           items={departmentList}
