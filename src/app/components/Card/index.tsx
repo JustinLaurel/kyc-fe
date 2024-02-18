@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 
@@ -6,7 +6,7 @@ interface CardProps {
   children: React.ReactNode;
   buttons?: {
     label: string;
-    onClick: () => void;
+    onClick?: () => void;
     colorScheme?: BUTTON_COLOR_SCHEMES; // Defaults red. See ActionButton
     isSubmit?: boolean;
   }[];
@@ -25,16 +25,8 @@ export default function Card(props: CardProps) {
     hasSeparator = true,
   } = props;
 
-  const formSubmit = useMemo(
-    () => buttons?.find((button) => button.isSubmit)?.onClick ?? (() => {}),
-    [buttons]
-  );
-
   return (
-    <form
-      className={styles.card + (className ? ` ${className}` : "")}
-      onSubmit={formSubmit}
-    >
+    <main className={styles.card + (className ? ` ${className}` : "")}>
       {header && (
         <>
           <section className={styles.headerSection}>
@@ -55,7 +47,7 @@ export default function Card(props: CardProps) {
               <ActionButton
                 key={index}
                 colorScheme={button.colorScheme}
-                onClick={() => button.onClick()}
+                onClick={button.onClick}
                 isSubmit={button.isSubmit}
               >
                 {button.label}
@@ -64,7 +56,7 @@ export default function Card(props: CardProps) {
           </section>
         </>
       )}
-    </form>
+    </main>
   );
 }
 

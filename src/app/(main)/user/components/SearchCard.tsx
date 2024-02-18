@@ -67,7 +67,7 @@ export default function SearchBar(props: SearchBarProps) {
         },
       ]}
     >
-      <section className={styles.fieldsSection}>
+      <form className={styles.fieldsSection} onSubmit={handleSubmit(onSubmit)}>
         <FieldInput
           label={"Name"}
           placeholder={"Search by name"}
@@ -117,7 +117,7 @@ export default function SearchBar(props: SearchBarProps) {
           control={control}
           {...register("department")}
         />
-      </section>
+      </form>
     </Card>
   );
 }

@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import Image from "next/image";
 import { ValueOf } from "@/util";
 import TextButton from "../TextButton";
+import ActionButton from "../ActionButton";
 
 const ICON_SORT_TYPE = {
   UP: "UP",
@@ -19,6 +20,7 @@ interface CellButton {
   // For attaching onClick event to cell
   label: string;
   onClick: () => void;
+  isTextButton?: boolean;
 }
 interface Props {
   items: Record<string, string | CellButton | CellButton[]>[];
@@ -119,14 +121,22 @@ export default function DataTable(props: Props) {
                   return (
                     <CellUser key={cellIndex} style={flexStyle}>
                       {cellItem.map((item, index) => {
-                        return (
+                        return item.isTextButton ? (
                           <TextButton
                             key={index}
                             onClick={() => item.onClick()}
-                            className={styles.buttonText}
+                            className={styles.cellTextButton}
                           >
                             {item.label}
                           </TextButton>
+                        ) : (
+                          <ActionButton
+                            key={index}
+                            onClick={() => item.onClick()}
+                            className={styles.cellButton}
+                          >
+                            {item.label}
+                          </ActionButton>
                         );
                       })}
                     </CellUser>
@@ -134,13 +144,21 @@ export default function DataTable(props: Props) {
                 } else {
                   return (
                     <CellUser key={cellIndex} style={flexStyle}>
-                      <TextButton
-                        key={key}
-                        onClick={() => cellItem.onClick()}
-                        className={styles.buttonText}
-                      >
-                        {cellItem.label}
-                      </TextButton>
+                      {cellItem.isTextButton ? (
+                        <TextButton
+                          onClick={() => cellItem.onClick()}
+                          className={styles.cellTextButton}
+                        >
+                          {cellItem.label}
+                        </TextButton>
+                      ) : (
+                        <ActionButton
+                          onClick={() => cellItem.onClick()}
+                          className={styles.cellButton}
+                        >
+                          {cellItem.label}
+                        </ActionButton>
+                      )}
                     </CellUser>
                   );
                 }

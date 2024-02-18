@@ -63,6 +63,7 @@ export default function SearchTable(props: SearchTableProps) {
         name: {
           label: item.name,
           onClick: () => handleViewUser(item.userId),
+          isTextButton: true,
         },
         userId: item.userId,
         department: item.department,

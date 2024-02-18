@@ -68,9 +68,17 @@ $column-gap: 8px;
   }
 }
 
-.buttonText {
+.cellTextButton {
   margin-right: 16px;
   user-select: none;
   padding-top: 3px;
   padding-bottom: 3px;
+}
+.cellButton {
+  user-select: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding: 8px 0px;
+  width: 70px;
+  margin-right: 8px;
 }
