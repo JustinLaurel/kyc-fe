@@ -56,7 +56,7 @@ const TABLE_ITEMS = [
 export default async function SearchPage() {
   const departmentList = await getServer(routes.getListDepartments);
   const roleList = await getServer(routes.getListRoles);
-  const usersRaw = await postServer(routes.searchUser, {
+  const result = await postServer(routes.searchUser, {
     name: "",
     role: "",
     userId: "",
@@ -66,19 +66,11 @@ export default async function SearchPage() {
     sortBy: "",
     itemsPerPage: 10,
   });
-  const users = usersRaw.items.map((item: any, index: number) => {
-    return {
-      no: index + 1,
-      ...item
-    }
-  });
-
-  console.log(`users`, users);
 
   return (
     <section className={styles.userContainer}>
       <HeaderSection />
-      <ContentSection departmentList={departmentList} roleList={roleList} users={users} />
+      <ContentSection departmentList={departmentList} roleList={roleList} users={result.items} />
     </section>
   );
 }

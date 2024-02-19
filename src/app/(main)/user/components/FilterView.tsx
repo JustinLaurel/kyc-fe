@@ -53,63 +53,61 @@ export default function FilterView(props: FilterViewProps) {
   }
 
   return (
-    <Card
-      header="Search"
-      buttons={[
-        {
-          label: "Clear",
-          onClick: handleClear,
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        },
-        {
-          label: "Search",
-          onClick: handleSubmit(onSubmit),
-          isSubmit: true,
-        },
-      ]}
-    >
-      <form className={styles.fieldsSection} onSubmit={handleSubmit(onSubmit)}>
-        <FieldInput
-          label={"Name"}
-          placeholder={"Search by name"}
-          {...register("name", VALIDATION_RULES.name)}
-        />
-        <FieldDropdown
-          items={roleList}
-          title={"User Role"}
-          placeholder={"Please Select"}
-          {...register("role")}
-          control={control}
-        />
-        <FieldInput
-          label={"User ID"}
-          placeholder={"Search by user ID"}
-          {...register("userId", VALIDATION_RULES.userId)}
-        />
-        <FieldAutocomplete
-          items={[
-            {
-              label: "Status 1",
-              value: "one",
-            },
-            {
-              label: "Status 2",
-              value: "two",
-            },
-          ]}
-          title={"Status"}
-          placeholder={"Search by status"}
-          control={control}
-          {...register("status", VALIDATION_RULES.status)}
-        />
-        <FieldAutocomplete
-          items={departmentList}
-          title={"Department"}
-          placeholder={"Search by department/branch"}
-          control={control}
-          {...register("department")}
-        />
-      </form>
-    </Card>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Card
+        header="Search"
+        buttons={[
+          {
+            label: "Clear",
+            onClick: handleClear,
+            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+          },
+          {
+            label: "Search",
+            onClick: handleSubmit(onSubmit),
+            isSubmit: true,
+          },
+        ]}
+      >
+        <main className={styles.fieldsSection}>
+          <FieldInput
+            label={"Name"}
+            placeholder={"Search by name"}
+            {...register("name", VALIDATION_RULES.name)}
+          />
+          <FieldDropdown
+            items={roleList}
+            title={"User Role"}
+            placeholder={"Please Select"}
+            {...register("role")}
+            control={control}
+          />
+          <FieldInput
+            label={"User ID"}
+            placeholder={"Search by user ID"}
+            {...register("userId", VALIDATION_RULES.userId)}
+          />
+          <FieldAutocomplete
+            items={[
+              {
+                label: "Active",
+                value: "Active",
+              },
+            ]}
+            title={"Status"}
+            placeholder={"Search by status"}
+            control={control}
+            {...register("status", VALIDATION_RULES.status)}
+          />
+          <FieldAutocomplete
+            items={departmentList}
+            title={"Department"}
+            placeholder={"Search by department/branch"}
+            control={control}
+            {...register("department")}
+          />
+        </main>
+      </Card>
+    </form>
   );
 }
