@@ -27,12 +27,13 @@ const VALIDATION_RULES = {
   },
 };
 
-interface SearchBarProps {
+interface FilterViewProps {
   departmentList: ListItem[];
+  roleList: ListItem[];
   onSubmit: SubmitHandler<any>;
 }
-export default function SearchBar(props: SearchBarProps) {
-  const { departmentList, onSubmit } = props;
+export default function FilterView(props: FilterViewProps) {
+  const { departmentList, roleList, onSubmit } = props;
   const {
     register,
     handleSubmit,
@@ -74,16 +75,7 @@ export default function SearchBar(props: SearchBarProps) {
           {...register("name", VALIDATION_RULES.name)}
         />
         <FieldDropdown
-          items={[
-            {
-              label: "Role 1",
-              value: "role1",
-            },
-            {
-              label: "Role 2",
-              value: "role2",
-            },
-          ]}
+          items={roleList}
           title={"User Role"}
           placeholder={"Please Select"}
           {...register("role")}

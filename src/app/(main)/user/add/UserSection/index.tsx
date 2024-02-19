@@ -13,9 +13,10 @@ const SWIPE_INDEXES = {
 interface UserSectionProps {
   departmentList: ListItem[];
   approverGroupList: ListItem[];
+  roleList: ListItem[];
 }
 export default function UserSection(props: UserSectionProps) {
-  const { departmentList, approverGroupList } = props;
+  const { departmentList, approverGroupList, roleList } = props;
   // const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_SEARCH);
   const [swipeIndex, setSwipeIndex] = useState(SWIPE_INDEXES.USER_ADD);
   const [queriedStaff, setQueriedStaff] = useState(null);
@@ -39,6 +40,7 @@ export default function UserSection(props: UserSectionProps) {
         <AddView
           departmentList={departmentList}
           approverGroupList={approverGroupList}
+          roleList={roleList}
           staff={queriedStaff}
         />
       )}

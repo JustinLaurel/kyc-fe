@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./page.module.scss";
 import { routes } from "@/config/routes";
-import { getServer } from "@/services/serverApi";
+import { getServer, postServer } from "@/services/serverApi";
 import HeaderSection from "./components/HeaderSection";
 import ContentSection from "./components/ContentSection";
 
@@ -55,11 +55,30 @@ const TABLE_ITEMS = [
 
 export default async function SearchPage() {
   const departmentList = await getServer(routes.getListDepartments);
+  const roleList = await getServer(routes.getListRoles);
+  const usersRaw = await postServer(routes.searchUser, {
+    name: "",
+    role: "",
+    userId: "",
+    status: "",
+    department: "",
+    page: 0,
+    sortBy: "",
+    itemsPerPage: 10,
+  });
+  const users = usersRaw.items.map((item: any, index: number) => {
+    return {
+      no: index + 1,
+      ...item
+    }
+  });
+
+  console.log(`users`, users);
 
   return (
     <section className={styles.userContainer}>
       <HeaderSection />
-      <ContentSection departmentList={departmentList} users={TABLE_ITEMS} />
+      <ContentSection departmentList={departmentList} roleList={roleList} users={users} />
     </section>
   );
 }

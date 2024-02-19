@@ -2,7 +2,7 @@ import { ExceptionFactory } from "@/config/errors";
 
 async function post(
   url: string,
-  payload?: Record<string, string>,
+  payload?: Record<string, string | number>,
   cookieHeader?: string | null
 ) {
   try {
@@ -37,11 +37,11 @@ async function post(
 
 async function get(
   url: string,
-  payload?: Record<string, string>,
+  payload?: Record<string, string | number>,
   cookieHeader?: string | null
 ) {
   try {
-    const params = payload ? new URLSearchParams(payload) : null;
+    const params = payload ? new URLSearchParams(payload as any) : null;
     const withParams = params ? `${url}?${params.toString()}` : url;
     const options = {
       method: "GET",

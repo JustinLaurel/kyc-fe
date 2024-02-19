@@ -1,24 +1,18 @@
 "use client";
 
-import SearchCard from "./SearchCard";
-import SearchTable from "./SearchTable";
-
+import { useState } from "react";
+import FilterView from "./FilterView";
+import UsersResultTable from "./UsersResultTable";
+import { UserData } from "../type";
 
 interface ContentSectionProps {
   departmentList: ListItem[];
-  users: {
-    no: string;
-    name: string;
-    userId: string;
-    department: string;
-    userRole: string;
-    activity: string;
-    status: string;
-  }[];
+  roleList: ListItem[];
+  users: UserData[];
 }
 export default function ContentSection(props: ContentSectionProps) {
-  const { departmentList, users } = props;
-
+  const { departmentList, roleList, users } = props;
+  const [usersResult, setUsersResult] = useState(users);
 
   async function handleSearchUser(queryParams: Record<string, string>) {
     console.log(`queryParams`, queryParams);
@@ -26,11 +20,12 @@ export default function ContentSection(props: ContentSectionProps) {
 
   return (
     <>
-      <SearchCard
+      <FilterView
         departmentList={departmentList}
+        roleList={roleList}
         onSubmit={handleSearchUser}
       />
-      <SearchTable users={users} />
+      <UsersResultTable users={usersResult} />
     </>
   );
 }

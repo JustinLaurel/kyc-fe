@@ -4,6 +4,7 @@ import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { UserData } from "../type";
 
 const HEADERS = [
   "No",
@@ -35,19 +36,10 @@ const HEADERS = [
 ];
 const COL_WIDTHS = [0.3, 3, 1.5, 2, 2, 2, 1, 1.5];
 
-interface UserData {
-  no: string;
-  name: string;
-  userId: string;
-  department: string;
-  userRole: string;
-  activity: string;
-  status: string;
-}
-interface SearchTableProps {
+interface UsersResultTable {
   users: UserData[];
 }
-export default function SearchTable(props: SearchTableProps) {
+export default function UsersResultTable(props: UsersResultTable) {
   const { users } = props;
   const [tableData, setTableData] = useState([] as any);
   const router = useRouter();
@@ -58,6 +50,26 @@ export default function SearchTable(props: SearchTableProps) {
     }
   
     const mapped = users.map((item, index) => {
+      const actions = [];
+      if (item.actionsAllowed.canDelete) {
+        actions.push({
+          label: "Edit",
+          onClick: () => {},
+          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+        });
+      }
+      if (item.actionsAllowed.canEdit) {
+        actions.push({
+          label: "Delete",
+          onClick: () => {},
+        });
+      }
+      if (item.actionsAllowed.canReview) {
+        actions.push({
+          label: "Review",
+          onClick: () => {},
+        });
+      }
       return {
         no: item.no,
         name: {
@@ -70,23 +82,7 @@ export default function SearchTable(props: SearchTableProps) {
         userRole: item.userRole,
         activity: item.activity,
         status: item.status,
-        action:
-          index % 2 === 0
-            ? [
-                {
-                  label: "Edit",
-                  onClick: () => {},
-                  colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-                },
-                {
-                  label: "Delete",
-                  onClick: () => {},
-                },
-              ]
-            : {
-                label: "Review",
-                onClick: () => {},
-              },
+        action: actions,
       };
     });
     setTableData(mapped);

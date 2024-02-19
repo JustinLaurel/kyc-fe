@@ -51,10 +51,11 @@ const VALIDATION_RULES = {
 interface AddViewProps {
   departmentList: ListItem[];
   approverGroupList: ListItem[];
+  roleList: ListItem[];
   staff: SimpleStaff | null;
 }
 export default function AddView(props: AddViewProps) {
-  const { departmentList, approverGroupList, staff } = props;
+  const { departmentList, approverGroupList, roleList, staff } = props;
   const router = useRouter();
   const [messageModal, setMessageModal] = useState<MessageManager | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -189,16 +190,7 @@ export default function AddView(props: AddViewProps) {
           {...register("name", VALIDATION_RULES.name)}
         />
         <FieldDropdown
-          items={[
-            {
-              label: "Role 1",
-              value: "role1",
-            },
-            {
-              label: "Role 2",
-              value: "role2",
-            },
-          ]}
+          items={roleList}
           title={"User Role*"}
           placeholder={"Please Select"}
           error={errors.role}

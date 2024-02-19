@@ -7,6 +7,7 @@ import { routes } from "@/config/routes";
 export default async function UserAddPage() {
   const departmentList = await getServer(routes.getListDepartments);
   const approverGroupList = await getServer(routes.getListApproverGroups);
+  const roleList = await getServer(routes.getListRoles);
 
   return (
     <div className={styles.container}>
@@ -14,6 +15,7 @@ export default async function UserAddPage() {
       <UserSection
         approverGroupList={approverGroupList}
         departmentList={departmentList}
+        roleList={roleList}
       />
     </div>
   );

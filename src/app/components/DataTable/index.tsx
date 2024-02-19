@@ -111,7 +111,7 @@ export default function DataTable(props: Props) {
                   flexBasis: 10,
                 };
                 const cellItem = item[key];
-                if (typeof cellItem === "string") {
+                if (!cellItem || typeof cellItem === "string" || typeof cellItem === "number") {
                   return (
                     <CellUser key={cellIndex} style={flexStyle}>
                       {cellItem}

@@ -3,8 +3,10 @@ const routes = {
   login: `${base}/auth/login`,
   getListDepartments: `${base}/constant/list/departments`,
   getListApproverGroups: `${base}/constant/list/approver-groups`,
+  getListRoles: `${base}/constant/list/staff-roles`,
   getStaffSimple: `${base}/staff/simple/{USER_ID}`,
   submitAddStaff: `${base}/staff/add`,
+  searchUser: `${base}/staff/search`,
 };
 
 export { routes };
