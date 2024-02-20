@@ -80,7 +80,6 @@ export default function AddView(props: AddViewProps) {
     if (isValidateSuccessful) {
       setMessageModal({
         type: MODAL_TYPE.CANCEL_CONFIRM,
-        isOpen: true,
         message: "Are you sure to submit this application?",
         handleClose: () => setMessageModal(null),
         handleCancel: () => setMessageModal(null),
@@ -96,7 +95,6 @@ export default function AddView(props: AddViewProps) {
       await postClient(routes.submitAddStaff, data);
       setMessageModal({
         type: MODAL_TYPE.OK,
-        isOpen: true,
         message: "User successfully created!",
         handleClose: () => setMessageModal(null),
         handleOk: () => setMessageModal(null),
@@ -105,7 +103,6 @@ export default function AddView(props: AddViewProps) {
     } catch (error: any) {
       setMessageModal({
         type: MODAL_TYPE.OK,
-        isOpen: true,
         message:
           error.message === "Staff ID already exists"
             ? "User already exists in the system. Please enter a new User ID"
@@ -126,7 +123,7 @@ export default function AddView(props: AddViewProps) {
     const isValidStaffId = await trigger("userId");
     if (isValidStaffId) {
       const staffData = await getClient(
-        routes.getStaffSimple.replace("{STAFF_ID}", getValues("userId"))
+        routes.getStaffSimple.replace("{USER_ID}", getValues().userId)
       );
       const modal = {
         type: MODAL_TYPE.OK as const,
