@@ -3,10 +3,11 @@ import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 import { Backdrop } from "@mui/material";
 import { MODAL_TYPE } from "./type";
+import { isEmpty } from "@/util";
+import { EmptyObject } from "react-hook-form";
 
 interface BaseProps {
   message?: string | React.ReactNode;
-  isOpen: boolean;
   handleClose: () => void;
   header?: string;
 }
@@ -18,13 +19,7 @@ interface MessageModalProps extends BaseProps {
   }[];
 }
 function BaseMessageModal(props: MessageModalProps) {
-  const {
-    isOpen,
-    buttons,
-    message = "",
-    handleClose,
-    header = "Notification",
-  } = props;
+  const { buttons, message = "", handleClose, header = "Notification" } = props;
 
   function handleCloseModal(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -35,10 +30,10 @@ function BaseMessageModal(props: MessageModalProps) {
     }
   }
 
-  return isOpen ? (
+  return (
     <div className={styles.container}>
       <Backdrop
-        open={isOpen}
+        open={true}
         className={styles.dimmingOverlay}
         onClick={handleCloseModal}
       />
@@ -61,7 +56,7 @@ function BaseMessageModal(props: MessageModalProps) {
         )}
       </div>
     </div>
-  ) : null;
+  );
 }
 
 interface MessageModalYesNo extends BaseProps {
@@ -70,11 +65,10 @@ interface MessageModalYesNo extends BaseProps {
   handleYes: () => void;
 }
 function MessageModalYesNo(props: MessageModalYesNo) {
-  const { isOpen, message, handleNo, handleYes, handleClose } = props;
+  const { message, handleNo, handleYes, handleClose } = props;
 
   return (
     <BaseMessageModal
-      isOpen={isOpen}
       buttons={[
         {
           label: "NO",
@@ -98,11 +92,10 @@ interface MessageModalOk extends BaseProps {
   handleOk: () => void;
 }
 function MessageModalOk(props: MessageModalOk) {
-  const { isOpen, message, handleOk, handleClose } = props;
+  const { message, handleOk, handleClose } = props;
 
   return (
     <BaseMessageModal
-      isOpen={isOpen}
       buttons={[
         {
           label: "OK",
@@ -122,11 +115,10 @@ interface MessageModalCancelConfirm extends BaseProps {
   handleConfirm: () => void;
 }
 function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
-  const { isOpen, message, handleCancel, handleConfirm, handleClose } = props;
+  const { message, handleCancel, handleConfirm, handleClose } = props;
 
   return (
     <BaseMessageModal
-      isOpen={isOpen}
       buttons={[
         {
           label: "CANCEL",
@@ -146,17 +138,25 @@ function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
 }
 
 function MessageModal(
-  props: MessageModalYesNo | MessageModalOk | MessageModalCancelConfirm
+  props:
+    | MessageModalYesNo
+    | MessageModalOk
+    | MessageModalCancelConfirm
+    | EmptyObject
 ) {
-  switch (props.type) {
-    case MODAL_TYPE.YES_NO:
-      return <MessageModalYesNo {...props} />;
-    case MODAL_TYPE.OK:
-      return <MessageModalOk {...props} />;
-    case MODAL_TYPE.CANCEL_CONFIRM:
-      return <MessageModalCancelConfirm {...props} />;
-    default:
-      return <></>;
+  if (isEmpty(props)) {
+    return <></>;
+  } else {
+    switch (props.type) {
+      case MODAL_TYPE.YES_NO:
+        return <MessageModalYesNo {...props} />;
+      case MODAL_TYPE.OK:
+        return <MessageModalOk {...props} />;
+      case MODAL_TYPE.CANCEL_CONFIRM:
+        return <MessageModalCancelConfirm {...props} />;
+      default:
+        return <></>;
+    }
   }
 }
 

@@ -166,7 +166,7 @@ export default function AddView(props: AddViewProps) {
       ]}
     >
       <Loader isLoading={isLoading} />
-      {messageModal && <MessageModal {...messageModal} />}
+      <MessageModal {...messageModal} />
       <div className={styles.addWrapper}>
         <FieldInput
           label={"User ID*"}

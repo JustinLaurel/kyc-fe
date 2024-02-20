@@ -114,7 +114,7 @@ export default function LoginPage() {
           </section>
         </form>
       </Card>
-      {messageModal && <MessageModal {...messageModal} />}
+      <MessageModal {...messageModal} />
     </div>
   );
 }

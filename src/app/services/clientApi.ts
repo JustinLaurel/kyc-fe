@@ -1,3 +1,4 @@
+"use client";
 import { get, post } from "./api";
 
 async function postClient(url: string, payload?: Record<string, string | number | null>) {

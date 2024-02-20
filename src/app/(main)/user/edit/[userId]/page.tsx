@@ -1,16 +1,14 @@
 import styles from "./page.module.scss";
 import RouteStepsView from "./RouteStepsView";
-import RemarksTable from "./RemarksTable";
-import UserDetailsView from "./UserDetailsView";
 import { getServer } from "@/services/serverApi";
 import { routes } from "@/config/routes";
+import ContentSection from "./ContentSection";
 
 interface UserViewPageProps {
   params: {
     userId: string;
   };
 }
-
 export default async function UserEditPage({ params }: UserViewPageProps) {
   const { userId } = params;
 
@@ -27,15 +25,12 @@ export default async function UserEditPage({ params }: UserViewPageProps) {
         <div className={styles.header}>Edit User</div>
         <RouteStepsView />
       </section>
-      <section className={styles.cardsSection}>
-        <UserDetailsView
-          staff={staffData}
-          departmentList={departmentList}
-          roleList={roleList}
-          approverGroupList={approverGroupList}
-        />
-        <RemarksTable />
-      </section>
+      <ContentSection
+        staff={staffData}
+        departmentList={departmentList}
+        roleList={roleList}
+        approverGroupList={approverGroupList}
+      />
     </div>
   );
 }

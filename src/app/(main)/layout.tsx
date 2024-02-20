@@ -9,7 +9,7 @@ import ProfileDropdown from "./layoutComponents/ProfileDropdown";
 import MessageModal from "@/components/MessageModal";
 import { useRouter } from "next/navigation";
 import AmbankFooter from "@/components/AmbankFooter";
-import { MODAL_TYPE } from "@/components/MessageModal/type";
+import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
 
 interface Props {
   children: React.ReactNode;
@@ -22,8 +22,7 @@ export default function MainPageLayout(props: Props) {
   const [isNotificationsDropdownOpen, setIsNotificationsDropdownOpen] =
     useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [isLogoutNotificationOpen, setIsLogoutNotificationOpen] =
-    useState(false);
+  const [messageModal, setMessageModal] = useState<MessageManager | null>(null);
   const router = useRouter();
 
   function handleNotificationIconClick() {
@@ -40,7 +39,16 @@ export default function MainPageLayout(props: Props) {
   }
 
   function handleLogoutClick() {
-    setIsLogoutNotificationOpen(true);
+    setMessageModal({
+      type: MODAL_TYPE.YES_NO,
+      handleNo: () => setMessageModal(null),
+      handleYes: () => {
+        setMessageModal(null);
+        router.push("/login");
+      },
+      handleClose: () => setMessageModal(null),
+      message: "Are you sure you want to logout?",
+    });
     setIsProfileDropdownOpen(false);
   }
 
@@ -126,18 +134,7 @@ export default function MainPageLayout(props: Props) {
         handleClose={() => setIsSidebarOpen(false)}
       />
       <AmbankFooter />
-
-      <MessageModal
-        type={MODAL_TYPE.YES_NO}
-        isOpen={isLogoutNotificationOpen}
-        handleNo={() => setIsLogoutNotificationOpen(false)}
-        handleYes={() => {
-          setIsLogoutNotificationOpen(false);
-          router.push("/login");
-        }}
-        handleClose={() => setIsLogoutNotificationOpen(false)}
-        message={"Are you sure you want to logout?"}
-      />
+      <MessageModal {...messageModal} />
     </main>
   );
 }

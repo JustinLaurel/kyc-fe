@@ -1,20 +1,25 @@
 "use client";
-
 import { useForm } from "react-hook-form";
-import { INITIAL_ADD_FORM } from "../../add/UserSection/AddView";
 import FieldInput from "@/components/FieldInput";
 import FieldDropdown from "@/components/FieldDropdown";
 import Card from "@/components/Card";
 import styles from "./page.module.scss";
 import { ListItem, SimpleStaff } from "@/config/types";
 
+const INITIAL_VIEW_FORM = {
+  userId: "",
+  name: "",
+  email: "",
+  department: "",
+  role: "",
+  approverGroup: "",
+};
 interface UserDetailsProps {
   staff: SimpleStaff;
   departmentList: ListItem[];
   roleList: ListItem[];
   approverGroupList: ListItem[];
 }
-
 export default function UserDetailsView(props: UserDetailsProps) {
   const { staff, departmentList, roleList, approverGroupList } = props;
   const {
@@ -25,7 +30,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
     getValues,
     reset,
     control,
-  } = useForm<typeof INITIAL_ADD_FORM>({
+  } = useForm<typeof INITIAL_VIEW_FORM>({
     defaultValues: { ...staff },
   });
 

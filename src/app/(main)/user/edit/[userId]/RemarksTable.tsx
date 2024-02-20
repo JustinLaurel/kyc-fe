@@ -3,14 +3,15 @@ import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
-interface RemarksTableProps {}
+interface RemarksTableProps {
+  handleSubmitEdit: () => void;
+}
 export default function RemarksTable(props: RemarksTableProps) {
+  const { handleSubmitEdit } = props;
+  const router = useRouter();
 
-  async function postUpdateUser() {
-
-  }
-  
   return (
     <Card
       header={"Review"}
@@ -19,11 +20,11 @@ export default function RemarksTable(props: RemarksTableProps) {
         {
           label: "Cancel",
           colorScheme: BUTTON_COLOR_SCHEMES.GREY,
-          onClick: () => {},
+          onClick: () => router.back(),
         },
         {
           label: "Update",
-          onClick: () => {},
+          onClick: handleSubmitEdit,
         },
       ]}
     >
@@ -55,7 +56,7 @@ export default function RemarksTable(props: RemarksTableProps) {
             onClick: () => {},
           },
           {
-            label: "From",
+            label: "RM Approver Name",
             onClick: () => {},
           },
           {

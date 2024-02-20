@@ -1,10 +1,4 @@
 
-export const BASE_MESSAGE_MANAGER = {
-  isOpen: false,
-  message: "",
-  type: null,
-  handleClose: () => {},
-};
 export enum MODAL_TYPE {
   YES_NO,
   CANCEL_CONFIRM,
@@ -12,7 +6,6 @@ export enum MODAL_TYPE {
 }
 interface BaseManager {
   type: MODAL_TYPE;
-  isOpen: boolean;
   message: string;
   handleClose:  () => void;
 }
