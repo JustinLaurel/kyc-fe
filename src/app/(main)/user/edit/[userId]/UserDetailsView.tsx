@@ -3,13 +3,11 @@ import Card from "@/components/Card";
 import FieldDropdown from "@/components/FieldDropdown";
 import FieldInput from "@/components/FieldInput";
 import styles from "./page.module.scss";
-import { ListItem, SimpleStaff } from "@/config/types";
-import { INITIAL_ADD_FORM } from "../../add/UserSection/AddView";
-import { UseFormReturn, useForm } from "react-hook-form";
+import { ListItem } from "@/config/types";
+import { UseFormReturn } from "react-hook-form";
 import { INITIAL_EDIT_FORM } from "./ContentSection";
 
 interface UserDetailsProps {
-  staff: SimpleStaff;
   departmentList: ListItem[];
   roleList: ListItem[];
   approverGroupList: ListItem[];

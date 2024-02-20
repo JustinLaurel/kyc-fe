@@ -5,6 +5,7 @@ import { routes } from "@/config/routes";
 import { getServer } from "@/services/serverApi";
 import RouteStepsView from "./RouteStepsView";
 import { convertNullToEmptyString } from "@/util";
+import ContentSection from "./ContentSection";
 
 interface UserViewPageProps {
   params: {
@@ -28,15 +29,12 @@ export default async function UserViewPage({ params }: UserViewPageProps) {
         <div className={styles.header}>View User</div>
         <RouteStepsView />
       </section>
-      <section className={styles.cardsSection}>
-        <UserDetailsView
-          departmentList={departmentList}
-          roleList={roleList}
-          approverGroupList={approverGroupList}
-          staff={convertNullToEmptyString(staffData)}
-        />
-        <RemarksTable />
-      </section>
+      <ContentSection
+        staff={convertNullToEmptyString(staffData)}
+        departmentList={departmentList}
+        roleList={roleList}
+        approverGroupList={approverGroupList}
+      />
     </div>
   );
 }

@@ -1,45 +1,29 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import FieldInput from "@/components/FieldInput";
 import FieldDropdown from "@/components/FieldDropdown";
 import Card from "@/components/Card";
 import styles from "./page.module.scss";
-import { ListItem, SimpleStaff } from "@/config/types";
+import { ListItem } from "@/config/types";
+import { INITIAL_VIEW_FORM } from "./ContentSection";
 
-const INITIAL_VIEW_FORM = {
-  userId: "",
-  name: "",
-  email: "",
-  department: "",
-  role: "",
-  approverGroup: "",
-};
 interface UserDetailsProps {
-  staff: SimpleStaff;
   departmentList: ListItem[];
   roleList: ListItem[];
   approverGroupList: ListItem[];
+  formHook: UseFormReturn<typeof INITIAL_VIEW_FORM, any, undefined>;
+  handleSearch: () => void;
 }
 export default function UserDetailsView(props: UserDetailsProps) {
-  const { staff, departmentList, roleList, approverGroupList } = props;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    getValues,
-    reset,
-    control,
-  } = useForm<typeof INITIAL_VIEW_FORM>({
-    defaultValues: { ...staff },
-  });
+  const { departmentList, roleList, approverGroupList, formHook, handleSearch } = props;
+  const {register, control} = formHook;
 
   return (
     <Card header={"User Details"} className={styles.userDetailsContainer}>
       <div className={styles.detailsWrapper}>
         <FieldInput
           label={"User ID*"}
-          onButtonClick={() => {}}
+          onButtonClick={handleSearch}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
           {...register("userId")}

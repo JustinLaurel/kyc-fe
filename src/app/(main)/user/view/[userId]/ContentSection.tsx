@@ -1,17 +1,17 @@
 "use client";
-import { ListItem, SimpleStaff } from "@/config/types";
-import UserDetailsView from "./UserDetailsView";
-import styles from "./page.module.scss";
-import RemarksTable from "./RemarksTable";
-import { useForm } from "react-hook-form";
-import { getClient, postClient } from "@/services/clientApi";
-import { routes } from "@/config/routes";
-import MessageModal from "@/components/MessageModal";
-import { useState } from "react";
 import Loader from "@/components/Loader";
+import MessageModal from "@/components/MessageModal";
+import UserDetailsView from "./UserDetailsView";
+import RemarksTable from "./RemarksTable";
+import { ListItem, SimpleStaff } from "@/config/types";
+import styles from "./page.module.scss";
+import { useState } from "react";
 import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
+import { getClient } from "@/services/clientApi";
+import { routes } from "@/config/routes";
+import { useForm } from "react-hook-form";
 
-export const INITIAL_EDIT_FORM = {
+export const INITIAL_VIEW_FORM = {
   userId: "",
   name: "",
   email: "",
@@ -32,32 +32,12 @@ export default function ContentSection(props: ContentSectionProps) {
   const [messageModal, setMessageModal] = useState<MessageManager | null>(null);
   const [currentStaff, setCurrentStaff] = useState<SimpleStaff | null>(staff);
 
-  const formHook = useForm<typeof INITIAL_EDIT_FORM>({
+  const formHook = useForm<typeof INITIAL_VIEW_FORM>({
     defaultValues: {
       ...currentStaff,
     },
   });
-  const { handleSubmit, getValues } = formHook;
-
-  async function submitEditStaff() {
-    const values = getValues();
-    try {
-      setIsLoading(true);
-      const responseMessage = await postClient(routes.submitEditStaff, values);
-      if (responseMessage) {
-        setMessageModal({
-          type: MODAL_TYPE.OK,
-          handleOk: () => setMessageModal(null),
-          message: responseMessage,
-          handleClose: () => setMessageModal(null),
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { getValues } = formHook;
 
   async function handleSearch() {
     const userId = getValues().userId;
@@ -95,7 +75,7 @@ export default function ContentSection(props: ContentSectionProps) {
         formHook={formHook}
         handleSearch={handleSearch}
       />
-      <RemarksTable handleSubmitEdit={handleSubmit(submitEditStaff)} />
+      <RemarksTable />
     </section>
   );
 }
