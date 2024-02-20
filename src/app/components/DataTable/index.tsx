@@ -2,20 +2,15 @@
 import { useState } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
-import { ValueOf } from "@/util";
 import TextButton from "../TextButton";
 import ActionButton from "../ActionButton";
 import { Button } from "@mui/material";
-
-const ICON_SORT_TYPE = {
-  UP: "UP",
-  DOWN: "DOWN",
-} as const;
+import { SORT_ORDER } from "@/config/types";
 
 interface HeaderSortButton {
   // For attaching sort onClick event to header cell
   label: string;
-  onClick: () => void;
+  onClick: (sortOrder: SORT_ORDER) => void;
 }
 interface CellButton {
   // For attaching onClick event to cell
@@ -37,25 +32,57 @@ interface Props {
  */
 export default function DataTable(props: Props) {
   const { items, headers, colWidths = null } = props;
-  const [sortImages, setSortImages] = useState<
-    Record<string, ValueOf<typeof ICON_SORT_TYPE>>
+  const [sortOrders, setSortOrders] = useState<
+    Record<string, SORT_ORDER>
   >({});
 
   function toggleSortImages(headerLabel: string) {
-    setSortImages((prev) => {
+    setSortOrders((prev) => {
       const currentSortType = prev[headerLabel];
-      if (!currentSortType) {
-        return {
-          [headerLabel]: ICON_SORT_TYPE.DOWN,
-        };
-      } else if (currentSortType === ICON_SORT_TYPE.DOWN) {
-        return {
-          [headerLabel]: ICON_SORT_TYPE.UP,
-        };
-      } else {
-        return {};
+      const newSortType = sortOrderToggler(currentSortType);
+      switch (newSortType) {
+        case SORT_ORDER.DEFAULT:
+          return {};
+        case SORT_ORDER.ASC:
+          return {
+            [headerLabel]: SORT_ORDER.ASC,
+          };
+        case SORT_ORDER.DESC:
+          return {
+            [headerLabel]: SORT_ORDER.DESC,
+          };
+        default:
+          return {};
       }
     });
+  }
+
+  function sortOrderToggler(
+    currentOrder: SORT_ORDER
+  ) {
+    switch (currentOrder) {
+      case SORT_ORDER.DEFAULT:
+        return SORT_ORDER.DESC;
+      case SORT_ORDER.DESC:
+        return SORT_ORDER.ASC;
+      case SORT_ORDER.ASC:
+        return SORT_ORDER.DEFAULT;
+      default:
+        return SORT_ORDER.DEFAULT;
+    }
+  }
+
+  function handleHeaderSort(header: HeaderSortButton) {
+    const currentSortOrder = sortOrders[header.label] ?? SORT_ORDER.DEFAULT;
+    const newSortOrder = sortOrderToggler(currentSortOrder);
+    if (newSortOrder === SORT_ORDER.DEFAULT) {
+      setSortOrders({});
+    } else {
+      setSortOrders({
+        [header.label]: newSortOrder,
+      })
+    }
+    header.onClick(newSortOrder);
   }
 
   return (
@@ -79,15 +106,12 @@ export default function DataTable(props: Props) {
                 <HeaderCell
                   key={index}
                   style={{ ...flexStyle, cursor: "pointer" }}
-                  onClick={() => {
-                    toggleSortImages(header.label);
-                    header.onClick();
-                  }}
+                  onClick={() => handleHeaderSort(header)}
                 >
                   <div className={styles.title}>{header.label}</div>
-                  {sortImages[header.label] === ICON_SORT_TYPE.UP ? (
+                  {sortOrders[header.label] === SORT_ORDER.ASC ? (
                     <IconSortUp />
-                  ) : sortImages[header.label] === ICON_SORT_TYPE.DOWN ? (
+                  ) : sortOrders[header.label] === SORT_ORDER.DESC ? (
                     <IconSortDown />
                   ) : (
                     <IconSort />

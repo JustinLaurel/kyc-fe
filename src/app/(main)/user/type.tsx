@@ -14,3 +14,4 @@ export interface UserData {
   status: string;
   actionsAllowed: ActionsAllowed;
 }
+export type SortableColumn = keyof Omit<UserData, "no" | "actionsAllowed">;

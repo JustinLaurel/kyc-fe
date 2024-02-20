@@ -4,60 +4,53 @@ import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { UserData } from "../type";
-import { postClient } from "@/services/clientApi";
-import { routes } from "@/config/routes";
+import { SortableColumn, UserData } from "../type";
 
-const HEADERS = [
-  "No",
-  {
-    label: "Name",
-    onClick: () => {},
-  },
-  {
-    label: "User ID",
-    onClick: () => {},
-  },
-  {
-    label: "Department/Branch",
-    onClick: () => {},
-  },
-  {
-    label: "User Role",
-    onClick: () => {},
-  },
-  {
-    label: "Activity",
-    onClick: () => {},
-  },
-  {
-    label: "Status",
-    onClick: () => {},
-  },
-  "Action",
-];
 const COL_WIDTHS = [0.3, 3, 1.5, 2, 2, 2, 1, 1.5];
 
 interface UsersResultTable {
   users: UserData[];
+  handleHeaderClick: (sortBy: SortableColumn, order: SORT_ORDER) => void;
 }
 export default function UsersResultTable(props: UsersResultTable) {
-  const { users } = props;
+  const { users, handleHeaderClick } = props;
   const [tableData, setTableData] = useState([] as any);
   const router = useRouter();
 
-  async function handleHeaderClick() { // Sort
-    const payload = {
-      
-    }
-    const sortedResults = await postClient(routes.searchUser, payload);
-  }
+  const HEADERS = [
+    "No",
+    {
+      label: "Name",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("name", order),
+    },
+    {
+      label: "User ID",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("userId", order),
+    },
+    {
+      label: "Department/Branch",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("department", order),
+    },
+    {
+      label: "User Role",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("userRole", order),
+    },
+    {
+      label: "Activity",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("activity", order),
+    },
+    {
+      label: "Status",
+      onClick: (order: SORT_ORDER) => handleHeaderClick("name", order),
+    },
+    "Action",
+  ];
 
   useEffect(() => {
     function handleViewUser(userId: string) {
       router.push(`/user/view/${userId}`);
     }
-  
+
     const mapped = users.map((item, index) => {
       const actions = [];
       if (item.actionsAllowed.canDelete) {

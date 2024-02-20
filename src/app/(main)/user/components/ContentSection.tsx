@@ -3,11 +3,12 @@
 import { useState } from "react";
 import FilterView from "./FilterView";
 import UsersResultTable from "./UsersResultTable";
-import { UserData } from "../type";
+import { SortableColumn, UserData } from "../type";
 import { routes } from "@/config/routes";
 import { postClient } from "@/services/clientApi";
 import Loader from "@/components/Loader";
 import { useForm } from "react-hook-form";
+import { ListItem, SORT_ORDER } from "@/config/types";
 
 export const INITIAL_SEARCH_FORM = {
   name: "",
@@ -31,14 +32,15 @@ export default function ContentSection(props: ContentSectionProps) {
       ...INITIAL_SEARCH_FORM,
     },
   });
-  const { handleSubmit, reset } = formHook;
+  const { handleSubmit, reset, getValues } = formHook;
 
   async function handleSearchUser(filterValues: typeof INITIAL_SEARCH_FORM) {
     const payload = {
       ...filterValues,
       page: 0,
       itemsPerPage: 10,
-      sortBy: "",
+      sortBy: null,
+      sortOrder: null,
     };
     try {
       setIsLoading(true);
@@ -55,7 +57,25 @@ export default function ContentSection(props: ContentSectionProps) {
     reset({ ...INITIAL_SEARCH_FORM });
   }
 
-  async function handleHeaderClick(sortBy: string) {
+  async function handleRequestSort(sortBy: SortableColumn, order: SORT_ORDER) {
+    console.log(`sortBy`, sortBy);
+    console.log(`order`, order);
+    // const payload = {
+    //   ...getValues(),
+    //   page: 0,
+    //   itemsPerPage: 10,
+    //   sortBy: sortBy,
+    //   sortOrder: order,
+    // };
+    // try {
+    //   setIsLoading(true);
+    //   const users = await postClient(routes.searchUser, payload);
+    //   setUsersResult(users?.items ?? []);
+    // } catch (error: any) {
+    //   console.error(error.message);
+    // } finally {
+    //   setIsLoading(false);
+    // }
   }
 
   return (
@@ -68,7 +88,10 @@ export default function ContentSection(props: ContentSectionProps) {
         handleClear={handleClearFilter}
         formHook={formHook}
       />
-      <UsersResultTable users={usersResult} />
+      <UsersResultTable
+        users={usersResult}
+        handleHeaderClick={handleRequestSort}
+      />
     </>
   );
 }
