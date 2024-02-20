@@ -95,7 +95,7 @@ export default function AddView(props: AddViewProps) {
       await postClient(routes.submitAddStaff, data);
       setMessageModal({
         type: MODAL_TYPE.OK,
-        message: "User successfully created!",
+        message: "User ID request has been submitted successfully. It has been routed to Admin Approver.",
         handleClose: () => setMessageModal(null),
         handleOk: () => setMessageModal(null),
       });
