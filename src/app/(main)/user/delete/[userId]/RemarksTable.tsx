@@ -23,6 +23,10 @@ export default function RemarksTable(props: RemarksTableProps) {
           colorScheme: BUTTON_COLOR_SCHEMES.GREY,
           onClick: handleBack,
         },
+        {
+          label: "Delete",
+          onClick: () => {},
+        },
       ]}
     >
       <DataTable

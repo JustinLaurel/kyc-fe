@@ -1,16 +1,16 @@
 import styles from "./page.module.scss";
-import { routes } from "@/config/routes";
-import { getServer } from "@/services/serverApi";
 import RouteStepsView from "./RouteStepsView";
-import { convertNullToEmptyString } from "@/util";
 import ContentSection from "./ContentSection";
+import { getServer } from "@/services/serverApi";
+import { routes } from "@/config/routes";
+import { convertNullToEmptyString } from "@/util";
 
-interface UserViewPageProps {
+interface UserDeletePageProps {
   params: {
     userId: string;
   };
 }
-export default async function UserViewPage({ params }: UserViewPageProps) {
+export default async function UserDeletePage({ params }: UserDeletePageProps) {
   const { userId } = params;
 
   const staffData = await getServer(
@@ -23,7 +23,7 @@ export default async function UserViewPage({ params }: UserViewPageProps) {
   return (
     <div className={styles.container}>
       <section className={styles.headerSection}>
-        <div className={styles.header}>View User</div>
+        <div className={styles.header}>Delete User</div>
         <RouteStepsView />
       </section>
       <ContentSection
