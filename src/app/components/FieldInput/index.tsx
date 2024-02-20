@@ -27,6 +27,12 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
     props: FieldInputProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ) {
+    function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key === "Enter" && onButtonClick && buttonLabel) {
+        onButtonClick();
+      }
+    }
+
     const {
       label,
       type = "text",
@@ -36,7 +42,7 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
       error = null,
       ...inputProps
     } = props;
-    
+
     return (
       <section
         className={
@@ -66,6 +72,7 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
             }
             type={type}
             ref={ref}
+            onKeyDown={handleInputEnter}
             {...inputProps}
           />
           {onButtonClick && buttonLabel && (
