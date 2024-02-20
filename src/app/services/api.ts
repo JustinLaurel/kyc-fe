@@ -2,7 +2,7 @@ import { ExceptionFactory } from "@/config/errors";
 
 async function post(
   url: string,
-  payload?: Record<string, string | number>,
+  payload?: Record<string, string | number | null>,
   cookieHeader?: string | null
 ) {
   try {
@@ -37,7 +37,7 @@ async function post(
 
 async function get(
   url: string,
-  payload?: Record<string, string | number>,
+  payload?: Record<string, string | number | null>,
   cookieHeader?: string | null
 ) {
   try {

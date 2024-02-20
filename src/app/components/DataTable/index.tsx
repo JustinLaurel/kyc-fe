@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { ValueOf } from "@/util";
 import TextButton from "../TextButton";
 import ActionButton from "../ActionButton";
+import { Button } from "@mui/material";
 
 const ICON_SORT_TYPE = {
   UP: "UP",
@@ -59,113 +60,132 @@ export default function DataTable(props: Props) {
 
   return (
     <main className={styles.table}>
-      <section className={styles.headerSection}>
-        {headers.map((header, index) => {
-          const flexStyle = {
-            flexGrow: colWidths ? colWidths[index] : 1,
-            flexShrink: colWidths ? 1 / colWidths[index] : 1,
-            flexBasis: 10,
-          };
-          if (typeof header === "string") {
+      <section className={styles.content}>
+        <section className={styles.headerSection}>
+          {headers.map((header, index) => {
+            const flexStyle = {
+              flexGrow: colWidths ? colWidths[index] : 1,
+              flexShrink: colWidths ? 1 / colWidths[index] : 1,
+              flexBasis: 10,
+            };
+            if (typeof header === "string") {
+              return (
+                <HeaderCell key={index} style={flexStyle}>
+                  {header}
+                </HeaderCell>
+              );
+            } else {
+              return (
+                <HeaderCell
+                  key={index}
+                  style={{ ...flexStyle, cursor: "pointer" }}
+                  onClick={() => {
+                    toggleSortImages(header.label);
+                    header.onClick();
+                  }}
+                >
+                  <div className={styles.title}>{header.label}</div>
+                  {sortImages[header.label] === ICON_SORT_TYPE.UP ? (
+                    <IconSortUp />
+                  ) : sortImages[header.label] === ICON_SORT_TYPE.DOWN ? (
+                    <IconSortDown />
+                  ) : (
+                    <IconSort />
+                  )}
+                </HeaderCell>
+              );
+            }
+          })}
+        </section>
+        <section className={styles.usersSection}>
+          {items.map((item, rowIndex) => {
             return (
-              <CellHeader key={index} style={flexStyle}>
-                {header}
-              </CellHeader>
-            );
-          } else {
-            return (
-              <CellHeader
-                key={index}
-                style={{ ...flexStyle, cursor: "pointer" }}
-                onClick={() => {
-                  toggleSortImages(header.label);
-                  header.onClick();
-                }}
+              <div
+                key={rowIndex}
+                className={
+                  styles.row + (rowIndex % 2 === 0 ? " " + styles.even : "")
+                }
               >
-                <div className={styles.title}>{header.label}</div>
-                {sortImages[header.label] === ICON_SORT_TYPE.UP ? (
-                  <IconSortUp />
-                ) : sortImages[header.label] === ICON_SORT_TYPE.DOWN ? (
-                  <IconSortDown />
-                ) : (
-                  <IconSort />
-                )}
-              </CellHeader>
-            );
-          }
-        })}
-      </section>
-      <section className={styles.usersSection}>
-        {items.map((item, rowIndex) => {
-          return (
-            <div
-              key={rowIndex}
-              className={
-                styles.row + (rowIndex % 2 === 0 ? " " + styles.even : "")
-              }
-            >
-              {Object.keys(item).map((key, cellIndex) => {
-                const flexStyle = {
-                  flexGrow: colWidths ? colWidths[cellIndex] : 1,
-                  flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
-                  flexBasis: 10,
-                };
-                const cellItem = item[key];
-                if (!cellItem || typeof cellItem === "string" || typeof cellItem === "number") {
-                  return (
-                    <CellUser key={cellIndex} style={flexStyle}>
-                      {cellItem}
-                    </CellUser>
-                  );
-                } else if (Array.isArray(cellItem)) {
-                  return (
-                    <CellUser key={cellIndex} style={flexStyle}>
-                      {cellItem.map((item, index) => {
-                        return item.isTextButton ? (
+                {Object.keys(item).map((key, cellIndex) => {
+                  const flexStyle = {
+                    flexGrow: colWidths ? colWidths[cellIndex] : 1,
+                    flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
+                    flexBasis: 10,
+                  };
+                  const cellItem = item[key];
+                  if (
+                    !cellItem ||
+                    typeof cellItem === "string" ||
+                    typeof cellItem === "number"
+                  ) {
+                    return (
+                      <Cell key={cellIndex} style={flexStyle}>
+                        {cellItem}
+                      </Cell>
+                    );
+                  } else if (Array.isArray(cellItem)) {
+                    return (
+                      <Cell key={cellIndex} style={flexStyle}>
+                        {cellItem.map((item, index) => {
+                          return item.isTextButton ? (
+                            <TextButton
+                              key={index}
+                              onClick={() => item.onClick()}
+                              className={styles.cellTextButton}
+                            >
+                              {item.label}
+                            </TextButton>
+                          ) : (
+                            <ActionButton
+                              key={index}
+                              onClick={() => item.onClick()}
+                              className={styles.cellButton}
+                            >
+                              {item.label}
+                            </ActionButton>
+                          );
+                        })}
+                      </Cell>
+                    );
+                  } else {
+                    return (
+                      <Cell key={cellIndex} style={flexStyle}>
+                        {cellItem.isTextButton ? (
                           <TextButton
-                            key={index}
-                            onClick={() => item.onClick()}
+                            onClick={() => cellItem.onClick()}
                             className={styles.cellTextButton}
                           >
-                            {item.label}
+                            {cellItem.label}
                           </TextButton>
                         ) : (
                           <ActionButton
-                            key={index}
-                            onClick={() => item.onClick()}
+                            onClick={() => cellItem.onClick()}
                             className={styles.cellButton}
                           >
-                            {item.label}
+                            {cellItem.label}
                           </ActionButton>
-                        );
-                      })}
-                    </CellUser>
-                  );
-                } else {
-                  return (
-                    <CellUser key={cellIndex} style={flexStyle}>
-                      {cellItem.isTextButton ? (
-                        <TextButton
-                          onClick={() => cellItem.onClick()}
-                          className={styles.cellTextButton}
-                        >
-                          {cellItem.label}
-                        </TextButton>
-                      ) : (
-                        <ActionButton
-                          onClick={() => cellItem.onClick()}
-                          className={styles.cellButton}
-                        >
-                          {cellItem.label}
-                        </ActionButton>
-                      )}
-                    </CellUser>
-                  );
-                }
-              })}
-            </div>
-          );
-        })}
+                        )}
+                      </Cell>
+                    );
+                  }
+                })}
+              </div>
+            );
+          })}
+        </section>
+      </section>
+      <section className={styles.pagination}>
+        <div className={styles.recordNumberWrapper}>
+          Showing <span className={styles.recordNumber}>10</span> of{" "}
+          <span className={styles.recordNumber}>60</span> records
+        </div>
+        <div className={styles.buttonsWrapper}>
+          <Button className={styles.paginationButton}>Previous</Button>
+          <div className={styles.pageNumber}>
+            <div>1</div>
+          </div>
+          <Button className={styles.paginationButton}>Next</Button>
+        </div>
       </section>
     </main>
   );
@@ -176,7 +196,7 @@ interface CellProps {
   style?: React.CSSProperties;
   onClick?: () => void;
 }
-function CellHeader({ children, style, onClick }: CellProps) {
+function HeaderCell({ children, style, onClick }: CellProps) {
   return (
     <div
       className={styles.cell + " " + styles.headerCell}
@@ -187,7 +207,7 @@ function CellHeader({ children, style, onClick }: CellProps) {
     </div>
   );
 }
-function CellUser({ children, style }: CellProps) {
+function Cell({ children, style }: CellProps) {
   return (
     <div
       className={styles.cell + " " + styles.userCell}

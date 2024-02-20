@@ -5,6 +5,8 @@ import DataTable from "@/components/DataTable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { UserData } from "../type";
+import { postClient } from "@/services/clientApi";
+import { routes } from "@/config/routes";
 
 const HEADERS = [
   "No",
@@ -43,6 +45,13 @@ export default function UsersResultTable(props: UsersResultTable) {
   const { users } = props;
   const [tableData, setTableData] = useState([] as any);
   const router = useRouter();
+
+  async function handleHeaderClick() { // Sort
+    const payload = {
+      
+    }
+    const sortedResults = await postClient(routes.searchUser, payload);
+  }
 
   useEffect(() => {
     function handleViewUser(userId: string) {

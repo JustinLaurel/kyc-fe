@@ -3,6 +3,12 @@
 $container-radius: 4px;
 $column-gap: 8px;
 .table {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.content {
   .headerSection {
     display: flex;
     min-height: 60px;
@@ -13,13 +19,13 @@ $column-gap: 8px;
     padding-right: 10px;
     border-top-right-radius: $container-radius;
     border-top-left-radius: $container-radius;
-
+  
     color: colors.$mediumdark-gray;
     font-size: 16px;
     font-weight: 700;
     line-height: 19px;
     text-align: left;
-
+  
     .headerCell {
       display: flex;
       flex-wrap: nowrap;
@@ -35,7 +41,7 @@ $column-gap: 8px;
       border-bottom-right-radius: $container-radius;
       border-bottom-left-radius: $container-radius;
     }
-
+  
     .row {
       min-height: 60px;
       display: flex;
@@ -43,7 +49,7 @@ $column-gap: 8px;
       align-items: center;
       padding-left: 20px;
       padding-right: 10px;
-
+  
       color: colors.$mediumdark-gray;
       font-size: 16px;
       line-height: 19px;
@@ -56,7 +62,7 @@ $column-gap: 8px;
       .userCell {
         display: flex;
         color: darkslategray;
-
+  
         padding-top: 5px;
         padding-bottom: 5px;
       }
@@ -66,19 +72,64 @@ $column-gap: 8px;
     flex-wrap: wrap;
     overflow-wrap: anywhere;
   }
+  .cellTextButton {
+    margin-right: 16px;
+    user-select: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .cellButton {
+    user-select: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding: 8px 0px;
+    width: 70px;
+    margin-right: 8px;
+  }  
 }
 
-.cellTextButton {
-  margin-right: 16px;
-  user-select: none;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-.cellButton {
-  user-select: none;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding: 8px 0px;
-  width: 70px;
-  margin-right: 8px;
+.pagination {
+  display: flex;
+  justify-content: space-between;
+
+  .buttonsWrapper {
+    display: flex;
+    align-items: center;
+
+    .pageNumber {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      border: 1px solid colors.$border-gray;
+      color: colors.$ambank-red;
+      width: 60px;
+    }
+    .paginationButton {
+      text-transform: none;
+      background-color: colors.$light-gray;
+      font-weight: 600;
+      color: colors.$mediumdark-gray;
+      border: 1px solid colors.$border-gray;
+      width: 120px;
+    }
+    .paginationButton:first-child {
+      border-right: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+    .paginationButton:last-child {
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  .recordNumberWrapper {
+    color: colors.$medium-gray;
+    .recordNumber {
+      color: colors.$ambank-red;
+    }  
+  }
+
 }

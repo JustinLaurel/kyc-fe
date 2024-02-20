@@ -1,20 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./searchbar.module.scss";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
+import { INITIAL_SEARCH_FORM } from "./ContentSection";
 
-export const INITIAL_SEARCH_FORM = {
-  name: "",
-  role: "",
-  userId: "",
-  status: null,
-  department: null,
-};
 const VALIDATION_RULES = {
   name: {
     minLength: 6,
@@ -30,30 +24,16 @@ const VALIDATION_RULES = {
 interface FilterViewProps {
   departmentList: ListItem[];
   roleList: ListItem[];
-  onSubmit: SubmitHandler<any>;
+  handleSearch: () => void;
+  handleClear: () => void;
+  formHook: UseFormReturn<typeof INITIAL_SEARCH_FORM, any, undefined>;
 }
 export default function FilterView(props: FilterViewProps) {
-  const { departmentList, roleList, onSubmit } = props;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    getValues,
-    reset,
-    control,
-  } = useForm<typeof INITIAL_SEARCH_FORM>({
-    defaultValues: {
-      ...INITIAL_SEARCH_FORM,
-    },
-  });
-
-  function handleClear() {
-    reset({ ...INITIAL_SEARCH_FORM });
-  }
+  const { departmentList, roleList, handleSearch, handleClear, formHook } = props;
+  const { register, control } = formHook;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSearch}>
       <Card
         header="Search"
         buttons={[
@@ -64,7 +44,7 @@ export default function FilterView(props: FilterViewProps) {
           },
           {
             label: "Search",
-            onClick: handleSubmit(onSubmit),
+            onClick: handleSearch,
             isSubmit: true,
           },
         ]}
