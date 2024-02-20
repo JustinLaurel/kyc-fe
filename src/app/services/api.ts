@@ -53,10 +53,6 @@ async function get(
       };
     }
     const response = await fetch(withParams, options);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
     let json;
     try {
       json = await response.json();
@@ -69,7 +65,7 @@ async function get(
     }
     return json;
   } catch (error) {
-    throw new Error(String(error));
+    throw error;
   }
 }
 

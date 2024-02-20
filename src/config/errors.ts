@@ -29,8 +29,16 @@ export class BadRequestException extends StandardException {
   }
 }
 
+export class NotFoundException extends StandardException {
+  static code = 'NOT_FOUND';
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 const EXCEPTION_TYPES = [
   StandardException,
   UnauthorizedException,
   BadRequestException,
+  NotFoundException,
 ];

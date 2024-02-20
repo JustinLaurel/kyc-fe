@@ -5,35 +5,30 @@ import FieldInput from "@/components/FieldInput";
 import styles from "./page.module.scss";
 import { ListItem, SimpleStaff } from "@/config/types";
 import { INITIAL_ADD_FORM } from "../../add/UserSection/AddView";
-import { useForm } from "react-hook-form";
+import { UseFormReturn, useForm } from "react-hook-form";
+import { INITIAL_EDIT_FORM } from "./ContentSection";
 
 interface UserDetailsProps {
   staff: SimpleStaff;
   departmentList: ListItem[];
   roleList: ListItem[];
   approverGroupList: ListItem[];
+  formHook: UseFormReturn<typeof INITIAL_EDIT_FORM, any, undefined>;
+  handleSearch: () => void;
 }
 export default function UserDetailsView(props: UserDetailsProps) {
-  const { staff, departmentList, roleList, approverGroupList } = props;
-
+  const { departmentList, roleList, approverGroupList, formHook, handleSearch } = props;
   const {
     register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    getValues,
-    reset,
     control,
-  } = useForm<typeof INITIAL_ADD_FORM>({
-    defaultValues: { ...staff },
-  });
+  } = formHook;
 
   return (
     <Card header={"User Details"} className={styles.userDetailsContainer}>
       <div className={styles.detailsWrapper}>
         <FieldInput
           label={"User ID*"}
-          onButtonClick={() => {}}
+          onButtonClick={handleSearch}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
           {...register("userId")}

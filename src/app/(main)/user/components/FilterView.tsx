@@ -8,6 +8,7 @@ import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
 import { UseFormReturn } from "react-hook-form";
 import { INITIAL_SEARCH_FORM } from "./ContentSection";
+import { ListItem } from "@/config/types";
 
 const VALIDATION_RULES = {
   name: {

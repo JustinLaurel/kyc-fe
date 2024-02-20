@@ -36,6 +36,7 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
       error = null,
       ...inputProps
     } = props;
+    
     return (
       <section
         className={
