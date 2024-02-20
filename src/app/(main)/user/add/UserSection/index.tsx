@@ -4,6 +4,7 @@ import { getClient, postClient } from "@/services/clientApi";
 import { routes } from "@/config/routes";
 import SearchView, { INITIAL_SEARCH_FORM } from "./SearchView";
 import AddView, { INITIAL_ADD_FORM } from "./AddView";
+import { ListItem } from "@/config/types";
 
 const SWIPE_INDEXES = {
   USER_SEARCH: 0,

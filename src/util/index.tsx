@@ -4,3 +4,14 @@ export type ValueOf<T> = T[keyof T];
 export type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
+
+export function convertNullToEmptyString<T>(object: Record<string, any>) {
+  const newObj = { ...object };
+  const keys = Object.keys(newObj);
+  for (const key of keys) {
+    if (newObj[key] === null) {
+      newObj[key] = "";
+    }
+  }
+  return newObj as T;
+}

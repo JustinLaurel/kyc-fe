@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import MessageModal from "@/components/MessageModal";
 import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
 import Loader from "@/components/Loader";
+import { ListItem, SimpleStaff } from "@/config/types";
 
 export const INITIAL_ADD_FORM = {
   userId: "",

@@ -5,6 +5,7 @@ import DataTable from "@/components/DataTable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SortableColumn, UserData } from "../type";
+import { SORT_ORDER } from "@/config/types";
 
 const COL_WIDTHS = [0.3, 3, 1.5, 2, 2, 2, 1, 1.5];
 
