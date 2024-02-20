@@ -52,19 +52,27 @@ export default function UsersResultTable(props: UsersResultTable) {
       router.push(`/user/view/${userId}`);
     }
 
+    function handleEditUser(userId: string) {
+      router.push(`/user/edit/${userId}`);
+    }
+
+    function handleDeleteUser(userId: string) {
+      router.push(`/user/delete/${userId}`);
+    }
+
     const mapped = users.map((item, index) => {
       const actions = [];
       if (item.actionsAllowed.canDelete) {
         actions.push({
           label: "Edit",
-          onClick: () => {},
+          onClick: () => handleEditUser(item.userId),
           colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
         });
       }
       if (item.actionsAllowed.canEdit) {
         actions.push({
           label: "Delete",
-          onClick: () => {},
+          onClick: () => handleDeleteUser(item.userId),
         });
       }
       if (item.actionsAllowed.canReview) {

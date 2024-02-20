@@ -1,10 +1,9 @@
 import styles from "./page.module.scss";
-import UserDetailsView from "./UserDetailsView";
-import RemarksTable from "./RemarksTable";
-import { routes } from "@/config/routes";
-import { getServer } from "@/services/serverApi";
 import RouteStepsView from "./RouteStepsView";
-import { convertNullToEmptyString } from "@/util";
+import RemarksTable from "./RemarksTable";
+import UserDetailsView from "./UserDetailsView";
+import { getServer } from "@/services/serverApi";
+import { routes } from "@/config/routes";
 
 interface UserViewPageProps {
   params: {
@@ -12,7 +11,7 @@ interface UserViewPageProps {
   };
 }
 
-export default async function UserViewPage({ params }: UserViewPageProps) {
+export default async function UserEditPage({ params }: UserViewPageProps) {
   const { userId } = params;
 
   const staffData = await getServer(
@@ -25,15 +24,15 @@ export default async function UserViewPage({ params }: UserViewPageProps) {
   return (
     <div className={styles.container}>
       <section className={styles.headerSection}>
-        <div className={styles.header}>View User</div>
+        <div className={styles.header}>Edit User</div>
         <RouteStepsView />
       </section>
       <section className={styles.cardsSection}>
         <UserDetailsView
+          staff={staffData}
           departmentList={departmentList}
           roleList={roleList}
           approverGroupList={approverGroupList}
-          staff={convertNullToEmptyString(staffData)}
         />
         <RemarksTable />
       </section>
