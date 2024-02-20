@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 import { Backdrop } from "@mui/material";
@@ -10,6 +10,7 @@ interface BaseProps {
   message?: string | React.ReactNode;
   handleClose: () => void;
   header?: string;
+  onKeyboardEnterPress?: () => void;
 }
 interface MessageModalProps extends BaseProps {
   buttons?: {
@@ -19,7 +20,15 @@ interface MessageModalProps extends BaseProps {
   }[];
 }
 function BaseMessageModal(props: MessageModalProps) {
-  const { buttons, message = "", handleClose, header = "Notification" } = props;
+  const {
+    buttons,
+    message = "",
+    handleClose,
+    header = "Notification",
+    onKeyboardEnterPress,
+  } = props;
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   function handleCloseModal(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -30,6 +39,23 @@ function BaseMessageModal(props: MessageModalProps) {
     }
   }
 
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.focus();
+    }
+    if (onKeyboardEnterPress) {
+      const handleKeyDown = (event: any) => {
+        if (event.key === "Enter") {
+          onKeyboardEnterPress();
+        }
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };  
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <Backdrop
@@ -37,7 +63,7 @@ function BaseMessageModal(props: MessageModalProps) {
         className={styles.dimmingOverlay}
         onClick={handleCloseModal}
       />
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} ref={modalRef} tabIndex={-1}>
         <section className={styles.headerSection}>{header}</section>
         <section className={styles.contentSection}>{message}</section>
         {buttons && buttons.length && (
@@ -83,6 +109,7 @@ function MessageModalYesNo(props: MessageModalYesNo) {
       ]}
       message={message}
       handleClose={handleClose}
+      onKeyboardEnterPress={handleYes}
     />
   );
 }
@@ -105,6 +132,7 @@ function MessageModalOk(props: MessageModalOk) {
       ]}
       handleClose={handleClose}
       message={message}
+      onKeyboardEnterPress={handleOk}
     />
   );
 }
@@ -133,6 +161,7 @@ function MessageModalCancelConfirm(props: MessageModalCancelConfirm) {
       ]}
       handleClose={handleClose}
       message={message}
+      onKeyboardEnterPress={handleConfirm}
     />
   );
 }
