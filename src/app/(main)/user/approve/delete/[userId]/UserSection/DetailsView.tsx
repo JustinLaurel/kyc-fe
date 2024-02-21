@@ -4,13 +4,10 @@ import styles from "./index.module.scss";
 import FieldInput from "@/components/FieldInput";
 import { useState } from "react";
 import FieldDropdown from "@/components/FieldDropdown";
-import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 import { useRouter } from "next/navigation";
-import { getClient, postClient } from "@/services/clientApi";
-import { routes } from "@/config/routes";
 import { useForm } from "react-hook-form";
 import MessageModal from "@/components/MessageModal";
-import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
+import { MessageManager } from "@/components/MessageModal/type";
 import Loader from "@/components/Loader";
 import { ListItem, SimpleStaff } from "@/config/types";
 
@@ -75,98 +72,16 @@ export default function AddView(props: AddViewProps) {
     },
   });
 
-  async function handleClickSubmit() {
-    const isValidateSuccessful = await trigger();
-    if (isValidateSuccessful) {
-      setMessageModal({
-        type: MODAL_TYPE.CANCEL_CONFIRM,
-        message: "Are you sure to submit this application?",
-        handleClose: () => setMessageModal(null),
-        handleCancel: () => setMessageModal(null),
-        handleConfirm: handleSubmit(submitUser),
-      });
-    }
-  }
-
-  async function submitUser(data: typeof INITIAL_ADD_FORM) {
-    setMessageModal(null);
-    setIsLoading(true);
-    try {
-      await postClient(routes.submitAddStaff, data);
-      setMessageModal({
-        type: MODAL_TYPE.OK,
-        message: "User ID request has been submitted successfully. It has been routed to Admin Approver.",
-        handleClose: () => setMessageModal(null),
-        handleOk: () => setMessageModal(null),
-      });
-      clearForm();
-    } catch (error: any) {
-      setMessageModal({
-        type: MODAL_TYPE.OK,
-        message:
-          error.message === "Staff ID already exists"
-            ? "User already exists in the system. Please enter a new User ID"
-            : "Failed to create user: " + error.message,
-        handleClose: () => setMessageModal(null),
-        handleOk: () => setMessageModal(null),
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  function clearForm() {
-    reset({ ...INITIAL_ADD_FORM });
-  }
-
-  async function handleClickSearch() {
-    const isValidStaffId = await trigger("userId");
-    if (isValidStaffId) {
-      const staffData = await getClient(
-        routes.getStaffSimple.replace("{USER_ID}", getValues().userId)
-      );
-      const modal = {
-        type: MODAL_TYPE.OK as const,
-        isOpen: true,
-        handleClose: () => setMessageModal(null),
-        handleOk: () => setMessageModal(null),
-      };
-      if (staffData?.userId) {
-        setMessageModal({
-          ...modal,
-          message: "This User ID exists in the system.",
-        });
-      } else {
-        setMessageModal({
-          ...modal,
-          message: "This User ID does not exist in the system.",
-        });
-      }
-    }
-  }
-
   return (
     <Card
       header={"Review User"}
       className={styles.addView}
-      buttons={[
-        {
-          label: "Cancel",
-          onClick: () => clearForm(),
-          colorScheme: BUTTON_COLOR_SCHEMES.GREY,
-        },
-        {
-          label: "Submit",
-          onClick: handleClickSubmit,
-        },
-      ]}
     >
       <Loader isLoading={isLoading} />
       <MessageModal {...messageModal} />
       <div className={styles.addWrapper}>
         <FieldInput
           label={"User ID*"}
-          onButtonClick={() => handleClickSearch()}
           buttonLabel={"Search"}
           placeholder={"Enter User ID here"}
           error={errors.userId}

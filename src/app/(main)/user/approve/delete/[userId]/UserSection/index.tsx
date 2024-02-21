@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { getClient, postClient } from "@/services/clientApi";
 import { routes } from "@/config/routes";
-import AddView from "./AddView";
+import AddView from "./DetailsView";
 import { ListItem, SimpleStaff } from "@/config/types";
 import RemarksTable from "./RemarksTable";
 import { useForm } from "react-hook-form";

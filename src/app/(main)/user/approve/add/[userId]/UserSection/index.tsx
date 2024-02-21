@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
-import { getClient, postClient } from "@/services/clientApi";
-import { routes } from "@/config/routes";
-import AddView from "./AddView";
+import DetailsView from "./DetailsView";
 import { ListItem, SimpleStaff } from "@/config/types";
 import RemarksTable from "./RemarksTable";
 import { useForm } from "react-hook-form";
@@ -37,7 +35,7 @@ export default function UserSection(props: UserSectionProps) {
 
   return (
     <>
-      <AddView
+      <DetailsView
         departmentList={departmentList}
         approverGroupList={approverGroupList}
         roleList={roleList}
