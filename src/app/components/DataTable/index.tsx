@@ -36,27 +36,6 @@ export default function DataTable(props: Props) {
     Record<string, SORT_ORDER>
   >({});
 
-  function toggleSortImages(headerLabel: string) {
-    setSortOrders((prev) => {
-      const currentSortType = prev[headerLabel];
-      const newSortType = sortOrderToggler(currentSortType);
-      switch (newSortType) {
-        case SORT_ORDER.DEFAULT:
-          return {};
-        case SORT_ORDER.ASC:
-          return {
-            [headerLabel]: SORT_ORDER.ASC,
-          };
-        case SORT_ORDER.DESC:
-          return {
-            [headerLabel]: SORT_ORDER.DESC,
-          };
-        default:
-          return {};
-      }
-    });
-  }
-
   function sortOrderToggler(
     currentOrder: SORT_ORDER
   ) {

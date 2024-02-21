@@ -1,0 +1,28 @@
+@use "src/app/colors";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  font-size: 12px;
+  line-height: 14.4px;
+
+  .label {
+    font-weight: 700;
+  }
+  .textarea {
+    resize: none;
+    height: 128px;
+    background-color: colors.$light-gray;
+    border: none;
+    border-radius: 4px;
+    font-family: colors.$font-lato !important;
+    font-size: 16px;
+    line-height: 19.2px;
+    padding: 16px;
+  }
+  .lengthLabel {
+    text-align: right;
+    color: colors.$mediumdark-gray;
+  }
+}

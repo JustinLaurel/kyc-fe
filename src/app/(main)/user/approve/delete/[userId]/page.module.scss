@@ -1,0 +1,7 @@
+@use "src/app/colors";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}

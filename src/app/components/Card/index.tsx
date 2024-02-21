@@ -1,9 +1,10 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 
 interface CardProps {
   children: React.ReactNode;
+  subchildren?: React.ReactNode[];
   buttons?: {
     label: string;
     onClick?: () => void;
@@ -18,6 +19,7 @@ interface CardProps {
 export default function Card(props: CardProps) {
   const {
     children,
+    subchildren,
     buttons,
     header = null,
     subheader = null,
@@ -37,7 +39,20 @@ export default function Card(props: CardProps) {
         </>
       )}
 
-      <section className={styles.contentSection}>{children}</section>
+      {children && (
+        <>
+          <section className={styles.contentSection}>{children}</section>
+          {subchildren && hasSeparator && <Separator />}
+        </>
+      )}
+      {subchildren &&
+        subchildren.length > 0 &&
+        subchildren.map((subchild, index) => (
+          <React.Fragment key={index}>
+            <section className={styles.contentSection}>{subchild}</section>
+            {index < subchildren.length - 1 && <Separator />}
+          </React.Fragment>
+        ))}
 
       {buttons && buttons.length && (
         <>

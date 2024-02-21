@@ -1,0 +1,14 @@
+@use 'src/app/colors';
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  .header {
+    color: colors.$dark-gray;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+  }
+}

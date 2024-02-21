@@ -46,6 +46,8 @@ function BaseMessageModal(props: MessageModalProps) {
     if (onKeyboardEnterPress) {
       const handleKeyDown = (event: any) => {
         if (event.key === "Enter") {
+          event.preventDefault();
+          event.stopPropagation();
           onKeyboardEnterPress();
         }
       };
