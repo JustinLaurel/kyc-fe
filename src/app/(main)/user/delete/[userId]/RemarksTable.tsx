@@ -5,8 +5,11 @@ import DataTable from "@/components/DataTable";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 
-interface RemarksTableProps {}
+interface RemarksTableProps {
+  handleDelete: () => void;
+}
 export default function RemarksTable(props: RemarksTableProps) {
+  const { handleDelete } = props;
   const router = useRouter();
 
   function handleBack() {
@@ -25,7 +28,7 @@ export default function RemarksTable(props: RemarksTableProps) {
         },
         {
           label: "Delete",
-          onClick: () => {},
+          onClick: handleDelete,
         },
       ]}
     >

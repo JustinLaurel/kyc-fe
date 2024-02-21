@@ -7,6 +7,7 @@ const routes = {
   getStaffSimple: `${base}/staff/simple/{USER_ID}`,
   submitAddStaff: `${base}/staff/add`,
   submitEditStaff: `${base}/staff/edit`,
+  submitDeleteStaff: `${base}/staff/delete`,
   searchUser: `${base}/staff/search`,
 };
 
