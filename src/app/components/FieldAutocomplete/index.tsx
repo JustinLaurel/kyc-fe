@@ -4,7 +4,6 @@ import {
   InputAdornment,
   MenuItem,
   Paper,
-  Popper,
   TextField,
 } from "@mui/material";
 import styles from "./index.module.scss";
@@ -12,6 +11,7 @@ import Image from "next/image";
 import { forwardRef } from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
 import React from "react";
+import { ListItem } from "@/config/types";
 
 interface FieldAutocompleteProps {
   items: ListItem[];

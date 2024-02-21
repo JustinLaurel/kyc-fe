@@ -49,9 +49,10 @@ export default function ContentSection(props: ContentSectionProps) {
         handleOk: () => router.back(),
         message: "User does not exist",
         handleClose: () => router.back(),
-      });  
+      });
     }
-}, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, staff]); // From Server Component: Will never change
 
   async function handleSearch() {
     const userId = getValues().userId;

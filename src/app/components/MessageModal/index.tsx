@@ -54,7 +54,7 @@ function BaseMessageModal(props: MessageModalProps) {
         document.removeEventListener("keydown", handleKeyDown);
       };  
     }
-  }, []);
+  }, [onKeyboardEnterPress]);
 
   return (
     <div className={styles.container}>

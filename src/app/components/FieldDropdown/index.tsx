@@ -3,6 +3,7 @@ import { Select, MenuItem } from "@mui/material";
 import styles from "./index.module.scss";
 import React from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
+import { ListItem } from "@/config/types";
 
 interface FieldDropdownProps {
   items: ListItem[];

@@ -97,7 +97,8 @@ export default function UsersResultTable(props: UsersResultTable) {
       };
     });
     setTableData(mapped);
-  }, [users]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, users]);
 
   return (
     <Card header="Search Result">
