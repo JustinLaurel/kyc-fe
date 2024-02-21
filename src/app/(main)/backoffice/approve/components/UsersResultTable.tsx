@@ -50,30 +50,15 @@ export default function UsersResultTable(props: UsersResultTable) {
   useEffect(() => {
     if (!users) return;
     function handleViewUser(userId: string) {
-      router.push(`/user/make/view/${userId}`);
-    }
-
-    function handleEditUser(userId: string) {
-      router.push(`/user/make/edit/${userId}`);
-    }
-
-    function handleDeleteUser(userId: string) {
-      router.push(`/user/make/delete/${userId}`);
+      router.push(`/backoffice/approve/view/${userId}`);
     }
 
     const mapped = users.map((item, index) => {
       const actions = [];
-      if (item.actionsAllowed.canDelete) {
+      if (item.actionsAllowed.canReview) {
         actions.push({
-          label: "Edit",
-          onClick: () => handleEditUser(item.userId),
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        });
-      }
-      if (item.actionsAllowed.canEdit) {
-        actions.push({
-          label: "Delete",
-          onClick: () => handleDeleteUser(item.userId),
+          label: "Review",
+          onClick: () => router.push(`/backoffice/approve/add/${item.userId}`),
         });
       }
       return {

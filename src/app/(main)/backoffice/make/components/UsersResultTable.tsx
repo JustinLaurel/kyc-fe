@@ -50,15 +50,30 @@ export default function UsersResultTable(props: UsersResultTable) {
   useEffect(() => {
     if (!users) return;
     function handleViewUser(userId: string) {
-      router.push(`/user/approve/view/${userId}`);
+      router.push(`/backoffice/make/view/${userId}`);
+    }
+
+    function handleEditUser(userId: string) {
+      router.push(`/backoffice/make/edit/${userId}`);
+    }
+
+    function handleDeleteUser(userId: string) {
+      router.push(`/backoffice/make/delete/${userId}`);
     }
 
     const mapped = users.map((item, index) => {
       const actions = [];
-      if (item.actionsAllowed.canReview) {
+      if (item.actionsAllowed.canDelete) {
         actions.push({
-          label: "Review",
-          onClick: () => router.push(`/user/approve/add/${item.userId}`),
+          label: "Edit",
+          onClick: () => handleEditUser(item.userId),
+          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+        });
+      }
+      if (item.actionsAllowed.canEdit) {
+        actions.push({
+          label: "Delete",
+          onClick: () => handleDeleteUser(item.userId),
         });
       }
       return {

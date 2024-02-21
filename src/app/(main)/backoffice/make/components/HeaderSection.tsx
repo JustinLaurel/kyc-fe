@@ -11,7 +11,7 @@ export default function Header() {
     <div className={styles.headerSection}>
       <div>User Management</div>
       <ActionButton
-        onClick={() => router.push("/user/approve/add")}
+        onClick={() => router.push("/backoffice/make/add")}
         className={styles.createButton}
       >
         Create New

@@ -13,7 +13,11 @@ export default function Sidebar(props: Props) {
   const { isOpen, handleClose } = props;
   return (
     <>
-      <Backdrop open={isOpen} className={styles.dimmingOverlay} onClick={handleClose}/>
+      <Backdrop
+        open={isOpen}
+        className={styles.dimmingOverlay}
+        onClick={handleClose}
+      />
       <section className={`${styles.sidebar} ${isOpen ? styles.active : ""}`}>
         <div className={styles.userInfo}>
           <div className={styles.wrapper}>
@@ -52,7 +56,7 @@ export default function Sidebar(props: Props) {
               darkSrc="/assets/images/icon_user_management_dark.png"
               label={"User Management"}
               onClick={() => {
-                router.push("/user/make");
+                router.push("/backoffice/make");
                 handleClose();
               }}
             />
