@@ -23,13 +23,40 @@ const MENU_AUTHORITIES = {
 };
 
 const MENU_AUTHORITIES_2 = {
-  user: {
-    MENUS: ["SEARCH_FILTER", "USERS_LISTING"],
-    view: {
-      MENUS: ["USER_DETAILS", "REMARKS_TABLE"],
+  create: {
+    staff: {
+      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
     },
-    add: {
-      MENUS: ["DETAILS_SWIPEABLE"],
+    customer: {
+      MENUS: [
+        "SEARCH",
+        {
+          name: "VIEW",
+          submenus: [
+            "CUSTOMER_DETAILS",
+            "UBO",
+            "OTHER_RELATED_PARTIES",
+            "RISK_RATING_SCREENING",
+          ],
+        },
+        {
+          name: "ADD",
+          submenus: [
+            ""
+          ]
+        }
+      ],
+      applications: {
+        MENUS: ["SEARCH"],
+      },
+    },
+  },
+  approve: {
+    staff: {
+      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
+    },
+    customer: {
+      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
     },
   },
 };
