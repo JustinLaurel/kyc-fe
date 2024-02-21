@@ -4,18 +4,18 @@ import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SortableColumn, UserData } from "../type";
 import { SORT_ORDER } from "@/config/types";
+import { SortableColumn, UserData } from "../type";
 
 const COL_WIDTHS = [0.3, 3, 1.5, 2, 2, 2, 1, 1.5];
 
 interface UsersResultTable {
-  users: UserData[];
+  users: UserData[] | null;
   handleHeaderClick: (sortBy: SortableColumn, order: SORT_ORDER) => void;
 }
 export default function UsersResultTable(props: UsersResultTable) {
   const { users, handleHeaderClick } = props;
-  const [tableData, setTableData] = useState([] as any);
+  const [tableData, setTableData] = useState(null);
   const router = useRouter();
 
   const HEADERS = [
@@ -48,16 +48,17 @@ export default function UsersResultTable(props: UsersResultTable) {
   ];
 
   useEffect(() => {
+    if (!users) return;
     function handleViewUser(userId: string) {
-      router.push(`/user/view/${userId}`);
+      router.push(`/user/make/view/${userId}`);
     }
 
     function handleEditUser(userId: string) {
-      router.push(`/user/edit/${userId}`);
+      router.push(`/user/make/edit/${userId}`);
     }
 
     function handleDeleteUser(userId: string) {
-      router.push(`/user/delete/${userId}`);
+      router.push(`/user/make/delete/${userId}`);
     }
 
     const mapped = users.map((item, index) => {
@@ -96,13 +97,15 @@ export default function UsersResultTable(props: UsersResultTable) {
         action: actions,
       };
     });
-    setTableData(mapped);
+    setTableData(mapped as any);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, users]);
 
   return (
-    <Card header="Search Result">
-      <DataTable items={tableData} headers={HEADERS} colWidths={COL_WIDTHS} />
-    </Card>
+    tableData && (
+      <Card header="Search Result">
+        <DataTable items={tableData} headers={HEADERS} colWidths={COL_WIDTHS} />
+      </Card>
+    )
   );
 }

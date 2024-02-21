@@ -52,7 +52,7 @@ export default function Sidebar(props: Props) {
               darkSrc="/assets/images/icon_user_management_dark.png"
               label={"User Management"}
               onClick={() => {
-                router.push("/user");
+                router.push("/user/make");
                 handleClose();
               }}
             />

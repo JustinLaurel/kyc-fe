@@ -21,12 +21,11 @@ export const INITIAL_SEARCH_FORM = {
 interface ContentSectionProps {
   departmentList: ListItem[];
   roleList: ListItem[];
-  users: UserData[];
 }
 export default function ContentSection(props: ContentSectionProps) {
-  const { departmentList, roleList, users } = props;
+  const { departmentList, roleList } = props;
   const [isLoading, setIsLoading] = useState(false);
-  const [usersResult, setUsersResult] = useState(users);
+  const [usersResult, setUsersResult] = useState(null);
   const formHook = useForm<typeof INITIAL_SEARCH_FORM>({
     defaultValues: {
       ...INITIAL_SEARCH_FORM,

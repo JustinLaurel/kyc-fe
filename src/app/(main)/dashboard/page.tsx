@@ -33,12 +33,12 @@ export default function DashboardPage() {
           <TaskView
             src={"/assets/images/icon_search_user.png"}
             buttonLabel={"Search User"}
-            onClick={() => router.push("/user")}
+            onClick={() => router.push("/user/make")}
           />
           <TaskView
             src={"/assets/images/icon_add_user.png"}
             buttonLabel={"Add User"}
-            onClick={() => router.push("/user/add")}
+            onClick={() => router.push("/user/make/add")}
           />
         </div>
       </Card>

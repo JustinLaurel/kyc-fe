@@ -1,35 +1,30 @@
 const MENU_AUTHORITIES = {
-  user: {
-    MENUS: [
-      "SEARCH_FILTER",
-      {
-        name: "USERS_LISTING",
-        omit: ["reviewButton"],
-      },
-    ],
-    view: {
+  staff: {
+    make: {
       MENUS: [
-        {
-          name: "USER_DETAILS",
-          omit: ["approverGroup", "userRole", "backButton"],
-        },
-        "REMARKS_TABLE",
+        { name: "SEARCH" },
+        { name: "VIEW" },
+        { name: "ADD" },
+        { name: "EDIT" },
+        { name: "DELETE" },
       ],
     },
-    add: {
-      MENUS: ["DETAILS_SWIPEABLE"],
+    approve: {
+      MENUS: [
+        { name: "SEARCH" },
+        { name: "VIEW" },
+        { name: "ADD" },
+        { name: "EDIT" },
+        { name: "DELETE" },
+      ],
     },
   },
-};
-
-const MENU_AUTHORITIES_2 = {
-  create: {
-    staff: {
-      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
-    },
-    customer: {
+  customer: {
+    make: {
       MENUS: [
-        "SEARCH",
+        {
+          name: "SEARCH",
+        },
         {
           name: "VIEW",
           submenus: [
@@ -41,21 +36,60 @@ const MENU_AUTHORITIES_2 = {
         },
         {
           name: "ADD",
-          submenus: [
-            ""
-          ]
-        }
+          submenus: ["CUSTOMER_DETAILS", "UBO", "OTHER_RELATED_PARTIES"],
+        },
+      ],
+      applications: {
+        MENUS: [
+          {
+            name: "SEARCH",
+          },
+        ],
+      },
+    },
+    approve: {
+      MENUS: [
+        { name: "SEARCH" },
+        { name: "VIEW" },
+        { name: "ADD" },
+        { name: "EDIT" },
+        { name: "DELETE" },
+      ],
+    },
+  },
+};
+interface MenuItem {
+  name: string;
+  submenus?: string[];
+}
+
+const MENU_AUTHORITIES_2 = {
+  staff: {
+    make: {
+      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
+    },
+    approve: {
+      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
+    },
+  },
+  customer: {
+    make: {
+      MENUS: [
+        "SEARCH",
+        "VIEW",
+        "VIEW_CUSTOMER_DETAILS",
+        "VIEW_UBO",
+        "VIEW_OTHER_RELATED_PARTIES",
+        "VIEW_RISK_RATING_SCREENING",
+        "ADD",
+        "EDIT",
+        "DELETE",
       ],
       applications: {
         MENUS: ["SEARCH"],
       },
     },
-  },
-  approve: {
-    staff: {
-      MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
-    },
-    customer: {
+    approve: {
       MENUS: ["SEARCH", "VIEW", "ADD", "EDIT", "DELETE"],
     },
   },
