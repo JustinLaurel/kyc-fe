@@ -7,7 +7,7 @@ import { ListItem } from "@/config/types";
 
 interface FieldDropdownProps {
   items: ListItem[];
-  title?: string;
+  label?: string;
   placeholder?: string;
   error?: FieldError;
   name: string; // From react-hook-form's "{...register()}" call
@@ -18,7 +18,7 @@ const FieldDropdown = React.forwardRef<HTMLSelectElement, FieldDropdownProps>(
   function FieldDropdownInternal(props, ref) {
     const {
       items,
-      title,
+      label,
       placeholder = "",
       error = null,
       control,
@@ -27,14 +27,14 @@ const FieldDropdown = React.forwardRef<HTMLSelectElement, FieldDropdownProps>(
 
     return (
       <div className={styles.fieldContainer}>
-        {title && <div className={styles.title}>{title}</div>}
+        {label && <div className={styles.title}>{label}</div>}
         <Controller
           control={control}
           {...registerProps}
           render={({ field: { onChange, onBlur, value, ref } }) => {
             return (
               <Select
-                id={title}
+                id={label}
                 disableUnderline
                 displayEmpty
                 renderValue={() =>

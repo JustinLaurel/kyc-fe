@@ -60,7 +60,7 @@ export default function FilterView(props: FilterViewProps) {
           />
           <FieldDropdown
             items={roleList}
-            title={"User Role"}
+            label={"User Role"}
             placeholder={"Please Select"}
             {...register("role")}
             control={control}

@@ -90,7 +90,7 @@ export default function DetailsView(props: DetailsViewProps) {
         />
         <FieldDropdown
           items={departmentList}
-          title={"Department/Branch*"}
+          label={"Department/Branch*"}
           placeholder={"Please Select"}
           error={errors.department}
           name={"department"}
@@ -104,7 +104,7 @@ export default function DetailsView(props: DetailsViewProps) {
         />
         <FieldDropdown
           items={roleList}
-          title={"User Role*"}
+          label={"User Role*"}
           placeholder={"Please Select"}
           error={errors.role}
           control={control}
@@ -117,7 +117,7 @@ export default function DetailsView(props: DetailsViewProps) {
           {...register("email", VALIDATION_RULES.email)}
         />
         <FieldDropdown
-          title={"Approver Group*"}
+          label={"Approver Group*"}
           items={approverGroupList}
           placeholder={"Please Select"}
           error={errors.approverGroup}

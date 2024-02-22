@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { Control, Controller, FieldError } from "react-hook-form";
-import React, { useState } from "react";
+import React from "react";
 
 export interface DateRangeField {
   to: Date | null | undefined;
@@ -62,7 +62,6 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
                             spellCheck: false,
                             autoCorrect: "off",
                           },
-                          inputProps: {},
                         },
                       }}
                       onChange={(newValue) => {
