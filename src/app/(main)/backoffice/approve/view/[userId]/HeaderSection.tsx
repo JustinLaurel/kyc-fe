@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import HeaderStandard from "@/components/HeaderWithSteps";
 
 const routeItems = [
@@ -7,12 +8,10 @@ const routeItems = [
     onClick: () => {},
   },
   {
-    label: "Update User",
+    label: "View User",
   },
 ];
 
 export default function HeaderSection() {
-  return (
-    <HeaderStandard label="Update User" routeItems={routeItems} />
-  );
+  return <HeaderStandard label="View User" routeItems={routeItems} />;
 }

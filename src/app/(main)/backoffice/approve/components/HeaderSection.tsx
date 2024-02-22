@@ -1,21 +1,11 @@
 "use client";
 
-import styles from "./headersection.module.scss";
-import ActionButton from "@/components/ActionButton";
-import { useRouter } from "next/navigation";
+import HeaderStandard from "@/components/HeaderWithSteps";
 
 export default function Header() {
-  const router = useRouter();
-  
   return (
-    <div className={styles.headerSection}>
-      <div>User Management</div>
-      <ActionButton
-        onClick={() => router.push("/backoffice/approve/add")}
-        className={styles.createButton}
-      >
-        Create New
-      </ActionButton>
-    </div>
+    <HeaderStandard
+      label="User Management"
+    />
   );
 }

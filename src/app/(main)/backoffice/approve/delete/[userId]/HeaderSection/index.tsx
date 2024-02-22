@@ -1,6 +1,5 @@
 "use client";
-import RouteSteps from "@/components/RouteSteps";
-import styles from "./index.module.scss";
+import HeaderStandard from "@/components/HeaderWithSteps";
 
 const routeItems = [
   {
@@ -13,10 +12,5 @@ const routeItems = [
 ];
 
 export default function HeaderSection() {
-  return (
-    <section className={styles.headerSection}>
-      <div className={styles.header}>Delete User</div>
-      <RouteSteps routeItems={routeItems} />
-    </section>
-  );
+  return <HeaderStandard label="Delete User" routeItems={routeItems} />;
 }
