@@ -1,0 +1,25 @@
+@use 'src/app/colors';
+
+.headerWithSteps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .leftSection {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+
+    .headerText {
+      color: colors.$dark-gray;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 29px;
+    }
+  }
+  .headerButton {
+    width: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

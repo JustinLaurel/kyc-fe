@@ -1,7 +1,7 @@
 import styles from "./page.module.scss";
 import { routes } from "@/config/routes";
 import { getServer } from "@/services/serverApi";
-import RouteStepsView from "./RouteStepsView";
+import HeaderSection from "./HeaderSection";
 import { convertNullToEmptyString } from "@/util";
 import ContentSection from "./ContentSection";
 
@@ -22,10 +22,7 @@ export default async function UserViewPage({ params }: UserViewPageProps) {
 
   return (
     <div className={styles.container}>
-      <section className={styles.headerSection}>
-        <div className={styles.header}>View User</div>
-        <RouteStepsView />
-      </section>
+      <HeaderSection />
       <ContentSection
         staff={convertNullToEmptyString(staffData)}
         departmentList={departmentList}

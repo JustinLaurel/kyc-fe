@@ -1,13 +1,8 @@
 import React from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
+import { ButtonSpecs } from "@/config/types";
 
-interface ButtonSpecs {
-  label: string;
-  onClick?: () => void;
-  colorScheme?: BUTTON_COLOR_SCHEMES;
-  isSubmit?: boolean;
-}
 interface CardProps {
   children: React.ReactNode;
   subchildren?: React.ReactNode[];

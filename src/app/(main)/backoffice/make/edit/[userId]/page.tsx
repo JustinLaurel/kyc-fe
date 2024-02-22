@@ -1,8 +1,9 @@
 import styles from "./page.module.scss";
-import RouteStepsView from "./RouteStepsView";
+import RouteStepsView from "./HeaderSection";
 import { getServer } from "@/services/serverApi";
 import { routes } from "@/config/routes";
 import ContentSection from "./ContentSection";
+import HeaderSection from "./HeaderSection";
 
 interface UserViewPageProps {
   params: {
@@ -21,10 +22,7 @@ export default async function UserEditPage({ params }: UserViewPageProps) {
 
   return (
     <div className={styles.container}>
-      <section className={styles.headerSection}>
-        <div className={styles.header}>Edit User</div>
-        <RouteStepsView />
-      </section>
+      <HeaderSection />
       <ContentSection
         staff={staffData}
         departmentList={departmentList}

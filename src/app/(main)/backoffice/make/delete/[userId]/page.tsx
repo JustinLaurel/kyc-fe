@@ -1,5 +1,5 @@
 import styles from "./page.module.scss";
-import RouteStepsView from "./RouteStepsView";
+import HeaderSection from "./HeaderSection";
 import ContentSection from "./ContentSection";
 import { getServer } from "@/services/serverApi";
 import { routes } from "@/config/routes";
@@ -22,10 +22,7 @@ export default async function UserDeletePage({ params }: UserDeletePageProps) {
 
   return (
     <div className={styles.container}>
-      <section className={styles.headerSection}>
-        <div className={styles.header}>Delete User</div>
-        <RouteStepsView />
-      </section>
+      <HeaderSection />
       <ContentSection
         staff={convertNullToEmptyString(staffData)}
         departmentList={departmentList}
