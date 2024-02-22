@@ -10,7 +10,10 @@ import { useForm } from "react-hook-form";
 export const INITIAL_LISTING_FORM = {
   customerName: "",
   idNo: "",
-  submissionDate: "",
+  submissionDate: {
+    from: null,
+    to: null,
+  },
   status: "",
 };
 export default function Filter() {
@@ -21,46 +24,57 @@ export default function Filter() {
   });
   const { register, handleSubmit, control } = formHook;
 
+  function submitSearchQuery(values: typeof INITIAL_LISTING_FORM) {
+    console.log(`values`, values);
+  }
+
   return (
-    <Card
-      header="Search"
-      buttons={[
-        {
-          label: "Clear",
-          onClick: () => {},
-          colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
-        },
-        {
-          label: "Search",
-          onClick: () => {},
-        },
-      ]}
-    >
-      <StyledFieldContainer>
-        <FieldInput
-          label={"Customer Name"}
-          placeholder={"Search by Customer Name"}
-          {...register("customerName")}
-        />
-        <FieldInput
-          label={"ID No"}
-          placeholder={"Search by ID No"}
-          {...register("idNo")}
-        />
-        <DateRangePicker label="Submission Date" />
-        <FieldAutocomplete
-          label="Status"
-          items={[
-            {
-              label: "Active",
-              value: "Active",
-            },
-          ]}
-          control={control}
-          placeholder={"Search by Status"}
-          {...register("status")}
-        />
-      </StyledFieldContainer>
-    </Card>
+    <form onSubmit={handleSubmit(submitSearchQuery)}>
+      <Card
+        header="Search"
+        buttons={[
+          {
+            label: "Clear",
+            onClick: () => {},
+            colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
+          },
+          {
+            label: "Search",
+            onClick: handleSubmit(submitSearchQuery),
+            isSubmit: true,
+          },
+        ]}
+      >
+        <StyledFieldContainer>
+          <FieldInput
+            label={"Customer Name"}
+            placeholder={"Search by Customer Name"}
+            {...register("customerName")}
+          />
+          <FieldInput
+            label={"ID No"}
+            placeholder={"Search by ID No"}
+            {...register("idNo")}
+          />
+          <DateRangePicker
+            label={"Submission Date"}
+            control={control}
+            {...register("submissionDate")}
+          />
+          <FieldAutocomplete
+            label="Status"
+            items={[
+              {
+                label: "Active",
+                value: "Active",
+              },
+            ]}
+            control={control}
+            placeholder={"Search by Status"}
+            {...register("status")}
+          />
+        </StyledFieldContainer>
+      </Card>
+    </form>
   );
 }
