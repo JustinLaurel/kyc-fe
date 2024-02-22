@@ -13,6 +13,7 @@ import MessageModal from "@/components/MessageModal";
 import { MODAL_TYPE, MessageManager } from "@/components/MessageModal/type";
 import Loader from "@/components/Loader";
 import { ListItem, SimpleStaff } from "@/config/types";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 export const INITIAL_ADD_FORM = {
   userId: "",
@@ -164,7 +165,7 @@ export default function AddView(props: AddViewProps) {
     >
       <Loader isLoading={isLoading} />
       <MessageModal {...messageModal} />
-      <div className={styles.addWrapper}>
+      <StyledFieldContainer>
         <FieldInput
           label={"User ID*"}
           onButtonClick={() => handleClickSearch()}
@@ -209,7 +210,7 @@ export default function AddView(props: AddViewProps) {
           control={control}
           {...register("approverGroup", VALIDATION_RULES.approverGroup)}
         />
-      </div>
+      </StyledFieldContainer>
     </Card>
   );
 }

@@ -9,6 +9,7 @@ import FieldDropdown from "@/components/FieldDropdown";
 import { UseFormReturn } from "react-hook-form";
 import { INITIAL_SEARCH_FORM } from "./ContentSection";
 import { ListItem } from "@/config/types";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 const VALIDATION_RULES = {
   name: {
@@ -50,7 +51,7 @@ export default function FilterView(props: FilterViewProps) {
           },
         ]}
       >
-        <main className={styles.fieldsSection}>
+        <StyledFieldContainer>
           <FieldInput
             label={"Name"}
             placeholder={"Search by name"}
@@ -87,7 +88,7 @@ export default function FilterView(props: FilterViewProps) {
             control={control}
             {...register("department")}
           />
-        </main>
+        </StyledFieldContainer>
       </Card>
     </form>
   );

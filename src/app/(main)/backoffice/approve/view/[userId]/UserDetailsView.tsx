@@ -8,6 +8,7 @@ import { ListItem } from "@/config/types";
 import { INITIAL_VIEW_FORM } from "./ContentSection";
 import { useRouter } from "next/navigation";
 import { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 interface UserDetailsProps {
   departmentList: ListItem[];
@@ -39,7 +40,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
         },
       ]}
     >
-      <div className={styles.detailsWrapper}>
+      <StyledFieldContainer>
         <FieldInput
           label={"User ID*"}
           onButtonClick={handleSearch}
@@ -78,7 +79,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
           control={control}
           {...register("approverGroup")}
         />
-      </div>
+      </StyledFieldContainer>
     </Card>
   );
 }

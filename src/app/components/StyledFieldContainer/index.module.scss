@@ -1,0 +1,15 @@
+@use "src/app/colors";
+
+$section-vertical-padding: 20px;
+$section-horizontal-padding: 30px;
+
+.styledFieldContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 16px;
+  column-gap: 40px;
+
+  &.singleColumn {
+    grid-template-columns: 1fr;
+  }
+}

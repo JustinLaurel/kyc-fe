@@ -6,6 +6,7 @@ import styles from "./page.module.scss";
 import { ListItem } from "@/config/types";
 import { UseFormReturn } from "react-hook-form";
 import { INITIAL_EDIT_FORM } from "./ContentSection";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 interface UserDetailsProps {
   departmentList: ListItem[];
@@ -23,7 +24,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
 
   return (
     <Card header={"User Details"} className={styles.userDetailsContainer}>
-      <div className={styles.detailsWrapper}>
+      <StyledFieldContainer>
         <FieldInput
           label={"User ID*"}
           onButtonClick={handleSearch}
@@ -62,7 +63,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
           control={control}
           {...register("approverGroup")}
         />
-      </div>
+      </StyledFieldContainer>
     </Card>
   );
 }

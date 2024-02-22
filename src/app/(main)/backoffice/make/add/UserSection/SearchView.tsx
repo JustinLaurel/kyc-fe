@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { getClient, postClient } from "@/services/clientApi";
 import { routes } from "@/config/routes";
 import { useForm } from "react-hook-form";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 export const INITIAL_SEARCH_FORM = {
   userId: "",
@@ -28,7 +29,7 @@ export default function SearchView(props: SearchViewProps) {
 
   return (
     <Card header={"User Details"} className={styles.searchView}>
-      <div className={styles.searchWrapper}>
+      <StyledFieldContainer singleColumn={true}>
         <FieldInput
           label={"User ID*"}
           placeholder={"Enter User ID here"}
@@ -36,7 +37,7 @@ export default function SearchView(props: SearchViewProps) {
           buttonLabel={"Search"}
           {...register("userId")}
         />
-      </div>
+      </StyledFieldContainer>
     </Card>
   );
 }

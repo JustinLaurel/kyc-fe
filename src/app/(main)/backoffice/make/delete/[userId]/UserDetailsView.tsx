@@ -6,6 +6,7 @@ import Card from "@/components/Card";
 import styles from "./page.module.scss";
 import { ListItem } from "@/config/types";
 import { INITIAL_VIEW_FORM } from "./ContentSection";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 
 interface UserDetailsProps {
   departmentList: ListItem[];
@@ -15,12 +16,18 @@ interface UserDetailsProps {
   handleSearch: () => void;
 }
 export default function UserDetailsView(props: UserDetailsProps) {
-  const { departmentList, roleList, approverGroupList, formHook, handleSearch } = props;
-  const {register, control} = formHook;
+  const {
+    departmentList,
+    roleList,
+    approverGroupList,
+    formHook,
+    handleSearch,
+  } = props;
+  const { register, control } = formHook;
 
   return (
     <Card header={"User Details"} className={styles.userDetailsContainer}>
-      <div className={styles.detailsWrapper}>
+      <StyledFieldContainer>
         <FieldInput
           label={"User ID*"}
           onButtonClick={handleSearch}
@@ -59,7 +66,7 @@ export default function UserDetailsView(props: UserDetailsProps) {
           control={control}
           {...register("approverGroup")}
         />
-      </div>
+      </StyledFieldContainer>
     </Card>
   );
 }
