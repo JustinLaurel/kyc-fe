@@ -10,6 +10,7 @@ import { UseFormReturn } from "react-hook-form";
 import { INITIAL_SEARCH_FORM } from "./ContentSection";
 import { ListItem } from "@/config/types";
 import StyledFieldContainer from "@/components/StyledFieldContainer";
+import DateRangePicker from "@/components/DateRangePicker";
 
 const VALIDATION_RULES = {
   name: {
@@ -76,14 +77,14 @@ export default function FilterView(props: FilterViewProps) {
                 value: "Active",
               },
             ]}
-            title={"Status"}
+            label={"Status"}
             placeholder={"Search by status"}
             control={control}
             {...register("status", VALIDATION_RULES.status)}
           />
           <FieldAutocomplete
             items={departmentList}
-            title={"Department"}
+            label={"Department"}
             placeholder={"Search by department/branch"}
             control={control}
             {...register("department")}

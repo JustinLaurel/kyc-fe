@@ -76,14 +76,14 @@ export default function FilterView(props: FilterViewProps) {
                 value: "Active",
               },
             ]}
-            title={"Status"}
+            label={"Status"}
             placeholder={"Search by status"}
             control={control}
             {...register("status", VALIDATION_RULES.status)}
           />
           <FieldAutocomplete
             items={departmentList}
-            title={"Department"}
+            label={"Department"}
             placeholder={"Search by department/branch"}
             control={control}
             {...register("department")}

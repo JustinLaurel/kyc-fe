@@ -15,7 +15,7 @@ import { ListItem } from "@/config/types";
 
 interface FieldAutocompleteProps {
   items: ListItem[];
-  title?: string;
+  label?: string;
   placeholder?: string;
   error?: FieldError;
   name: string;
@@ -27,7 +27,7 @@ const FieldAutocomplete = React.forwardRef<
 >(function FieldAutocompleteInternal(props, ref) {
   const {
     items,
-    title,
+    label,
     placeholder = "",
     error = null,
     control,
@@ -36,7 +36,7 @@ const FieldAutocomplete = React.forwardRef<
 
   return (
     <div className={styles.fieldContainer}>
-      {title && <div className={styles.title}>{title}</div>}
+      {label && <div className={styles.title}>{label}</div>}
       <Controller
         control={control}
         {...registerProps}
