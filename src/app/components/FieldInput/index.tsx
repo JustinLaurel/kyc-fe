@@ -12,7 +12,7 @@ const StylingClasses = {
   button: "button",
 } as const;
 interface FieldInputProps {
-  label: string;
+  label?: string;
   type?: HTMLInputTypeAttribute;
   onButtonClick?: () => void;
   buttonLabel?: string;
@@ -50,12 +50,16 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
           (classes.container ? ` ${classes.container}` : "")
         }
       >
-        <label
-          className={styles.label + (classes.label ? ` ${classes.label}` : "")}
-          htmlFor={label}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className={
+              styles.label + (classes.label ? ` ${classes.label}` : "")
+            }
+            htmlFor={label}
+          >
+            {label}
+          </label>
+        )}
         <div
           className={
             styles.inputWrapper +

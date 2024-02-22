@@ -47,7 +47,7 @@ export default function Sidebar(props: Props) {
               darkSrc="/assets/images/icon_dashboard_dark.png"
               label={"Dashboard"}
               onClick={() => {
-                router.push("/dashboard");
+                router.push("/frontoffice");
                 handleClose();
               }}
             />

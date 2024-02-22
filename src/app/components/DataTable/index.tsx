@@ -19,7 +19,7 @@ interface CellButton {
   isTextButton?: boolean;
 }
 interface Props {
-  items: Record<string, string | CellButton | CellButton[]>[];
+  items: Record<string, string | number | CellButton | CellButton[]>[];
   headers: (string | HeaderSortButton)[];
   colWidths?: number[];
 }

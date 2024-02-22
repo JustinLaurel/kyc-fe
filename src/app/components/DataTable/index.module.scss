@@ -61,7 +61,7 @@ $column-gap: 8px;
       }
       .userCell {
         display: flex;
-        color: darkslategray;
+        color: colors.$mediumdark-gray;
   
         padding-top: 5px;
         padding-bottom: 5px;
@@ -82,8 +82,8 @@ $column-gap: 8px;
     user-select: none;
     padding-top: 3px;
     padding-bottom: 3px;
-    padding: 8px 0px;
-    width: 70px;
+    padding: 8px 16px;
+    width: auto;
     margin-right: 8px;
   }  
 }

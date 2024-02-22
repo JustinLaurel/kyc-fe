@@ -1,0 +1,54 @@
+.overviewCards {
+  display: flex;
+  column-gap: 2vw;
+
+  .overviewChart {
+    flex-grow: 1;
+    min-width: 320px;
+    max-width: 420px;
+    padding-left: 0;
+    .contentSection {
+      padding-left: 36px;
+      padding-right: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 36px;
+
+      .legendSection {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+        .totalApplications {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          text-align: left;
+          .total {
+            font-weight: 400;
+          }
+        }  
+      }
+    }
+  }
+
+  .applicationsListing {
+    flex-grow: 2.5;
+
+    .headerContainer {
+      display: flex;
+      align-items: center;
+      column-gap: 16px;
+  
+      .applicationsCount {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .createNewButton {
+        width: 124px;
+        padding: 11.5px;
+      }
+    }
+  }
+}

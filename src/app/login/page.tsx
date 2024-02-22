@@ -10,8 +10,6 @@ import MessageModal from "@/components/MessageModal";
 
 import { useForm } from "react-hook-form";
 import FieldInput from "@/components/FieldInput";
-import { CircularProgress } from "@mui/material";
-import Loader from "@/components/Loader";
 import { UnauthorizedException } from "@/config/errors";
 import { MessageManager } from "@/components/MessageModal/type";
 
@@ -43,7 +41,7 @@ export default function LoginPage() {
       });
 
       if (response.authToken) {
-        router.push("/dashboard");
+        router.push("/backoffice/make");
       }
     } catch (error: any) {
       const message =
@@ -104,9 +102,7 @@ export default function LoginPage() {
               >
                 Clear
               </ActionButton>
-              <ActionButton isSubmit={true}>
-                Log In
-              </ActionButton>
+              <ActionButton isSubmit={true}>Log In</ActionButton>
             </div>
             <div className={styles.error}>
               {errors.root?.serverError?.message}

@@ -35,25 +35,36 @@
   }
 
   .headerSection {
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
     padding-left: $section-horizontal-padding;
     padding-right: $section-horizontal-padding;
     padding-top: $section-vertical-padding;
     padding-bottom: $section-vertical-padding;
 
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    .header {
-      font-size: 20px;
-      line-height: 24px;
-      color: rgba(35, 31, 32, 1);
+    .headerWrapper {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+      font-weight: 700;
+  
+      .header {
+        font-size: 20px;
+        line-height: 24px;
+        color: rgba(35, 31, 32, 1);
+      }
+      .subheader {
+        font-size: 16px;
+        line-height: 19px;
+        color: colors.$medium-gray;
+      }
     }
-    .subheader {
-      font-size: 16px;
-      line-height: 19px;
-      color: colors.$medium-gray;
+
+    .headerButton {
+      padding: 11.5px 24px;
+      width: max-content;
     }
   }
 

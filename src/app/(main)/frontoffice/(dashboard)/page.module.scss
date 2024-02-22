@@ -1,0 +1,8 @@
+@use "src/app/colors";
+
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+

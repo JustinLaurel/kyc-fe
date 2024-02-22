@@ -1,20 +1,29 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 
+interface ButtonSpecs {
+  label: string;
+  onClick?: () => void;
+  colorScheme?: BUTTON_COLOR_SCHEMES;
+  isSubmit?: boolean;
+}
 interface CardProps {
   children: React.ReactNode;
   subchildren?: React.ReactNode[];
-  buttons?: {
-    label: string;
-    onClick?: () => void;
-    colorScheme?: BUTTON_COLOR_SCHEMES; // Defaults red. See ActionButton
-    isSubmit?: boolean;
-  }[];
+  buttons?: ButtonSpecs[];
   header?: React.ReactNode | string;
+  headerButton?: ButtonSpecs;
   subheader?: React.ReactNode | string;
   className?: string;
   hasSeparator?: boolean;
+  classes?: {
+    container?: string;
+    headerSection?: string;
+    contentSection?: string;
+    actionsSection?: string;
+    headerButton?: string;
+  };
 }
 export default function Card(props: CardProps) {
   const {
@@ -22,18 +31,46 @@ export default function Card(props: CardProps) {
     subchildren,
     buttons,
     header = null,
+    headerButton,
     subheader = null,
     className,
     hasSeparator = true,
+    classes = {},
   } = props;
 
   return (
-    <main className={styles.card + (className ? ` ${className}` : "")}>
+    <main
+      className={
+        styles.card +
+        (className ? ` ${className}` : "") +
+        (classes.container ? ` ${classes.container}` : "")
+      }
+    >
       {header && (
         <>
-          <section className={styles.headerSection}>
-            <div className={styles.header}>{header}</div>
-            {subheader && <div className={styles.subheader}>{subheader}</div>}
+          <section
+            className={
+              styles.headerSection +
+              (classes.headerSection ? ` ${classes.headerSection}` : "")
+            }
+          >
+            <div className={styles.headerWrapper}>
+              <div className={styles.header}>{header}</div>
+              {subheader && <div className={styles.subheader}>{subheader}</div>}
+            </div>
+            {headerButton && (
+              <ActionButton
+                colorScheme={headerButton.colorScheme}
+                className={
+                  styles.headerButton +
+                  (classes.headerButton ? ` ${classes.headerButton}` : "")
+                }
+                onClick={headerButton.onClick}
+                isSubmit={headerButton.isSubmit}
+              >
+                {headerButton.label}
+              </ActionButton>
+            )}
           </section>
           {hasSeparator && <Separator />}
         </>
@@ -41,7 +78,14 @@ export default function Card(props: CardProps) {
 
       {children && (
         <>
-          <section className={styles.contentSection}>{children}</section>
+          <section
+            className={
+              styles.contentSection +
+              (classes.contentSection ? ` ${classes.contentSection}` : "")
+            }
+          >
+            {children}
+          </section>
           {subchildren && hasSeparator && <Separator />}
         </>
       )}
@@ -49,7 +93,14 @@ export default function Card(props: CardProps) {
         subchildren.length > 0 &&
         subchildren.map((subchild, index) => (
           <React.Fragment key={index}>
-            <section className={styles.contentSection}>{subchild}</section>
+            <section
+              className={
+                styles.contentSection +
+                (classes.contentSection ? ` ${classes.contentSection}` : "")
+              }
+            >
+              {subchild}
+            </section>
             {index < subchildren.length - 1 && <Separator />}
           </React.Fragment>
         ))}
@@ -57,7 +108,12 @@ export default function Card(props: CardProps) {
       {buttons && buttons.length && (
         <>
           {hasSeparator && <Separator />}
-          <section className={styles.actionsSection}>
+          <section
+            className={
+              styles.actionsSection +
+              (classes.actionsSection ? ` ${classes.actionsSection}` : "")
+            }
+          >
             {buttons.map((button, index) => (
               <ActionButton
                 key={index}
