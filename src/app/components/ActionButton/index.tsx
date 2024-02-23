@@ -6,6 +6,7 @@ export enum BUTTON_COLOR_SCHEMES {
   WHITE = "whiteBtn",
   RED = "redBtn",
   GREY = "greyBtn",
+  LIGHT_GREY = "lightGreyBtn",
 }
 
 interface Props {

@@ -9,7 +9,7 @@ import {
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { forwardRef } from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
+import { Control, Controller, FieldError, UseFormRegisterReturn } from "react-hook-form";
 import React from "react";
 import { ListItem } from "@/config/types";
 
@@ -18,17 +18,16 @@ interface FieldAutocompleteProps {
   label?: string;
   placeholder?: string;
   error?: FieldError;
-  name: string;
   control: Control<any, any>;
 }
 const FieldAutocomplete = React.forwardRef<
   HTMLSelectElement,
-  FieldAutocompleteProps
+  FieldAutocompleteProps & UseFormRegisterReturn
 >(function FieldAutocompleteInternal(props, ref) {
   const {
     items,
     label,
-    placeholder = "",
+    placeholder = "Please Select",
     error = null,
     control,
     ...registerProps

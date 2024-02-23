@@ -15,67 +15,69 @@ import {
   createTheme,
 } from "@mui/material";
 import dayjs from "dayjs";
-import { Control, Controller, FieldError } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldError,
+  UseFormRegisterReturn,
+} from "react-hook-form";
 import React from "react";
 
 interface DatePickerProps {
   label?: string;
   error?: FieldError;
-  name: string; // From react-hook-form's "{...register()}" call
   control: Control<any, any>;
 }
-const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
-  function DatePickerInternal(props: DatePickerProps, ref) {
-    const { label, error, control, ...registerProps } = props;
-    return (
-      <main className={styles.datePicker}>
-        {label && (
-          <label className={styles.label} htmlFor={label}>
-            {label}
-          </label>
-        )}
-        <ThemeProvider theme={pickerTheme}>
-          <LocalizationProvider
-            dateAdapter={AdapterDayjs}
-            adapterLocale="en-gb"
-          >
-            <Controller
-              control={control}
-              {...registerProps}
-              render={({ field: { onChange, value, ref } }) => {
-                return (
-                  <MuiDatePicker
-                    minDate={dayjs().subtract(20, "year")}
-                    maxDate={dayjs().add(20, "year")}
-                    reduceAnimations
-                    className={styles.picker}
-                    slotProps={{
-                      textField: {
-                        InputProps: {
-                          spellCheck: false,
-                          autoCorrect: "off",
-                        },
+const DatePicker = React.forwardRef<
+  HTMLDivElement,
+  DatePickerProps & UseFormRegisterReturn
+>(function DatePickerInternal(props, ref) {
+  const { label, error, control, ...registerProps } = props;
+  return (
+    <main className={styles.datePicker}>
+      {label && (
+        <label className={styles.label} htmlFor={label}>
+          {label}
+        </label>
+      )}
+      <ThemeProvider theme={pickerTheme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+          <Controller
+            control={control}
+            name={registerProps.name}
+            render={({ field: { onChange, ref } }) => {
+              return (
+                <MuiDatePicker
+                  minDate={dayjs().subtract(20, "year")}
+                  maxDate={dayjs().add(20, "year")}
+                  reduceAnimations
+                  className={styles.picker}
+                  slotProps={{
+                    textField: {
+                      InputProps: {
+                        spellCheck: false,
+                        autoCorrect: "off",
                       },
-                    }}
-                    onChange={(newValue) => {
-                      if (newValue && newValue.isValid()) {
-                        onChange(newValue.toDate());
-                      }
-                    }}
-                    ref={ref}
-                    slots={{
-                      openPickerButton: CalendarButton,
-                    }}
-                  />
-                );
-              }}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
-      </main>
-    );
-  }
-);
+                    },
+                  }}
+                  onChange={(newValue) => {
+                    onChange(
+                      newValue && newValue.isValid() ? newValue.toDate() : null
+                    );
+                  }}
+                  ref={ref}
+                  slots={{
+                    openPickerButton: CalendarButton,
+                  }}
+                />
+              );
+            }}
+          />
+        </LocalizationProvider>
+      </ThemeProvider>
+    </main>
+  );
+});
 
 function CalendarButton(props: IconButtonProps) {
   // Prevent Calendar icon from being tab-selectable

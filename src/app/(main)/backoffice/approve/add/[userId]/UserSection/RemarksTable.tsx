@@ -51,6 +51,7 @@ export default function RemarksTable(props: RemarksTableProps) {
           label={"Remarks"}
           {...register("remark")}
           onEnterPress={() => console.log(formHook.getValues())}
+          characterCount
         />
     </Card>
   );

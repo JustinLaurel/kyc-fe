@@ -2,7 +2,6 @@
 import Loader from "@/components/Loader";
 import MessageModal from "@/components/MessageModal";
 import UserDetailsView from "./UserDetailsView";
-import RemarksTable from "./RemarksTable";
 import { ListItem, SimpleStaff } from "@/config/types";
 import styles from "./page.module.scss";
 import { useState } from "react";

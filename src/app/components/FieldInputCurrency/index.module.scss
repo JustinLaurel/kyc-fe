@@ -1,0 +1,22 @@
+@use "src/app/colors";
+
+.fieldInputCurrencyContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  .label {
+    color: colors.$dark-gray;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+  }
+  .inputWrapper {
+    border-radius: 4px;
+    background-color: colors.$light-gray;
+    .input {
+      height: 40px;
+      padding: 0 16px;
+    }
+  }
+}

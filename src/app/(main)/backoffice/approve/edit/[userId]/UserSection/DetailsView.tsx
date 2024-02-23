@@ -88,9 +88,8 @@ export default function AddView(props: AddViewProps) {
         <FieldDropdown
           items={departmentList}
           label={"Department/Branch*"}
-          placeholder={"Please Select"}
           error={errors.department}
-          name={"department"}
+          {...register("department")}
           control={control}
         />
         <FieldInput
@@ -102,7 +101,6 @@ export default function AddView(props: AddViewProps) {
         <FieldDropdown
           items={roleList}
           label={"User Role*"}
-          placeholder={"Please Select"}
           error={errors.role}
           control={control}
           {...register("role", VALIDATION_RULES.role)}
@@ -116,7 +114,6 @@ export default function AddView(props: AddViewProps) {
         <FieldDropdown
           label={"Approver Group*"}
           items={approverGroupList}
-          placeholder={"Please Select"}
           error={errors.approverGroup}
           control={control}
           {...register("approverGroup", VALIDATION_RULES.approverGroup)}

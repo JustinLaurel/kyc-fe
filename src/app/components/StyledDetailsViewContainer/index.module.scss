@@ -1,0 +1,26 @@
+@use "src/app/colors";
+
+.simpleDetailsViewContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 16px;
+  column-gap: 10px;
+  overflow-wrap: anywhere;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+
+  .label {
+    color: colors.$dark-gray;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14.4px;
+  }
+  .value {
+    color: colors.$mediumdark-gray;
+    line-height: 19.2px;
+  }
+}

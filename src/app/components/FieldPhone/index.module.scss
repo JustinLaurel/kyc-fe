@@ -1,0 +1,65 @@
+@use 'src/app/colors';
+
+.fieldPhoneContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  flex: 1;
+
+  .label {
+    color: colors.$dark-gray;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+  }
+
+  .fieldSection {
+    display: flex;
+    column-gap: 8px;
+
+    .countryCodeDropdown {
+      flex: 1;
+      padding: 0;
+      background-color: colors.$light-gray;
+      border: none;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 5rem;
+  
+      &:focus-within {
+        outline: -webkit-focus-ring-color auto 1px;
+      }
+  
+      .select {
+        display: flex;
+        align-items: center;
+        height: 100%;
+  
+        box-sizing: border-box;
+        border-radius: inherit;
+        background-color: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .icon {
+        box-sizing: content-box;
+        padding-right: 8px;
+        padding-left: 8px;
+      }
+      .outlined {
+        outline: none;
+      }
+    
+    }
+    .phoneInput {
+      flex: 4.88;
+    }
+  }
+}

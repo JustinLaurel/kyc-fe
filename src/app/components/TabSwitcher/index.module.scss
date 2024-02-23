@@ -1,0 +1,20 @@
+@use "src/app/colors";
+
+.tabSwitcherContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.tabsSection {
+  display: flex;
+  column-gap: 16px;
+
+  .inactiveButton {
+    color: colors.$medium-gray;
+  }
+  .tabButton {
+    width: auto;
+    padding: 11.5px 24px;
+  }
+}

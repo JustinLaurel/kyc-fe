@@ -6,7 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/backoffice/make");
+    router.push("/frontoffice");
 
     // router is not referentially stable. To put router in dependencies array without causing a trillion push calls, gymnastics will need to be performed
     // Dan Abramov is an idiot

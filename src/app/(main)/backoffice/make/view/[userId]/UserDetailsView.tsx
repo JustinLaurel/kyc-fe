@@ -32,7 +32,6 @@ export default function UserDetailsView(props: UserDetailsProps) {
         <FieldDropdown
           items={departmentList}
           label={"Department/Branch*"}
-          placeholder={"Please Select"}
           control={control}
           {...register("department")}
         />
@@ -44,7 +43,6 @@ export default function UserDetailsView(props: UserDetailsProps) {
         <FieldDropdown
           items={roleList}
           label={"User Role*"}
-          placeholder={"Please Select"}
           control={control}
           {...register("role")}
         />
@@ -56,7 +54,6 @@ export default function UserDetailsView(props: UserDetailsProps) {
         <FieldDropdown
           label={"Approver Group*"}
           items={approverGroupList}
-          placeholder={"Please Select"}
           control={control}
           {...register("approverGroup")}
         />

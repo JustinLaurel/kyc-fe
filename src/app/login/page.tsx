@@ -41,7 +41,7 @@ export default function LoginPage() {
       });
 
       if (response.authToken) {
-        router.push("/backoffice/make");
+        router.push("/frontoffice");
       }
     } catch (error: any) {
       const message =

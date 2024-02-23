@@ -24,4 +24,8 @@
     background: linear-gradient(180deg, #97989A 0%, #5F6062 100%);
     color: white;
   }
+  &.lightGreyBtn {
+    background: linear-gradient(180deg, #ECEDF0 0%, #BFBFC1 100%);
+    color: colors.$medium-gray;
+  }
 }
