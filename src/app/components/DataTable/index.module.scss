@@ -56,15 +56,18 @@ $column-gap: 8px;
       font-weight: 400;
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid colors.$separator-gray;
-      &.even {
-        background-color: colors.$verylight-gray;
-      }
       .userCell {
         display: flex;
         color: colors.$mediumdark-gray;
   
         padding-top: 5px;
         padding-bottom: 5px;
+      }
+      &.greyBackground {
+        background-color: colors.$verylight-gray;
+      }
+      &.pinkBackground {
+        background-color: colors.$highlight-pink;
       }
     }
   }
@@ -85,7 +88,10 @@ $column-gap: 8px;
     padding: 8px 16px;
     width: auto;
     margin-right: 8px;
-  }  
+  }
+  .numberingCell {
+    width: 2rem;
+  }
 }
 
 .pagination {

@@ -25,7 +25,6 @@ export default function ApplicationsListing() {
       <DataTable
         items={DATATABLE_FAKE_DATA}
         headers={[
-          "No",
           {
             label: "Application ID",
             onClick: () => console.log("Application ID"),
@@ -51,7 +50,7 @@ export default function ApplicationsListing() {
             onClick: () => console.log("Status"),
           },
         ]}
-        colWidths={[24, 120, 140, 68, 112, 116, 120, 140]}
+        colWidths={[120, 140, 68, 112, 116, 120, 140]}
       />
     </Card>
   );
@@ -59,7 +58,6 @@ export default function ApplicationsListing() {
 
 const DATATABLE_FAKE_DATA = [
   {
-    no: "1",
     applicationId: "UKYC2023083100001",
     customerName: {
       label: "Quantum Solutions Sdn Bhd",
@@ -72,7 +70,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Pending RM Approver",
   },
   {
-    no: "2",
     applicationId: "UKYC2023082300024",
     customerName: {
       label: "Crestline Technologies Sdn Bhd",
@@ -85,7 +82,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Pending for Review in Net Reveal",
   },
   {
-    no: "3",
     applicationId: "UKYC2023082300386",
     customerName: {
       label: "Nexus Dynamics Sdn Bhd",
@@ -98,7 +94,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Reopened",
   },
   {
-    no: "4",
     applicationId: "UKYC2023082303573",
     customerName: {
       label: "Horizon Ventures Sdn Bhd",
@@ -111,7 +106,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Approved by Net Reveal",
   },
   {
-    no: "5",
     applicationId: "UKYC2023082335763",
     customerName: {
       label: "Stellar Innovations Sdn Bhd",
@@ -124,7 +118,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Draft",
   },
   {
-    no: "6",
     applicationId: "UKYC2023082300024",
     customerName: {
       label: "Pinnacle Enterprises Sdn Bhd",
@@ -137,7 +130,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Pending for Review in Net Reveal",
   },
   {
-    no: "7",
     applicationId: "UKYC2023082300930",
     customerName: {
       label: "Synergy Systems Sdn Bhd",
@@ -150,7 +142,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Pending for Review in Net Reveal",
   },
   {
-    no: "8",
     applicationId: "UKYC2023082303579",
     customerName: {
       label: "Velocity Holdings Sdn Bhd",
@@ -163,7 +154,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Pending for Review in Net Reveal",
   },
   {
-    no: "9",
     applicationId: "UKYC2023082300346",
     customerName: {
       label: "Eclipse Innovate Sdn Bhd",
@@ -176,7 +166,6 @@ const DATATABLE_FAKE_DATA = [
     status: "Rejected by Net Reveal",
   },
   {
-    no: "10",
     applicationId: "UKYC2023082303649",
     customerName: {
       label: "Zenith Group Sdn Bhd",

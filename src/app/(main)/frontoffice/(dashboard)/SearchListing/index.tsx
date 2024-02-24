@@ -17,7 +17,6 @@ export default function SearchListing() {
       <DataTable
         items={FAKE_DATA}
         headers={[
-          "No",
           { label: "ID Type", onClick: () => {} },
           { label: "ID No", onClick: () => {} },
           { label: "Customer Type", onClick: () => {} },
@@ -27,7 +26,7 @@ export default function SearchListing() {
           { label: "Error Messages", onClick: () => {} },
           "Action"
         ]}
-        colWidths={[24, 72, 202, 120, 136, 136, 80, 104, 230]}
+        colWidths={[72, 202, 120, 136, 136, 80, 104, 230]}
       />
     </Card>
   );
@@ -35,7 +34,6 @@ export default function SearchListing() {
 
 const FAKE_DATA = [
   {
-    no: 1,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -46,7 +44,6 @@ const FAKE_DATA = [
     actions: "",
   },
   {
-    no: 2,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -57,7 +54,6 @@ const FAKE_DATA = [
     actions: "",
   },
   {
-    no: 3,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -77,7 +73,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 4,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -93,7 +88,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 5,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -109,7 +103,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 6,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -125,7 +118,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 7,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -141,7 +133,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 8,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -161,7 +152,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 9,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",
@@ -181,7 +171,6 @@ const FAKE_DATA = [
     ],
   },
   {
-    no: 10,
     idType: "BRN",
     idNo: "202005123461",
     customerType: "C-Corporate",

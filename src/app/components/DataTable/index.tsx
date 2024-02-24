@@ -1,44 +1,43 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import TextButton from "../TextButton";
 import ActionButton from "../ActionButton";
 import { Button } from "@mui/material";
 import { SORT_ORDER } from "@/config/types";
+import { CellButton, HeaderSortButton, RowConfig, TableConfig } from "./type";
+import { CellProps } from "./type";
 
-interface HeaderSortButton {
-  // For attaching sort onClick event to header cell
-  label: string;
-  onClick: (sortOrder: SORT_ORDER) => void;
-}
-interface CellButton {
-  // For attaching onClick event to cell
-  label: string;
-  onClick: () => void;
-  isTextButton?: boolean;
-}
 interface Props {
   items: Record<string, string | number | CellButton | CellButton[]>[];
   headers: (string | HeaderSortButton)[];
   colWidths?: number[];
+  disableNumbering?: boolean;
+  rowConfig?: RowConfig[];
+  config?: TableConfig;
 }
 /**
  * Standard table.
- *
- * @param {Record<string, string | CellButton | CellButton[]>[]} props.items - Items displayed in table body. items.length === headers.length MUST be true
- * @param {string[]} props.headers - Headers. headers.length === items.length MUST be true
- * @param {number[]} props.colWidths - Width fraction occupied by each column. colWidths.length === headers.length === items.length MUST be true
+ * items.length === headers.length === colWidths.length MUST be true
+ * @param {Record<string, string | CellButton | CellButton[]>[]} props.items - Items displayed in table body
+ * @param {string[]} props.headers - Headers. Use {HeaderSortButton} if need sorting
+ * @param {number[]} props.colWidths - Width fraction occupied by each column
+ * @param {boolean} props.disableNumbering - Disable automatic numbering
+ * @param {boolean} props.rowConfig - Special styling/logic for specified row index
  */
 export default function DataTable(props: Props) {
-  const { items, headers, colWidths = null } = props;
-  const [sortOrders, setSortOrders] = useState<
-    Record<string, SORT_ORDER>
-  >({});
+  const {
+    items,
+    headers,
+    colWidths = null,
+    disableNumbering = false,
+    rowConfig = [],
+    config = {},
+  } = props;
+  const [sortOrders, setSortOrders] = useState<Record<string, SORT_ORDER>>({});
 
-  function sortOrderToggler(
-    currentOrder: SORT_ORDER
-  ) {
+  function sortOrderToggler(currentOrder: SORT_ORDER) {
     switch (currentOrder) {
       case SORT_ORDER.DEFAULT:
         return SORT_ORDER.DESC;
@@ -59,15 +58,26 @@ export default function DataTable(props: Props) {
     } else {
       setSortOrders({
         [header.label]: newSortOrder,
-      })
+      });
     }
     header.onClick(newSortOrder);
   }
+
+  const rowConfigMap = useMemo(() => {
+    const config = new Map<number, RowConfig>();
+    rowConfig.forEach((row) => {
+      config.set(row.rowIndex, { ...row });
+    });
+    return config;
+  }, [rowConfig]);
 
   return (
     <main className={styles.table}>
       <section className={styles.content}>
         <section className={styles.headerSection}>
+          {!disableNumbering && (
+            <HeaderCell className={styles.numberingCell}>No</HeaderCell>
+          )}
           {headers.map((header, index) => {
             const flexStyle = {
               flexGrow: colWidths ? colWidths[index] : 1,
@@ -102,13 +112,23 @@ export default function DataTable(props: Props) {
         </section>
         <section className={styles.usersSection}>
           {items.map((item, rowIndex) => {
+            const shouldHighlightRow = Boolean(
+              rowConfigMap.get(rowIndex)?.isHighlighted
+            );
             return (
               <div
                 key={rowIndex}
                 className={
-                  styles.row + (rowIndex % 2 === 0 ? " " + styles.even : "")
+                  styles.row +
+                  (!config.uniformRowColor && rowIndex % 2 === 0
+                    ? ` ${styles.greyBackground}`
+                    : "") +
+                  (shouldHighlightRow ? ` ${styles.pinkBackground}` : "")
                 }
               >
+                {!disableNumbering && (
+                  <Cell className={styles.numberingCell}>{rowIndex + 1}</Cell>
+                )}
                 {Object.keys(item).map((key, cellIndex) => {
                   const flexStyle = {
                     flexGrow: colWidths ? colWidths[cellIndex] : 1,
@@ -194,15 +214,15 @@ export default function DataTable(props: Props) {
   );
 }
 
-interface CellProps {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-}
-function HeaderCell({ children, style, onClick }: CellProps) {
+function HeaderCell({ children, style, onClick, className = "" }: CellProps) {
   return (
     <div
-      className={styles.cell + " " + styles.headerCell}
+      className={
+        styles.cell +
+        " " +
+        styles.headerCell +
+        (className ? ` ${className}` : "")
+      }
       style={style ? style : {}}
       onClick={onClick ? () => onClick() : () => {}}
     >
@@ -210,10 +230,12 @@ function HeaderCell({ children, style, onClick }: CellProps) {
     </div>
   );
 }
-function Cell({ children, style }: CellProps) {
+function Cell({ children, style, className = "" }: CellProps) {
   return (
     <div
-      className={styles.cell + " " + styles.userCell}
+      className={
+        styles.cell + " " + styles.userCell + (className ? ` ${className}` : "")
+      }
       style={style ? style : {}}
     >
       {children}

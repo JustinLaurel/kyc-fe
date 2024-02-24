@@ -7,7 +7,6 @@ export default function SearchListing() {
 
   const FAKE_DATA = [
     {
-      no: "1",
       idType: "BRN",
       idNo: {
         label: "202005123461",
@@ -21,7 +20,6 @@ export default function SearchListing() {
       action: "",
     },
     {
-      no: "2",
       idType: "BRN",
       idNo: {
         label: "202005123461",
@@ -40,7 +38,6 @@ export default function SearchListing() {
       ],
     },
     {
-      no: "3",
       idType: "BRN",
       idNo: {
         label: "202005123461",
@@ -71,7 +68,6 @@ export default function SearchListing() {
       <DataTable
         items={FAKE_DATA}
         headers={[
-          "No",
           {
             label: "ID Type",
             onClick: () => {},
@@ -98,7 +94,7 @@ export default function SearchListing() {
           },
           "Action",
         ]}
-        colWidths={[24, 80, 184, 144, 136, 184, 184, 184]}
+        colWidths={[80, 184, 144, 136, 184, 184, 184]}
       />
     </Card>
   );

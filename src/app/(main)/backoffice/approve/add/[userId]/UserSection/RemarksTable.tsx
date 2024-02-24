@@ -1,5 +1,4 @@
 import Card from "@/components/Card";
-import DataTable from "@/components/DataTable";
 import { UseFormReturn } from "react-hook-form";
 import { INITIAL_ADD_FORM } from ".";
 import FieldTextArea from "@/components/FieldTextArea";
@@ -13,14 +12,6 @@ export default function RemarksTable(props: RemarksTableProps) {
   const { formHook } = props;
   const { register, control } = formHook;
   const router = useRouter();
-  const dataItems = [
-    {
-      no: "1",
-      remark: "Wrong Department/Branch",
-      approverName: "Dominic Lau Yee Feng",
-      timestamp: "22/08/2023 10:00:00 AM",
-    },
-  ];
 
   return (
     <Card

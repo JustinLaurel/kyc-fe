@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { SORT_ORDER } from "@/config/types";
 import { SortableColumn, UserData } from "../type";
 
-const COL_WIDTHS = [0.3, 3, 1.5, 2, 2, 2, 1, 1.5];
+const COL_WIDTHS = [3, 1.5, 2, 2, 2, 1, 1.5];
 
 interface UsersResultTable {
   users: UserData[] | null;
@@ -19,7 +19,6 @@ export default function UsersResultTable(props: UsersResultTable) {
   const router = useRouter();
 
   const HEADERS = [
-    "No",
     {
       label: "Name",
       onClick: (order: SORT_ORDER) => handleHeaderClick("name", order),
@@ -77,7 +76,6 @@ export default function UsersResultTable(props: UsersResultTable) {
         });
       }
       return {
-        no: item.no,
         name: {
           label: item.name,
           onClick: () => handleViewUser(item.userId),

@@ -15,7 +15,6 @@ export default function RemarksTable(props: RemarksTableProps) {
   const router = useRouter();
   const dataItems = [
     {
-      no: "1",
       remark: "Wrong Department/Branch",
       approverName: "Dominic Lau Yee Feng",
       timestamp: "22/08/2023 10:00:00 AM",
@@ -59,13 +58,12 @@ export default function RemarksTable(props: RemarksTableProps) {
       {dataItems && dataItems.length > 0 && (
         <DataTable
           headers={[
-            "No",
             { label: "Remark", onClick: () => {} },
             { label: "RM Approver Name", onClick: () => {} },
             { label: "Timestamp", onClick: () => {} },
           ]}
           items={dataItems}
-          colWidths={[1, 28, 10, 10]}
+          colWidths={[28, 10, 10]}
         />
       )}
     </Card>

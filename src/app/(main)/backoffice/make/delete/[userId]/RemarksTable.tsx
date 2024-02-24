@@ -35,26 +35,22 @@ export default function RemarksTable(props: RemarksTableProps) {
       <DataTable
         items={[
           {
-            no: "1",
             remarks: "Remarks from row 1",
             from: "Chiew Weng Keat",
             timestamp: dayjs().subtract(2, "day").format("DD/MM/YYYY"),
           },
           {
-            no: "2",
             remarks: "Second remarks row",
             from: "Teo Tan Siang",
             timestamp: dayjs().subtract(5, "day").format("DD/MM/YYYY"),
           },
           {
-            no: "3",
             remarks: "Third remarks row",
             from: "Fu Suan Huang",
             timestamp: dayjs().subtract(6, "day").format("DD/MM/YYYY"),
           },
         ]}
         headers={[
-          "No",
           {
             label: "Remarks",
             onClick: () => {},
@@ -68,7 +64,7 @@ export default function RemarksTable(props: RemarksTableProps) {
             onClick: () => {},
           },
         ]}
-        colWidths={[1, 28, 10, 10]}
+        colWidths={[28, 10, 10]}
       />
     </Card>
   );
