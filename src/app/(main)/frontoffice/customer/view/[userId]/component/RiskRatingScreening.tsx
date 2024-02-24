@@ -3,7 +3,10 @@ import DataTable from "@/components/DataTable";
 
 export default function RiskRatingScreening() {
   return (
-    <Card>
+    <Card
+      header={"Risk Rating & Screening"}
+      subheader={"List of Risk Rating & Screening"}
+    >
       <DataTable
         items={FAKE_DATA}
         headers={[

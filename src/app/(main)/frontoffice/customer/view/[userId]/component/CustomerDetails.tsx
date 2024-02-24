@@ -1,7 +1,7 @@
 import Card from "@/components/Card";
 import styles from "./customerDetails.module.scss";
 import StyledFieldContainer from "@/components/StyledFieldContainer";
-import { UseFormReturn, useWatch } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import FieldDropdown from "@/components/FieldDropdown";
 import { INITIAL_CUSTOMER_DETAILS_FORM } from "../ContentSection";
 import FieldInput from "@/components/FieldInput";
@@ -10,6 +10,7 @@ import FieldPhone from "@/components/FieldPhone";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldInputCurrency from "@/components/FieldInputCurrency";
 import { useEffect } from "react";
+import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 interface CustomerDetailsProps {
   formHook: UseFormReturn<typeof INITIAL_CUSTOMER_DETAILS_FORM, any, undefined>;
@@ -25,7 +26,7 @@ export default function CustomerDetails(props: CustomerDetailsProps) {
 
   return (
     <main className={styles.customerDetailsContainer}>
-      <Card header={"Customer Identity"}>
+      <Card header={"Customer Identity"} className={styles.customerIdentityCard}>
         <StyledFieldContainer>
           <FieldInput
             label={"Customer Name*"}

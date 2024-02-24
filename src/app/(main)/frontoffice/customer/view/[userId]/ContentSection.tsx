@@ -1,15 +1,13 @@
 "use client";
-import { ListItem, SimpleStaff } from "@/config/types";
 import styles from "./page.module.scss";
-import { useState } from "react";
-import { MessageManager } from "@/components/MessageModal/type";
 import { useForm } from "react-hook-form";
 import CustomerSummaryCard from "./CustomerSummaryCard";
 import TabSwitcher from "@/components/TabSwitcher";
-import CustomerDetails from "./tabComponents/CustomerDetails";
-import Ubo from "./tabComponents/Ubo";
-import OtherRelatedParties from "./tabComponents/OtherRelatedParties";
-import RiskRatingScreening from "./tabComponents/RiskRatingScreening";
+import CustomerDetails from "./component/CustomerDetails";
+import Ubo from "./component/Ubo";
+import OtherRelatedParties from "./component/OtherRelatedParties";
+import RiskRatingScreening from "./component/RiskRatingScreening";
+import ButtonsView from "./component/ButtonsView";
 
 interface ContentSectionProps {}
 export default function ContentSection(props: ContentSectionProps) {
@@ -41,6 +39,7 @@ export default function ContentSection(props: ContentSectionProps) {
           },
         ]}
       />
+      <ButtonsView />
     </section>
   );
 }
