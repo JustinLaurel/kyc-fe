@@ -25,3 +25,5 @@ export interface ButtonSpecs {
   colorScheme?: BUTTON_COLOR_SCHEMES;
   isSubmit?: boolean;
 }
+
+export interface NoProps {}

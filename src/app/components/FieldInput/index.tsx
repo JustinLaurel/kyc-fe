@@ -1,11 +1,7 @@
 import { PartialRecord } from "@/util";
 import styles from "./index.module.scss";
 import ActionButton from "@/components/ActionButton";
-import {
-  ControllerRenderProps,
-  FieldError,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import React, { HTMLInputTypeAttribute } from "react";
 
 const StylingClasses = {
@@ -15,7 +11,7 @@ const StylingClasses = {
   input: "input",
   button: "button",
 } as const;
-interface FieldInputProps {
+interface FieldInputProps extends UseFormRegisterReturn {
   label?: string;
   type?: HTMLInputTypeAttribute;
   onButtonClick?: () => void;
@@ -23,80 +19,76 @@ interface FieldInputProps {
   classes?: PartialRecord<keyof typeof StylingClasses, string>;
   error?: FieldError;
   placeholder?: string;
-  ref?: React.Ref<HTMLInputElement>;
 }
 
-const FieldInput = React.forwardRef<
-  HTMLInputElement,
-  FieldInputProps & UseFormRegisterReturn
->(function FieldInputInternal(
-  props: FieldInputProps &
-    (UseFormRegisterReturn | ControllerRenderProps<any, any>),
-  ref: React.ForwardedRef<HTMLInputElement>
-) {
-  function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter" && onButtonClick && buttonLabel) {
-      onButtonClick();
-    }
-  }
-
-  const {
-    label,
-    type = "text",
-    onButtonClick = null,
-    buttonLabel = null,
-    classes = {} as PartialRecord<keyof typeof StylingClasses, string>,
-    error = null,
-    ...inputProps
-  } = props;
-
-  return (
-    <section
-      className={
-        styles.fieldContainer +
-        (classes.container ? ` ${classes.container}` : "")
+const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
+  function FieldInputInternal(props, ref) {
+    function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key === "Enter" && onButtonClick && buttonLabel) {
+        onButtonClick();
       }
-    >
-      {label && (
-        <label
-          className={styles.label + (classes.label ? ` ${classes.label}` : "")}
-          htmlFor={label}
-        >
-          {label}
-        </label>
-      )}
-      <div
+    }
+
+    const {
+      label,
+      type = "text",
+      onButtonClick = null,
+      buttonLabel = null,
+      classes = {} as PartialRecord<keyof typeof StylingClasses, string>,
+      error = null,
+      ...inputProps
+    } = props;
+
+    return (
+      <section
         className={
-          styles.inputWrapper +
-          (classes.inputWrapper ? ` ${classes.inputWrapper}` : "")
+          styles.fieldContainer +
+          (classes.container ? ` ${classes.container}` : "")
         }
       >
-        <input
-          autoComplete={"on"}
-          id={label}
-          className={
-            styles.input +
-            (error ? ` ${styles.hasError}` : "") +
-            (classes.input ? ` ${classes.input}` : "")
-          }
-          type={type}
-          onKeyDown={handleInputEnter}
-          {...inputProps}
-          ref={ref}
-        />
-        {onButtonClick && buttonLabel && (
-          <ActionButton
+        {label && (
+          <label
             className={
-              styles.button + (classes.button ? ` ${classes.button}` : "")
+              styles.label + (classes.label ? ` ${classes.label}` : "")
             }
-            onClick={onButtonClick}
+            htmlFor={label}
           >
-            {buttonLabel}
-          </ActionButton>
+            {label}
+          </label>
         )}
-      </div>
-    </section>
-  );
-});
+        <div
+          className={
+            styles.inputWrapper +
+            (classes.inputWrapper ? ` ${classes.inputWrapper}` : "")
+          }
+        >
+          <input
+            autoComplete={"on"}
+            id={label}
+            className={
+              styles.input +
+              (error ? ` ${styles.hasError}` : "") +
+              (classes.input ? ` ${classes.input}` : "")
+            }
+            type={type}
+            onKeyDown={handleInputEnter}
+            {...inputProps}
+            ref={ref}
+          />
+          {onButtonClick && buttonLabel && (
+            <ActionButton
+              className={
+                styles.button + (classes.button ? ` ${classes.button}` : "")
+              }
+              onClick={onButtonClick}
+            >
+              {buttonLabel}
+            </ActionButton>
+          )}
+        </div>
+      </section>
+    );
+  }
+);
 
 export default FieldInput;

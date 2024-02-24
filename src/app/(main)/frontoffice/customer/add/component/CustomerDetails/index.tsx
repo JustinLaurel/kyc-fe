@@ -1,4 +1,3 @@
-import "server-only";
 import styles from "./index.module.scss";
 import CustomerDetailsFormWrapper from "./CustomerDetailsFormWrapper";
 

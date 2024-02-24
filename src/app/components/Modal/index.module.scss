@@ -1,0 +1,17 @@
+.mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentWrapper {
+  background-color: white;
+  width: fit-content;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  outline: none;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}

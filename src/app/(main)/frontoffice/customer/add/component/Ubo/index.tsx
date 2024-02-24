@@ -1,12 +1,14 @@
 "use client";
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
+import Modal from "@/components/Modal";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Ubo() {
-  const router = useRouter();
-  function tempRouteHandler() {
-    router.push("audit/202005123461");
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(true);
+  function handleClickName() {
+    setIsDetailsModalOpen(true);
   }
   const FAKE_DATA = [
     {
@@ -14,7 +16,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -30,7 +32,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -46,7 +48,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -62,7 +64,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -78,7 +80,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -94,7 +96,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -110,7 +112,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -126,7 +128,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -142,7 +144,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -158,7 +160,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: tempRouteHandler,
+        onClick: handleClickName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -180,6 +182,12 @@ export default function Ubo() {
         onClick: () => {},
       }}
     >
+      <Modal
+        isOpen={isDetailsModalOpen}
+        handleClose={() => setIsDetailsModalOpen(false)}
+      >
+        <div>Details</div>
+      </Modal>
       <DataTable
         items={FAKE_DATA}
         headers={HEADERS}

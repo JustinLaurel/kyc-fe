@@ -27,101 +27,103 @@ export interface DateRangeField {
   to: Date | null | undefined;
   from: Date | null | undefined;
 }
-interface DateRangePickerProps {
+interface DateRangePickerProps extends UseFormRegisterReturn {
   label?: string;
   error?: FieldError;
   control: Control<any, any>;
 }
-const DateRangePicker = React.forwardRef<
-  HTMLDivElement,
-  DateRangePickerProps & UseFormRegisterReturn
->(function DateRangePickerInternal(props, ref) {
-  const { label, error, control, ...registerProps } = props;
-  return (
-    <main className={styles.dateRangePicker}>
-      {label && (
-        <label className={styles.label} htmlFor={label}>
-          {label}
-        </label>
-      )}
-      <ThemeProvider theme={pickerTheme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
-          <Controller
-            control={control}
-            name={registerProps.name}
-            render={({ field: { onChange, value, ref } }) => {
-              return (
-                <section className={styles.pickerSection}>
-                  <DatePicker
-                    minDate={dayjs().subtract(20, "year")}
-                    maxDate={
-                      value?.to ? dayjs(value.to) : dayjs().add(20, "year")
-                    }
-                    reduceAnimations
-                    className={styles.picker}
-                    slotProps={{
-                      textField: {
-                        InputProps: {
-                          spellCheck: false,
-                          autoCorrect: "off",
+const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
+  function DateRangePickerInternal(props, ref) {
+    const { label, error, control, ...registerProps } = props;
+    return (
+      <main className={styles.dateRangePicker}>
+        {label && (
+          <label className={styles.label} htmlFor={label}>
+            {label}
+          </label>
+        )}
+        <ThemeProvider theme={pickerTheme}>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale="en-gb"
+          >
+            <Controller
+              control={control}
+              name={registerProps.name}
+              render={({ field: { onChange, value, ref } }) => {
+                return (
+                  <section className={styles.pickerSection}>
+                    <DatePicker
+                      minDate={dayjs().subtract(20, "year")}
+                      maxDate={
+                        value?.to ? dayjs(value.to) : dayjs().add(20, "year")
+                      }
+                      reduceAnimations
+                      className={styles.picker}
+                      slotProps={{
+                        textField: {
+                          InputProps: {
+                            spellCheck: false,
+                            autoCorrect: "off",
+                          },
                         },
-                      },
-                    }}
-                    onChange={(newValue) => {
-                      onChange({
-                        ...value,
-                        from:
-                          newValue && newValue.isValid()
-                            ? newValue.toDate()
-                            : null,
-                      });
-                    }}
-                    ref={ref}
-                    slots={{
-                      openPickerButton: CalendarButton,
-                    }}
-                  />
-                  <div className={styles.pickerSeparator}>to</div>
-                  <DatePicker
-                    minDate={
-                      value?.from
-                        ? dayjs(value.from)
-                        : dayjs().subtract(20, "year")
-                    }
-                    maxDate={dayjs().add(20, "year")}
-                    reduceAnimations
-                    className={styles.picker}
-                    slotProps={{
-                      textField: {
-                        InputProps: {
-                          spellCheck: false,
-                          autoCorrect: "off",
+                      }}
+                      onChange={(newValue) => {
+                        onChange({
+                          ...value,
+                          from:
+                            newValue && newValue.isValid()
+                              ? newValue.toDate()
+                              : null,
+                        });
+                      }}
+                      ref={ref}
+                      slots={{
+                        openPickerButton: CalendarButton,
+                      }}
+                    />
+                    <div className={styles.pickerSeparator}>to</div>
+                    <DatePicker
+                      minDate={
+                        value?.from
+                          ? dayjs(value.from)
+                          : dayjs().subtract(20, "year")
+                      }
+                      maxDate={dayjs().add(20, "year")}
+                      reduceAnimations
+                      className={styles.picker}
+                      slotProps={{
+                        textField: {
+                          InputProps: {
+                            spellCheck: false,
+                            autoCorrect: "off",
+                          },
                         },
-                      },
-                    }}
-                    onChange={(newValue) => {
-                      onChange({
-                        ...value,
-                        to:
-                          newValue && newValue.isValid()
-                            ? newValue.toDate()
-                            : null,
-                      });
-                    }}
-                    ref={ref}
-                    slots={{
-                      openPickerButton: CalendarButton,
-                    }}
-                  />
-                </section>
-              );
-            }}
-          />
-        </LocalizationProvider>
-      </ThemeProvider>
-    </main>
-  );
-});
+                      }}
+                      onChange={(newValue) => {
+                        onChange({
+                          ...value,
+                          to:
+                            newValue && newValue.isValid()
+                              ? newValue.toDate()
+                              : null,
+                        });
+                      }}
+                      ref={ref}
+                      slots={{
+                        openPickerButton: CalendarButton,
+                      }}
+                    />
+                  </section>
+                );
+              }}
+            />
+          </LocalizationProvider>
+        </ThemeProvider>
+      </main>
+    );
+  }
+);
 
 function CalendarButton(props: IconButtonProps) {
   // Prevent Calendar icon from being tab-selectable
