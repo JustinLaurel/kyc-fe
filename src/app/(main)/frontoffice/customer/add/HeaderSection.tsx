@@ -1,26 +1,26 @@
 "use client";
+
 import HeaderStandard from "@/components/HeaderWithSteps";
 import { useRouter } from "next/navigation";
-
-const routeItems = [
-  {
-    label: "Home",
-    onClick: () => {},
-  },
-  {
-    label: "View Customer",
-  },
-];
 
 export default function HeaderSection() {
   const router = useRouter();
   return (
     <HeaderStandard
-      label={"View Customer"}
-      routeItems={routeItems}
+      label={"New Customer"}
+      routeItems={[
+        {
+          label: "Home",
+          onClick: () => {},
+        },
+        {
+          label: "New Customer",
+        },
+      ]}
       button={{
         label: "Audit History",
-        onClick: () => router.push("audit/202005123461"),
+        onClick: () =>
+          router.push("/frontoffice/customer/view/audit/202005123461"),
       }}
     />
   );

@@ -65,7 +65,7 @@ export const INITIAL_CUSTOMER_DETAILS_FORM = {
   geography: "",
   accountType: "",
   addressOfRegisteredOffice: "",
-  accountUnitCod: "",
+  accountUnitCode: "",
   purposeOfAccount: "",
   email: "",
   sourceOfFunds: "",

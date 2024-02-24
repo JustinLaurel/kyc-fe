@@ -17,12 +17,7 @@ interface CustomerDetailsProps {
 }
 export default function CustomerDetails(props: CustomerDetailsProps) {
   const { formHook } = props;
-  const { register, control, watch } = formHook;
-
-  const turnover = watch("turnover");
-  useEffect(() => {
-    console.log(turnover);
-  }, [turnover]);
+  const { register, control } = formHook;
 
   return (
     <main className={styles.customerDetailsContainer}>
@@ -105,7 +100,7 @@ export default function CustomerDetails(props: CustomerDetailsProps) {
             label={"Account Unit Code*"}
             items={[{ label: "SHA", value: "sha" }]}
             control={control}
-            {...register("geography")}
+            {...register("accountUnitCode")}
           />
           <FieldDropdown
             label={"Purpose of Account"}
