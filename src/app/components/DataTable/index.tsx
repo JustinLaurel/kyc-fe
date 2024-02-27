@@ -9,7 +9,7 @@ import { SORT_ORDER } from "@/config/types";
 import { CellButton, HeaderSortButton, RowConfig, TableConfig } from "./type";
 import { CellProps } from "./type";
 
-interface Props {
+type Props = {
   items: Record<string, string | number | CellButton | CellButton[]>[];
   headers: (string | HeaderSortButton)[];
   colWidths?: number[];

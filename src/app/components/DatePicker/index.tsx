@@ -52,7 +52,7 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
                     minDate={dayjs().subtract(20, "year")}
                     maxDate={dayjs().add(20, "year")}
                     reduceAnimations
-                    className={styles.picker}
+                    className={styles.picker + (error ? ` ${styles.hasError}` : "")}
                     slotProps={{
                       textField: {
                         InputProps: {

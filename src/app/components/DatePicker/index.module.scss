@@ -21,3 +21,8 @@
     }
   }
 }
+
+.hasError {
+  border: 1px solid colors.$ambank-red !important;
+  outline: none !important;
+}

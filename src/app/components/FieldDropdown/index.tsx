@@ -35,7 +35,11 @@ const FieldDropdown = React.forwardRef<HTMLSelectElement, FieldDropdownProps>(
       <div
         className={styles.fieldContainer + (className ? ` ${className}` : "")}
       >
-        {label && <div className={styles.title}>{label}</div>}
+        {label && (
+          <label className={styles.title} htmlFor={label}>
+            {label}
+          </label>
+        )}
         <Controller
           control={control}
           name={registerProps.name}

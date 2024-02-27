@@ -19,6 +19,8 @@ import {
   Control,
   Controller,
   FieldError,
+  FieldErrorsImpl,
+  Merge,
   UseFormRegisterReturn,
 } from "react-hook-form";
 import React from "react";
@@ -29,7 +31,15 @@ export interface DateRangeField {
 }
 interface DateRangePickerProps extends UseFormRegisterReturn {
   label?: string;
-  error?: FieldError;
+  error?:
+    | Merge<
+        FieldError,
+        FieldErrorsImpl<{
+          from: never;
+          to: never;
+        }>
+      >
+    | undefined;
   control: Control<any, any>;
 }
 const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
@@ -37,29 +47,30 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
     const { label, error, control, ...registerProps } = props;
     return (
       <main className={styles.dateRangePicker}>
-        {label && (
-          <label className={styles.label} htmlFor={label}>
-            {label}
-          </label>
-        )}
+        {label && <label className={styles.label}>{label}</label>}
         <ThemeProvider theme={pickerTheme}>
           <LocalizationProvider
             dateAdapter={AdapterDayjs}
             adapterLocale="en-gb"
           >
-            <Controller
-              control={control}
-              name={registerProps.name}
-              render={({ field: { onChange, value, ref } }) => {
-                return (
-                  <section className={styles.pickerSection}>
+            <section className={styles.pickerSection}>
+              <Controller
+                control={control}
+                name={`${registerProps.name}.from`}
+                rules={{
+                  validate: (value) => value && value.isValid(),
+                }}
+                render={({ field: { onChange, value, ref } }) => {
+                  return (
                     <DatePicker
                       minDate={dayjs().subtract(20, "year")}
                       maxDate={
                         value?.to ? dayjs(value.to) : dayjs().add(20, "year")
                       }
                       reduceAnimations
-                      className={styles.picker}
+                      className={
+                        styles.picker + (error?.from ? ` ${styles.hasError}` : "")
+                      }
                       slotProps={{
                         textField: {
                           InputProps: {
@@ -69,20 +80,26 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
                         },
                       }}
                       onChange={(newValue) => {
-                        onChange({
-                          ...value,
-                          from:
-                            newValue && newValue.isValid()
-                              ? newValue.toDate()
-                              : null,
-                        });
+                        onChange(newValue);
                       }}
+                      value={value}
                       ref={ref}
                       slots={{
                         openPickerButton: CalendarButton,
                       }}
                     />
-                    <div className={styles.pickerSeparator}>to</div>
+                  );
+                }}
+              />
+              <div className={styles.pickerSeparator}>to</div>
+              <Controller
+                control={control}
+                name={`${registerProps.name}.to`}
+                rules={{
+                  validate: (value) => value && value.isValid(),
+                }}
+                render={({ field: { onChange, value, ref } }) => {
+                  return (
                     <DatePicker
                       minDate={
                         value?.from
@@ -91,7 +108,9 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
                       }
                       maxDate={dayjs().add(20, "year")}
                       reduceAnimations
-                      className={styles.picker}
+                      className={
+                        styles.picker + (error?.to ? ` ${styles.hasError}` : "")
+                      }
                       slotProps={{
                         textField: {
                           InputProps: {
@@ -101,23 +120,18 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
                         },
                       }}
                       onChange={(newValue) => {
-                        onChange({
-                          ...value,
-                          to:
-                            newValue && newValue.isValid()
-                              ? newValue.toDate()
-                              : null,
-                        });
+                        onChange(newValue);
                       }}
+                      value={value}
                       ref={ref}
                       slots={{
                         openPickerButton: CalendarButton,
                       }}
                     />
-                  </section>
-                );
-              }}
-            />
+                  );
+                }}
+              />
+            </section>
           </LocalizationProvider>
         </ThemeProvider>
       </main>
