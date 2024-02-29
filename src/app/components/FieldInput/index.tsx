@@ -11,84 +11,87 @@ const StylingClasses = {
   input: "input",
   button: "button",
 } as const;
-interface FieldInputProps extends UseFormRegisterReturn {
+interface UncontrolledFieldInputProps {
   label?: string;
+  value: string;
   type?: HTMLInputTypeAttribute;
   onButtonClick?: () => void;
   buttonLabel?: string;
   classes?: PartialRecord<keyof typeof StylingClasses, string>;
+}
+interface ControlledFieldInputProps
+  extends Omit<UncontrolledFieldInputProps, "value">,
+    UseFormRegisterReturn {
   error?: FieldError;
   placeholder?: string;
 }
 
-const FieldInput = React.forwardRef<HTMLInputElement, FieldInputProps>(
-  function FieldInputInternal(props, ref) {
-    function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
-      if (event.key === "Enter" && onButtonClick && buttonLabel) {
-        onButtonClick();
-      }
+const FieldInput = React.forwardRef<
+  HTMLInputElement,
+  UncontrolledFieldInputProps | ControlledFieldInputProps
+>(function FieldInputInternal(props, ref) {
+  function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter" && onButtonClick && buttonLabel) {
+      onButtonClick();
     }
+  }
 
-    const {
-      label,
-      type = "text",
-      onButtonClick = null,
-      buttonLabel = null,
-      classes = {} as PartialRecord<keyof typeof StylingClasses, string>,
-      error = null,
-      ...inputProps
-    } = props;
+  const {
+    label,
+    type = "text",
+    onButtonClick = null,
+    buttonLabel = null,
+    classes = {} as PartialRecord<keyof typeof StylingClasses, string>,
+    ...inputProps
+  } = props;
 
-    return (
-      <section
+  return (
+    <section
+      className={
+        styles.fieldContainer +
+        (classes.container ? ` ${classes.container}` : "")
+      }
+    >
+      {label && (
+        <label
+          className={styles.label + (classes.label ? ` ${classes.label}` : "")}
+          htmlFor={label}
+        >
+          {label}
+        </label>
+      )}
+      <div
         className={
-          styles.fieldContainer +
-          (classes.container ? ` ${classes.container}` : "")
+          styles.inputWrapper +
+          (classes.inputWrapper ? ` ${classes.inputWrapper}` : "")
         }
       >
-        {label && (
-          <label
-            className={
-              styles.label + (classes.label ? ` ${classes.label}` : "")
-            }
-            htmlFor={label}
-          >
-            {label}
-          </label>
-        )}
-        <div
+        <input
+          autoComplete={"on"}
+          id={label}
           className={
-            styles.inputWrapper +
-            (classes.inputWrapper ? ` ${classes.inputWrapper}` : "")
+            styles.input +
+            ("error" in props && props.error ? ` ${styles.hasError}` : "") +
+            (classes.input ? ` ${classes.input}` : "")
           }
-        >
-          <input
-            autoComplete={"on"}
-            id={label}
+          type={type}
+          onKeyDown={handleInputEnter}
+          {...inputProps}
+          ref={ref}
+        />
+        {onButtonClick && buttonLabel && (
+          <ActionButton
             className={
-              styles.input +
-              (error ? ` ${styles.hasError}` : "") +
-              (classes.input ? ` ${classes.input}` : "")
+              styles.button + (classes.button ? ` ${classes.button}` : "")
             }
-            type={type}
-            onKeyDown={handleInputEnter}
-            {...inputProps}
-            ref={ref}
-          />
-          {onButtonClick && buttonLabel && (
-            <ActionButton
-              className={
-                styles.button + (classes.button ? ` ${classes.button}` : "")
-              }
-              onClick={onButtonClick}
-            >
-              {buttonLabel}
-            </ActionButton>
-          )}
-        </div>
-      </section>
-    );
-  }
-);
+            onClick={onButtonClick}
+          >
+            {buttonLabel}
+          </ActionButton>
+        )}
+      </div>
+    </section>
+  );
+});
 
 export default FieldInput;

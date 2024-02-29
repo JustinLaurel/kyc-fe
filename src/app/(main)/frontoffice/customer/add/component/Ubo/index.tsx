@@ -1,9 +1,13 @@
 "use client";
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
+import FieldAutocomplete from "@/components/FieldAutocomplete";
+import FieldInput from "@/components/FieldInput";
 import Modal from "@/components/Modal";
+import StyledFieldContainer from "@/components/StyledFieldContainer";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "./index.module.scss";
 
 export default function Ubo() {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(true);
@@ -185,8 +189,17 @@ export default function Ubo() {
       <Modal
         isOpen={isDetailsModalOpen}
         handleClose={() => setIsDetailsModalOpen(false)}
+        className={styles.uboModal}
       >
-        <div>Details</div>
+        <Card header={"UBO Details"}>
+          <StyledFieldContainer>
+            <FieldInput label={"UBO Type*"} value={"C-Corporate"} />
+            <FieldAutocomplete
+              label={"Entity in Which Shares are Held*"}
+              value={"AeroGuardians SDN BHD"}
+            />
+          </StyledFieldContainer>
+        </Card>
       </Modal>
       <DataTable
         items={FAKE_DATA}

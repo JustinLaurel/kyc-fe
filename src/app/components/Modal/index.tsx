@@ -7,9 +7,16 @@ interface ModalProps {
   handleClose: () => void;
   children: ReactElement<any, string | JSXElementConstructor<any>>;
   closeOnBackdropClick?: boolean;
+  className?: string;
 }
 export default function Modal(props: ModalProps) {
-  const { isOpen, handleClose, children, closeOnBackdropClick = false } = props;
+  const {
+    isOpen,
+    handleClose,
+    children,
+    closeOnBackdropClick = false,
+    className,
+  } = props;
 
   return (
     <MuiModal
@@ -22,7 +29,11 @@ export default function Modal(props: ModalProps) {
       }}
       className={styles.mainContainer}
     >
-      <main className={styles.contentWrapper}>{children}</main>
+      <main
+        className={styles.contentWrapper + (className ? ` ${className}` : "")}
+      >
+        {children}
+      </main>
     </MuiModal>
   );
 }
