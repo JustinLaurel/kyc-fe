@@ -23,9 +23,9 @@ export default function IndividualDetailsModal(
     <Modal
       isOpen={isOpen}
       handleClose={handleClose}
-      className={styles.uboDetailsModal}
+      className={styles.detailsModal}
     >
-      <main className={styles.uboDetailsModalContent}>
+      <main className={styles.detailsModalContent}>
         <Card header={"Related Party Details"}>
           <StyledFieldContainer>
             <FieldInput label={"Type*"} value={"P-Personal"} />
@@ -52,7 +52,10 @@ export default function IndividualDetailsModal(
             <FieldDropdown label={"Screening*"} value={"Yes"} />
           </StyledFieldContainer>
         </Card>
-        <Card header={"Contact Details"}>
+        <Card
+          header={"Contact Details"}
+          headerTooltipMessage={"This is for Bank to contact customer."}
+        >
           <StyledFieldContainer>
             <FieldInput label={"Email*"} value={"bryanlow@gmail.com"} />
             <FieldPhone

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./index.module.scss";
-import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
+import ActionButton from "../ActionButton";
 import { ButtonSpecs } from "@/config/types";
+import Tooltip from "@/components/Tooltip";
 
 interface CardProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ interface CardProps {
   buttons?: ButtonSpecs[];
   header?: React.ReactNode | string;
   headerButton?: ButtonSpecs;
+  headerTooltipMessage?: string;
   subheader?: React.ReactNode | string;
   className?: string;
   hasSeparator?: boolean;
@@ -27,6 +29,7 @@ export default function Card(props: CardProps) {
     buttons,
     header = null,
     headerButton,
+    headerTooltipMessage = null,
     subheader = null,
     className,
     hasSeparator = true,
@@ -50,7 +53,12 @@ export default function Card(props: CardProps) {
             }
           >
             <div className={styles.headerWrapper}>
-              <div className={styles.header}>{header}</div>
+              <div className={styles.header}>
+                {header}
+                {headerTooltipMessage && (
+                  <Tooltip message={headerTooltipMessage} />
+                )}
+              </div>
               {subheader && <div className={styles.subheader}>{subheader}</div>}
             </div>
             {headerButton && (

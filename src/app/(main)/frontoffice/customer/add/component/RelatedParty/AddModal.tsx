@@ -21,9 +21,9 @@ export default function AddModal(props: AddModalProps) {
     <Modal
       isOpen={isOpen}
       handleClose={handleClose}
-      className={styles.uboDetailsModal}
+      className={styles.detailsModal}
     >
-      <main className={styles.uboDetailsModalContent}>
+      <main className={styles.detailsModalContent}>
         <Card header={"Related Party Details"}>
           <StyledFieldContainer>
             <FieldInput label={"Type*"} value={"C-Corporate"} />

@@ -10,20 +10,23 @@ import FieldDropdown from "@/components/FieldDropdown";
 import FieldPhone from "@/components/FieldPhone";
 import FieldTextArea from "@/components/FieldTextArea";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
+import Tooltip from "@/components/Tooltip";
 
 interface CorporateDetailsModalProps {
   isOpen: boolean;
   handleClose: () => void;
 }
-export default function CorporateDetailsModal(props: CorporateDetailsModalProps) {
+export default function CorporateDetailsModal(
+  props: CorporateDetailsModalProps
+) {
   const { isOpen, handleClose } = props;
   return (
     <Modal
       isOpen={isOpen}
       handleClose={handleClose}
-      className={styles.uboDetailsModal}
+      className={styles.detailsModal}
     >
-      <main className={styles.uboDetailsModalContent}>
+      <main className={styles.detailsModalContent}>
         <Card header={"Related Party Details"}>
           <StyledFieldContainer>
             <FieldInput label={"Type*"} value={"C-Corporate"} />
@@ -54,7 +57,10 @@ export default function CorporateDetailsModal(props: CorporateDetailsModalProps)
             />
           </StyledFieldContainer>
         </Card>
-        <Card header={"Contact Details"}>
+        <Card
+          header={"Contact Details"}
+          headerTooltipMessage={"This is for Bank to contact customer."}
+        >
           <StyledFieldContainer>
             <FieldInput label={"Email*"} value={"bryanlow@gmail.com"} />
             <FieldPhone

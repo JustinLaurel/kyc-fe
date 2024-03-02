@@ -51,6 +51,8 @@
       font-weight: 700;
   
       .header {
+        display: flex;
+        column-gap: 8px;
         font-size: 20px;
         line-height: 24px;
         color: rgba(35, 31, 32, 1);

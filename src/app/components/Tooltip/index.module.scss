@@ -1,0 +1,16 @@
+@use 'src/app/colors';
+
+.iconButton {
+  padding: 0;
+}
+
+.tooltip {
+  padding: 16px 20px;
+  line-height: 20px;
+  font-size: 14px;
+  background-color: colors.$tooltip-black;
+  border-radius: 8px;
+}
+.tooltipArrow {
+  color: colors.$tooltip-black;
+}
