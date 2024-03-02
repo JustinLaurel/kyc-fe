@@ -11,7 +11,7 @@ export default function AuditLogPage() {
   )
 }
 
-export const FAKE_AUDIT_DATA = [
+const FAKE_AUDIT_DATA = [
   {
     timestamp: "23/05/2023  3:35:00 PM",
     performedBy: "Sarah Tay (100001a)",

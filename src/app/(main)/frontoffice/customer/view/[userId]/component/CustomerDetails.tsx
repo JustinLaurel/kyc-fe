@@ -9,14 +9,12 @@ import FieldTextArea from "@/components/FieldTextArea";
 import FieldPhone from "@/components/FieldPhone";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldInputCurrency from "@/components/FieldInputCurrency";
-import { useEffect } from "react";
-import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
 interface CustomerDetailsProps {
   formHook: UseFormReturn<typeof INITIAL_CUSTOMER_DETAILS_FORM, any, undefined>;
 }
 export default function CustomerDetails(props: CustomerDetailsProps) {
-  const { formHook, handleSubmit } = props;
+  const { formHook } = props;
   const { register, control } = formHook;
 
   return (
