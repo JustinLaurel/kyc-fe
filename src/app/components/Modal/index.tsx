@@ -32,7 +32,7 @@ export default function Modal(props: ModalProps) {
       <main
         className={styles.contentWrapper + (className ? ` ${className}` : "")}
       >
-        {children}
+        <div className={styles.contentInternalWrapper}>{children}</div>
       </main>
     </MuiModal>
   );

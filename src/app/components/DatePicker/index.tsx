@@ -2,6 +2,8 @@ import {
   CalendarIcon,
   DatePicker as MuiDatePicker,
   LocalizationProvider,
+  PickerChangeHandlerContext,
+  DateValidationError,
 } from "@mui/x-date-pickers";
 import styles from "./index.module.scss";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -23,65 +25,44 @@ import {
 } from "react-hook-form";
 import React from "react";
 
-interface DatePickerProps extends UseFormRegisterReturn {
+interface UncontrolledProps {
   label?: string;
+  value: Date;
+}
+interface ControlledProps
+  extends Omit<UncontrolledProps, "value">,
+    UseFormRegisterReturn {
   error?: FieldError;
   control: Control<any, any>;
 }
-const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
-  function DatePickerInternal(props, ref) {
-    const { label, error, control, ...registerProps } = props;
-    return (
-      <main className={styles.datePicker}>
-        {label && (
-          <label className={styles.label} htmlFor={label}>
-            {label}
-          </label>
+const DatePicker = React.forwardRef<
+  HTMLDivElement,
+  UncontrolledProps | ControlledProps
+>(function DatePickerInternal(props, ref) {
+  const isControlled = "control" in props;
+  return (
+    <main className={styles.datePicker}>
+      {props.label && (
+        <label className={styles.label} htmlFor={props.label}>
+          {props.label}
+        </label>
+      )}
+      <ThemeProvider theme={pickerTheme}>
+        {isControlled ? (
+          <Controller
+            control={props.control}
+            name={props.name}
+            render={({ field: { onChange, ref } }) => {
+              return <BaseDatePicker onChange={onChange} ref={ref} />;
+            }}
+          />
+        ) : (
+          <BaseDatePicker ref={ref} value={props.value} />
         )}
-        <ThemeProvider theme={pickerTheme}>
-          <LocalizationProvider
-            dateAdapter={AdapterDayjs}
-            adapterLocale="en-gb"
-          >
-            <Controller
-              control={control}
-              name={registerProps.name}
-              render={({ field: { onChange, ref } }) => {
-                return (
-                  <MuiDatePicker
-                    minDate={dayjs().subtract(20, "year")}
-                    maxDate={dayjs().add(20, "year")}
-                    reduceAnimations
-                    className={styles.picker + (error ? ` ${styles.hasError}` : "")}
-                    slotProps={{
-                      textField: {
-                        InputProps: {
-                          spellCheck: false,
-                          autoCorrect: "off",
-                        },
-                      },
-                    }}
-                    onChange={(newValue) => {
-                      onChange(
-                        newValue && newValue.isValid()
-                          ? newValue.toDate()
-                          : null
-                      );
-                    }}
-                    ref={ref}
-                    slots={{
-                      openPickerButton: CalendarButton,
-                    }}
-                  />
-                );
-              }}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
-      </main>
-    );
-  }
-);
+      </ThemeProvider>
+    </main>
+  );
+});
 
 function CalendarButton(props: IconButtonProps) {
   // Prevent Calendar icon from being tab-selectable
@@ -91,6 +72,56 @@ function CalendarButton(props: IconButtonProps) {
     </IconButton>
   );
 }
+
+interface UncontrolledBasePicker {
+  value: Date;
+}
+interface ControlledBasePickerProps
+  extends Omit<UncontrolledBasePicker, "value"> {
+  error?: FieldError;
+  onChange: (value: dayjs.Dayjs | Date | null) => void;
+}
+const BaseDatePicker = React.forwardRef<
+  HTMLDivElement,
+  UncontrolledBasePicker | ControlledBasePickerProps
+>(function BaseDatePickerInternal(props, ref) {
+  const isControlled = "onChange" in props;
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+      <MuiDatePicker
+        defaultValue={isControlled ? null : dayjs(props.value)}
+        minDate={dayjs().subtract(20, "year")}
+        maxDate={dayjs().add(20, "year")}
+        reduceAnimations
+        className={
+          styles.picker +
+          (isControlled && props.error ? ` ${styles.hasError}` : "")
+        }
+        slotProps={{
+          textField: {
+            InputProps: {
+              spellCheck: false,
+              autoCorrect: "off",
+            },
+          },
+        }}
+        onChange={
+          isControlled
+            ? (newValue) => {
+                props.onChange(
+                  newValue && newValue.isValid() ? newValue.toDate() : null
+                );
+              }
+            : () => {}
+        }
+        ref={ref}
+        slots={{
+          openPickerButton: CalendarButton,
+        }}
+      />
+    </LocalizationProvider>
+  );
+});
 
 const pickerTheme = (theme: Theme) => {
   return createTheme({

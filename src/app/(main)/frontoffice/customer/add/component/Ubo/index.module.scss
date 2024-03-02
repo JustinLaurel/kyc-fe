@@ -1,4 +1,15 @@
-.uboModal {
+.uboDetailsModal {
   position: absolute;
   width: 92vw;
+
+  .uboDetailsModalContent {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    align-items: center;
+
+    > main {
+      width: 100%;
+    }
+  }
 }

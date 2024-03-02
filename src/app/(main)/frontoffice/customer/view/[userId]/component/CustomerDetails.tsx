@@ -16,7 +16,7 @@ interface CustomerDetailsProps {
   formHook: UseFormReturn<typeof INITIAL_CUSTOMER_DETAILS_FORM, any, undefined>;
 }
 export default function CustomerDetails(props: CustomerDetailsProps) {
-  const { formHook } = props;
+  const { formHook, handleSubmit } = props;
   const { register, control } = formHook;
 
   return (

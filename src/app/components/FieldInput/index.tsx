@@ -76,6 +76,7 @@ const FieldInput = React.forwardRef<
           }
           type={type}
           onKeyDown={handleInputEnter}
+          onChange={() => {}} // Suppress browser console error
           {...inputProps}
           ref={ref}
         />

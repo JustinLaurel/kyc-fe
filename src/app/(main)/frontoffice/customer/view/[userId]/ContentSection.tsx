@@ -16,6 +16,13 @@ export default function ContentSection(props: ContentSectionProps) {
       ...INITIAL_CUSTOMER_DETAILS_FORM,
     },
   });
+
+  function handleSubmitCustomerDetails(
+    values: typeof INITIAL_CUSTOMER_DETAILS_FORM
+  ) {
+    console.log(values);
+  }
+
   return (
     <section className={styles.contentSection}>
       <CustomerSummaryCard />
@@ -39,7 +46,9 @@ export default function ContentSection(props: ContentSectionProps) {
           },
         ]}
       />
-      <ButtonsView />
+      <form onSubmit={formHook.handleSubmit(handleSubmitCustomerDetails)}>
+        <ButtonsView />
+      </form>
     </section>
   );
 }

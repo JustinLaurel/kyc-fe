@@ -10,7 +10,7 @@ export default function ButtonsView() {
       <ActionButton colorScheme={BUTTON_COLOR_SCHEMES.GREY}>
         Save as Draft
       </ActionButton>
-      <ActionButton>Submit</ActionButton>
+      <ActionButton isSubmit={true}>Submit</ActionButton>
     </main>
   );
 }
