@@ -2,21 +2,29 @@
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
 import { useState } from "react";
-import UboDetailsModal from "./UboDetailsModal";
+import CorporateDetailsModal from "./CorporateDetailsModal";
+import IndividualDetailsModal from "./IndividualDetailsModal";
 import styles from "./index.module.scss";
 
-export default function Ubo() {
-  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(true);
-  function handleClickName() {
-    setIsDetailsModalOpen(true);
+export default function RelatedParty() {
+  const [isCorporateDetailsOpen, setIsCorporateDetailsOpen] = useState(false);
+  const [isIndividualDetailsOpen, setIsIndividualDetailsOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  function handleClickCorporateName() {
+    setIsCorporateDetailsOpen(true);
   }
+  function handleClickIndividualName() {
+    setIsIndividualDetailsOpen(true);
+  }
+
   const FAKE_DATA = [
     {
       uboType: "P",
       hierarchyLevel: "1",
       name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -32,7 +40,23 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: handleClickName,
+        onClick: handleClickIndividualName,
+        isTextButton: true,
+      },
+      idType: "NRIC",
+      idNo: "9202201103003",
+      shareholding: "5.00%",
+      effectiveSharehlding: "5.00%",
+      relationship: "Director, Shareholder",
+      shares: "AeroGuardians SDN BHD",
+      screening: "Yes",
+    },
+    {
+      uboType: "P",
+      hierarchyLevel: "1",
+      name: {
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -48,7 +72,23 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: handleClickName,
+        onClick: handleClickIndividualName,
+        isTextButton: true,
+      },
+      idType: "NRIC",
+      idNo: "9202201103003",
+      shareholding: "5.00%",
+      effectiveSharehlding: "5.00%",
+      relationship: "Director, Shareholder",
+      shares: "AeroGuardians SDN BHD",
+      screening: "Yes",
+    },
+    {
+      uboType: "P",
+      hierarchyLevel: "1",
+      name: {
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -64,7 +104,39 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: handleClickName,
+        onClick: handleClickIndividualName,
+        isTextButton: true,
+      },
+      idType: "NRIC",
+      idNo: "9202201103003",
+      shareholding: "5.00%",
+      effectiveSharehlding: "5.00%",
+      relationship: "Director, Shareholder",
+      shares: "AeroGuardians SDN BHD",
+      screening: "Yes",
+    },
+    {
+      uboType: "P",
+      hierarchyLevel: "1",
+      name: {
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
+        isTextButton: true,
+      },
+      idType: "NRIC",
+      idNo: "9202201103003",
+      shareholding: "5.00%",
+      effectiveSharehlding: "5.00%",
+      relationship: "Director, Shareholder",
+      shares: "AeroGuardians SDN BHD",
+      screening: "Yes",
+    },
+    {
+      uboType: "P",
+      hierarchyLevel: "1",
+      name: {
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -80,7 +152,7 @@ export default function Ubo() {
       hierarchyLevel: "1",
       name: {
         label: "Bryan Low",
-        onClick: handleClickName,
+        onClick: handleClickIndividualName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -95,72 +167,8 @@ export default function Ubo() {
       uboType: "P",
       hierarchyLevel: "1",
       name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
-        isTextButton: true,
-      },
-      idType: "NRIC",
-      idNo: "9202201103003",
-      shareholding: "5.00%",
-      effectiveSharehlding: "5.00%",
-      relationship: "Director, Shareholder",
-      shares: "AeroGuardians SDN BHD",
-      screening: "Yes",
-    },
-    {
-      uboType: "P",
-      hierarchyLevel: "1",
-      name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
-        isTextButton: true,
-      },
-      idType: "NRIC",
-      idNo: "9202201103003",
-      shareholding: "5.00%",
-      effectiveSharehlding: "5.00%",
-      relationship: "Director, Shareholder",
-      shares: "AeroGuardians SDN BHD",
-      screening: "Yes",
-    },
-    {
-      uboType: "P",
-      hierarchyLevel: "1",
-      name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
-        isTextButton: true,
-      },
-      idType: "NRIC",
-      idNo: "9202201103003",
-      shareholding: "5.00%",
-      effectiveSharehlding: "5.00%",
-      relationship: "Director, Shareholder",
-      shares: "AeroGuardians SDN BHD",
-      screening: "Yes",
-    },
-    {
-      uboType: "P",
-      hierarchyLevel: "1",
-      name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
-        isTextButton: true,
-      },
-      idType: "NRIC",
-      idNo: "9202201103003",
-      shareholding: "5.00%",
-      effectiveSharehlding: "5.00%",
-      relationship: "Director, Shareholder",
-      shares: "AeroGuardians SDN BHD",
-      screening: "Yes",
-    },
-    {
-      uboType: "P",
-      hierarchyLevel: "1",
-      name: {
-        label: "Bryan Low",
-        onClick: handleClickName,
+        label: "XYZ Sdn Bhd",
+        onClick: handleClickCorporateName,
         isTextButton: true,
       },
       idType: "NRIC",
@@ -175,16 +183,20 @@ export default function Ubo() {
 
   return (
     <Card
-      header={"UBO"}
-      subheader={"List of UBO(s)"}
+      header={"Related Party Details"}
+      subheader={"List of Related Party"}
       headerButton={{
         label: "Add",
         onClick: () => {},
       }}
     >
-      <UboDetailsModal
-        isOpen={isDetailsModalOpen}
-        handleClose={() => setIsDetailsModalOpen(false)}
+      <CorporateDetailsModal
+        isOpen={isCorporateDetailsOpen}
+        handleClose={() => setIsCorporateDetailsOpen(false)}
+      />
+      <IndividualDetailsModal
+        isOpen={isIndividualDetailsOpen}
+        handleClose={() => setIsIndividualDetailsOpen(false)}
       />
       <DataTable
         items={FAKE_DATA}

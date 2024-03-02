@@ -11,11 +11,13 @@ import FieldPhone from "@/components/FieldPhone";
 import FieldTextArea from "@/components/FieldTextArea";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "@/components/ActionButton";
 
-interface UboDetailsModalProps {
+interface IndividualDetailsModalProps {
   isOpen: boolean;
   handleClose: () => void;
 }
-export default function UboDetailsModal(props: UboDetailsModalProps) {
+export default function IndividualDetailsModal(
+  props: IndividualDetailsModalProps
+) {
   const { isOpen, handleClose } = props;
   return (
     <Modal
@@ -24,34 +26,30 @@ export default function UboDetailsModal(props: UboDetailsModalProps) {
       className={styles.uboDetailsModal}
     >
       <main className={styles.uboDetailsModalContent}>
-        <Card header={"UBO Details"}>
+        <Card header={"Related Party Details"}>
           <StyledFieldContainer>
-            <FieldInput label={"Type*"} value={"C-Corporate"} />
+            <FieldInput label={"Type*"} value={"P-Personal"} />
             <FieldAutocomplete
+              label={"Country of Residence*"}
+              value={"Malaysia"}
+            />
+            <FieldAutocomplete label={"Hierarchy Level*"} value={"1"} />
+            <FieldAutocomplete label={"Occupation*"} value={"Site Manager"} />
+            <FieldAutocomplete label={"ID Type"} value={"NRIC"} />
+            <FieldInput
               label={"Entity in Which Shares are Held*"}
               value={"AeroGuardians SDN BHD"}
             />
-            <FieldAutocomplete label={"Hierarchy Level*"} value={"1"} />
-            <FieldInput label={"Shareholding*"} value={"85%"} />
-            <FieldAutocomplete label={"ID Type"} value={"BRN"} />
-            <FieldInput label={"Effective Shareholding"} value={"85%"} />
-            <FieldInput label={"ID No"} value={"23000202201"} />
-            <FieldAutocomplete label={"Relationship*"} value={"Shareholder"} />
-            <FieldInput label={"Name*"} value={"XYZ Sdn Bhd"} />
+            <FieldInput label={"ID No*"} value={"23000202201"} />
+            <FieldAutocomplete label={"Shareholding*"} value={"5%"} />
+            <FieldInput label={"Name*"} value={"Bryan Low"} />
+            <FieldInput label={"Effective Shareholding*"} value={"85%"} />
+            <FieldDropdown label={"Gender*"} value={"Male"} />
+            <FieldAutocomplete label={"Relationship"} value={"Shareholder"} />
+            <DatePicker label={"Date of Birth*"} value={new Date()} />
             <FieldAutocomplete label={"UBO Flag*"} value={"Y"} />
-            <DatePicker label={"Date of Incorporation*"} value={new Date()} />
-            <FieldAutocomplete label={"Screening"} value={"Yes"} />
-            <FieldAutocomplete label={"Geography*"} value={"Malaysia"} />
-            <FieldDropdown label={"Validity"} value={"Pending"} />
-            <FieldAutocomplete
-              label={"Nature of Business*"}
-              value={"Manufacturing"}
-            />
-            <FieldDropdown label={"Status"} value={"Pending"} />
-            <FieldAutocomplete
-              label={"Country of Incorporation*"}
-              value={"Malaysia"}
-            />
+            <FieldAutocomplete label={"Nationality*"} value={"Malaysian"} />
+            <FieldDropdown label={"Screening*"} value={"Yes"} />
           </StyledFieldContainer>
         </Card>
         <Card header={"Contact Details"}>
@@ -100,14 +98,6 @@ export default function UboDetailsModal(props: UboDetailsModalProps) {
             />
           </StyledFieldContainer>
         </Card>
-        <Card header={"Remarks"}>
-          <FieldTextArea
-            label={"Remarks"}
-            value={"UBO no longer valid."}
-            characterCount
-          />
-        </Card>
-
         <ActionButton
           onClick={handleClose}
           colorScheme={BUTTON_COLOR_SCHEMES.GREY}
