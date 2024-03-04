@@ -116,10 +116,10 @@ const BaseDropdown = React.forwardRef<
       {isControlled ? (
         Array.isArray(props.items) &&
         props.items.length > 0 &&
-        props.items.map((item, index) => {
+        props.items.map((item) => {
           return (
             <MenuItem
-              key={index}
+              key={item.value}
               value={item.value}
               className={styles.dropdownItem}
             >
@@ -128,9 +128,7 @@ const BaseDropdown = React.forwardRef<
           );
         })
       ) : (
-        <MenuItem value={props.value}>
-          {props.value}
-        </MenuItem>
+        <MenuItem value={props.value}>{props.value}</MenuItem>
       )}
     </Select>
   );

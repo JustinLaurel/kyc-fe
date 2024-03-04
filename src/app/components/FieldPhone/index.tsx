@@ -146,10 +146,10 @@ const BaseSelect = React.forwardRef<
     >
       {isControlled ? (
         Array.isArray(props.countryCodes) &&
-        props.countryCodes.map((item, index) => {
+        props.countryCodes.map((item) => {
           return (
             <MenuItem
-              key={index}
+              key={item.value}
               value={item.value}
               className={styles.dropdownItem}
             >

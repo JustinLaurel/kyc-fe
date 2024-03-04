@@ -136,7 +136,7 @@ const BaseAutocomplete = React.forwardRef<
         return (
           <MenuItem
             {...props}
-            key={(props as any).key}
+            key={option.value}
             classes={{
               root: styles.dropdownItem,
             }}
