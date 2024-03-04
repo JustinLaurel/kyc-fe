@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import ActionButton, { BUTTON_COLOR_SCHEMES } from "../ActionButton";
 import styles from "./index.module.scss";
 
@@ -19,9 +19,17 @@ export default function TabSwitcher(props: TabSwitcherProps) {
           return (
             <ActionButton
               key={index}
-              onClick={() => setSwipeIndex(index)}
-              colorScheme={isActive ? BUTTON_COLOR_SCHEMES.RED : BUTTON_COLOR_SCHEMES.LIGHT_GREY}
-              className={styles.tabButton + (isActive ? "" : ` ${styles.inactiveButton}`)}
+              onClick={() => {
+                startTransition(() => setSwipeIndex(index));
+              }}
+              colorScheme={
+                isActive
+                  ? BUTTON_COLOR_SCHEMES.RED
+                  : BUTTON_COLOR_SCHEMES.LIGHT_GREY
+              }
+              className={
+                styles.tabButton + (isActive ? "" : ` ${styles.inactiveButton}`)
+              }
             >
               {tab.label}
             </ActionButton>

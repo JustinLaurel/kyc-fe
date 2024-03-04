@@ -1,7 +1,7 @@
 "use client";
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import CorporateDetailsModal from "./CorporateDetailsModal";
 import IndividualDetailsModal from "./IndividualDetailsModal";
 import styles from "./index.module.scss";
@@ -12,10 +12,10 @@ export default function RelatedParty() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   function handleClickCorporateName() {
-    setIsCorporateDetailsOpen(true);
+    startTransition(() => setIsCorporateDetailsOpen(true));
   }
   function handleClickIndividualName() {
-    setIsIndividualDetailsOpen(true);
+    startTransition(() => setIsIndividualDetailsOpen(true));
   }
 
   const FAKE_DATA = [
