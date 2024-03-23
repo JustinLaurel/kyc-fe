@@ -10,7 +10,7 @@ import {
 } from "react-hook-form";
 import React, { HTMLInputTypeAttribute } from "react";
 import { InputAdornment, TextField } from "@mui/material";
-import { formatCurrency, reverseCurrencyFormat } from "@/services/util";
+import { formatCurrency, reverseCurrencyFormat } from "@/util";
 
 const StylingClasses = {
   container: "container",

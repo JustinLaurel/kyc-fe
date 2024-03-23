@@ -135,7 +135,7 @@ const BaseTextArea = React.forwardRef<
           height: props.gridRowSpan > 1 ? "100%" : "auto",
         }}
         ref={ref}
-        onChange={isControlled ? props.onChange : undefined}
+        onChange={isControlled ? props.onChange : () => {}}
         value={props.value}
       />
       {props.characterCount && (

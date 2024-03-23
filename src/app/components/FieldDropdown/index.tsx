@@ -109,7 +109,7 @@ const BaseDropdown = React.forwardRef<
         icon: styles.icon,
       }}
       ref={ref}
-      value={props.value}
+      value={props.value ?? ''}
       onChange={isControlled ? props.onChange : () => {}}
       onBlur={isControlled ? props.onBlur : () => {}}
     >

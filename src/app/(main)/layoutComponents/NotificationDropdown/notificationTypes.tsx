@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./notificationTypes.module.scss";
 import Image from "next/image";
-import { formatNotificationDate } from "@/services/util";
+import { formatNotificationDate } from "@/util";
 import dayjs from "dayjs";
 import TextButton from "@/components/TextButton";
 
