@@ -1,7 +1,7 @@
 "use client";
 import Card from "@/components/Card";
 import DataTable from "@/components/DataTable";
-import { startTransition, useState } from "react";
+import { startTransition, useMemo, useState } from "react";
 import CorporateDetailsModal from "./CorporateDetailsModal";
 import IndividualDetailsModal from "./IndividualDetailsModal";
 import styles from "./index.module.scss";
@@ -18,7 +18,7 @@ export default function RelatedParty() {
     startTransition(() => setIsIndividualDetailsOpen(true));
   }
 
-  const FAKE_DATA = [
+  const FAKE_DATA = useMemo(() => [
     {
       uboType: "P",
       hierarchyLevel: "1",
@@ -179,7 +179,22 @@ export default function RelatedParty() {
       shares: "AeroGuardians SDN BHD",
       screening: "Yes",
     },
-  ];
+  ], []);
+
+  const tableConfig = useMemo(() => {
+    return {
+      colWidths: [68, 104, 88, 68, 128, 128, 128, 122, 110, 104],
+      config: {
+        uniformRowColor: true,
+      },
+      rowConfig: [
+        {
+          rowIndex: 1,
+          isHighlighted: true,
+        },
+      ]
+    }
+  }, []);
 
   return (
     <Card
@@ -201,16 +216,9 @@ export default function RelatedParty() {
       <DataTable
         items={FAKE_DATA}
         headers={HEADERS}
-        colWidths={[68, 104, 88, 68, 128, 128, 128, 122, 110, 104]}
-        config={{
-          uniformRowColor: true,
-        }}
-        rowConfig={[
-          {
-            rowIndex: 1,
-            isHighlighted: true,
-          },
-        ]}
+        colWidths={tableConfig.colWidths}
+        config={tableConfig.config}
+        rowConfig={tableConfig.rowConfig}
       />
     </Card>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import TextButton from "../TextButton";
@@ -12,11 +12,11 @@ import { CellProps } from "./type";
 type Props = {
   items: Record<string, string | number | CellButton | CellButton[]>[];
   headers: (string | HeaderSortButton)[];
-  colWidths?: number[];
+  colWidths?: number[] | null;
   disableNumbering?: boolean;
   rowConfig?: RowConfig[];
   config?: TableConfig;
-}
+};
 /**
  * Standard table.
  * items.length === headers.length === colWidths.length MUST be true
@@ -26,7 +26,7 @@ type Props = {
  * @param {boolean} props.disableNumbering - Disable automatic numbering
  * @param {boolean} props.rowConfig - Special styling/logic for specified row index
  */
-export default function DataTable(props: Props) {
+const DataTable = memo(function DataTable(props: Props) {
   const {
     items,
     headers,
@@ -50,18 +50,21 @@ export default function DataTable(props: Props) {
     }
   }
 
-  function handleHeaderSort(header: HeaderSortButton) {
-    const currentSortOrder = sortOrders[header.label] ?? SORT_ORDER.DEFAULT;
-    const newSortOrder = sortOrderToggler(currentSortOrder);
-    if (newSortOrder === SORT_ORDER.DEFAULT) {
-      setSortOrders({});
-    } else {
-      setSortOrders({
-        [header.label]: newSortOrder,
-      });
-    }
-    header.onClick(newSortOrder);
-  }
+  const handleHeaderSort = useCallback(
+    (header: HeaderSortButton) => {
+      const currentSortOrder = sortOrders[header.label] ?? SORT_ORDER.DEFAULT;
+      const newSortOrder = sortOrderToggler(currentSortOrder);
+      if (newSortOrder === SORT_ORDER.DEFAULT) {
+        setSortOrders({});
+      } else {
+        setSortOrders({
+          [header.label]: newSortOrder,
+        });
+      }
+      header.onClick(newSortOrder);
+    },
+    [sortOrders]
+  );
 
   const rowConfigMap = useMemo(() => {
     const config = new Map<number, RowConfig>();
@@ -78,123 +81,127 @@ export default function DataTable(props: Props) {
           {!disableNumbering && (
             <HeaderCell className={styles.numberingCell}>No</HeaderCell>
           )}
-          {headers.map((header, index) => {
-            const flexStyle = {
-              flexGrow: colWidths ? colWidths[index] : 1,
-              flexShrink: colWidths ? 1 / colWidths[index] : 1,
-              flexBasis: 10,
-            };
-            if (typeof header === "string") {
-              return (
-                <HeaderCell key={index} style={flexStyle}>
-                  {header}
-                </HeaderCell>
-              );
-            } else {
-              return (
-                <HeaderCell
-                  key={index}
-                  style={{ ...flexStyle, cursor: "pointer" }}
-                  onClick={() => handleHeaderSort(header)}
-                >
-                  <div className={styles.title}>{header.label}</div>
-                  {sortOrders[header.label] === SORT_ORDER.ASC ? (
-                    <IconSortUp />
-                  ) : sortOrders[header.label] === SORT_ORDER.DESC ? (
-                    <IconSortDown />
-                  ) : (
-                    <IconSort />
-                  )}
-                </HeaderCell>
-              );
-            }
-          })}
+          {useMemo(() => {
+            return headers.map((header, index) => {
+              const flexStyle = {
+                flexGrow: colWidths ? colWidths[index] : 1,
+                flexShrink: colWidths ? 1 / colWidths[index] : 1,
+                flexBasis: 10,
+              };
+              if (typeof header === "string") {
+                return (
+                  <HeaderCell key={index} style={flexStyle}>
+                    {header}
+                  </HeaderCell>
+                );
+              } else {
+                return (
+                  <HeaderCell
+                    key={index}
+                    style={{ ...flexStyle, cursor: "pointer" }}
+                    onClick={() => handleHeaderSort(header)}
+                  >
+                    <div className={styles.title}>{header.label}</div>
+                    {sortOrders[header.label] === SORT_ORDER.ASC ? (
+                      <IconSortUp />
+                    ) : sortOrders[header.label] === SORT_ORDER.DESC ? (
+                      <IconSortDown />
+                    ) : (
+                      <IconSort />
+                    )}
+                  </HeaderCell>
+                );
+              }
+            });
+          }, [headers, colWidths, sortOrders, handleHeaderSort])}
         </section>
         <section className={styles.usersSection}>
-          {items.map((item, rowIndex) => {
-            const shouldHighlightRow = Boolean(
-              rowConfigMap.get(rowIndex)?.isHighlighted
-            );
-            return (
-              <div
-                key={rowIndex}
-                className={
-                  styles.row +
-                  (!config.uniformRowColor && rowIndex % 2 === 0
-                    ? ` ${styles.greyBackground}`
-                    : "") +
-                  (shouldHighlightRow ? ` ${styles.pinkBackground}` : "")
-                }
-              >
-                {!disableNumbering && (
-                  <Cell className={styles.numberingCell}>{rowIndex + 1}</Cell>
-                )}
-                {Object.keys(item).map((key, cellIndex) => {
-                  const flexStyle = {
-                    flexGrow: colWidths ? colWidths[cellIndex] : 1,
-                    flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
-                    flexBasis: 10,
-                  };
-                  const cellItem = item[key];
-                  if (
-                    !cellItem ||
-                    typeof cellItem === "string" ||
-                    typeof cellItem === "number"
-                  ) {
-                    return (
-                      <Cell key={cellIndex} style={flexStyle}>
-                        {cellItem}
-                      </Cell>
-                    );
-                  } else if (Array.isArray(cellItem)) {
-                    return (
-                      <Cell key={cellIndex} style={flexStyle}>
-                        {cellItem.map((item, index) => {
-                          return item.isTextButton ? (
+          {useMemo(() => {
+            return items.map((item, rowIndex) => {
+              const shouldHighlightRow = Boolean(
+                rowConfigMap.get(rowIndex)?.isHighlighted
+              );
+              return (
+                <div
+                  key={rowIndex}
+                  className={
+                    styles.row +
+                    (!config.uniformRowColor && rowIndex % 2 === 0
+                      ? ` ${styles.greyBackground}`
+                      : "") +
+                    (shouldHighlightRow ? ` ${styles.pinkBackground}` : "")
+                  }
+                >
+                  {!disableNumbering && (
+                    <Cell className={styles.numberingCell}>{rowIndex + 1}</Cell>
+                  )}
+                  {Object.keys(item).map((key, cellIndex) => {
+                    const flexStyle = {
+                      flexGrow: colWidths ? colWidths[cellIndex] : 1,
+                      flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
+                      flexBasis: 10,
+                    };
+                    const cellItem = item[key];
+                    if (
+                      !cellItem ||
+                      typeof cellItem === "string" ||
+                      typeof cellItem === "number"
+                    ) {
+                      return (
+                        <Cell key={cellIndex} style={flexStyle}>
+                          {cellItem}
+                        </Cell>
+                      );
+                    } else if (Array.isArray(cellItem)) {
+                      return (
+                        <Cell key={cellIndex} style={flexStyle}>
+                          {cellItem.map((item, index) => {
+                            return item.isTextButton ? (
+                              <TextButton
+                                key={index}
+                                onClick={() => item.onClick()}
+                                className={styles.cellTextButton}
+                              >
+                                {item.label}
+                              </TextButton>
+                            ) : (
+                              <ActionButton
+                                key={index}
+                                onClick={() => item.onClick()}
+                                className={styles.cellButton}
+                              >
+                                {item.label}
+                              </ActionButton>
+                            );
+                          })}
+                        </Cell>
+                      );
+                    } else {
+                      return (
+                        <Cell key={cellIndex} style={flexStyle}>
+                          {cellItem.isTextButton ? (
                             <TextButton
-                              key={index}
-                              onClick={() => item.onClick()}
+                              onClick={() => cellItem.onClick()}
                               className={styles.cellTextButton}
                             >
-                              {item.label}
+                              {cellItem.label}
                             </TextButton>
                           ) : (
                             <ActionButton
-                              key={index}
-                              onClick={() => item.onClick()}
+                              onClick={() => cellItem.onClick()}
                               className={styles.cellButton}
                             >
-                              {item.label}
+                              {cellItem.label}
                             </ActionButton>
-                          );
-                        })}
-                      </Cell>
-                    );
-                  } else {
-                    return (
-                      <Cell key={cellIndex} style={flexStyle}>
-                        {cellItem.isTextButton ? (
-                          <TextButton
-                            onClick={() => cellItem.onClick()}
-                            className={styles.cellTextButton}
-                          >
-                            {cellItem.label}
-                          </TextButton>
-                        ) : (
-                          <ActionButton
-                            onClick={() => cellItem.onClick()}
-                            className={styles.cellButton}
-                          >
-                            {cellItem.label}
-                          </ActionButton>
-                        )}
-                      </Cell>
-                    );
-                  }
-                })}
-              </div>
-            );
-          })}
+                          )}
+                        </Cell>
+                      );
+                    }
+                  })}
+                </div>
+              );
+            });
+          }, [items, config, rowConfigMap, colWidths, disableNumbering])}
         </section>
       </section>
       <section className={styles.pagination}>
@@ -212,7 +219,7 @@ export default function DataTable(props: Props) {
       </section>
     </main>
   );
-}
+});
 
 function HeaderCell({ children, style, onClick, className = "" }: CellProps) {
   return (
@@ -273,3 +280,5 @@ function IconSortDown() {
     />
   );
 }
+
+export default DataTable;
