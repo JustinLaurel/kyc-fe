@@ -1,3 +1,4 @@
+"use client";
 import ApplicationsListing from "./ApplicationsListing";
 import OverviewChart from "./OverviewChart";
 import styles from "./index.module.scss";

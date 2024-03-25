@@ -1,3 +1,4 @@
+"use client";
 import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import { useForm } from "react-hook-form";

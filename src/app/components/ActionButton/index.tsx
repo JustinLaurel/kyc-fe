@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { LegacyRef } from "react";
 import styles from "./index.module.scss";
 import { Button } from "@mui/material";
 
@@ -15,16 +16,20 @@ interface Props {
   onClick?: () => void;
   className?: string;
   isSubmit?: boolean;
+  component?: string;
+  draggable?: boolean;
 }
-export default function ActionButton(props: Props) {
+const ActionButton = React.forwardRef((props: Props, ref: any) => {
   const {
     colorScheme = BUTTON_COLOR_SCHEMES.RED,
     onClick = () => {},
     className = null,
     isSubmit = false,
+    ...additionalProps
   } = props;
   return (
     <Button
+      {...additionalProps}
       variant="contained"
       disableElevation
       className={
@@ -33,10 +38,12 @@ export default function ActionButton(props: Props) {
         styles[colorScheme] +
         (className ? ` ${className}` : "")
       }
-      onClick={isSubmit ? () => {} : onClick}
-      type={isSubmit ? "submit" : "button"}
+      {...(props.isSubmit ? { type: "submit" } : { onClick })}
+      ref={ref}
     >
       {props.children}
     </Button>
   );
-}
+});
+
+export default ActionButton;
