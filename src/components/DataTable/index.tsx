@@ -14,6 +14,7 @@ type Props = {
   disableNumbering?: boolean;
   rowConfig?: RowConfig[];
   config?: TableConfig;
+  width?: number;
 };
 /**
  * Standard table.
@@ -23,6 +24,7 @@ type Props = {
  * @param {number[]} props.colWidths - Width fraction occupied by each column
  * @param {boolean} props.disableNumbering - Disable automatic numbering
  * @param {boolean} props.rowConfig - Special styling/logic for specified row index
+ * @param {number} props.width - Table content width. Horizontal scrolling enabled if exceeds container width
  */
 const DataTable = memo(function DataTable(props: Props) {
   const {
@@ -32,6 +34,7 @@ const DataTable = memo(function DataTable(props: Props) {
     disableNumbering = false,
     rowConfig = [],
     config = {},
+    width,
   } = props;
   const [sortOrders, setSortOrders] = useState<Record<string, SORT_ORDER>>({});
 
@@ -74,135 +77,150 @@ const DataTable = memo(function DataTable(props: Props) {
 
   return (
     <main className={styles.table}>
-      <section className={styles.content}>
-        <section className={styles.headerSection}>
-          {!disableNumbering && (
-            <HeaderCell className={styles.numberingCell}>No</HeaderCell>
-          )}
-          {useMemo(() => {
-            return headers.map((header, index) => {
-              const flexStyle = {
-                flexGrow: colWidths ? colWidths[index] : 1,
-                flexShrink: colWidths ? 1 / colWidths[index] : 1,
-                flexBasis: 10,
-              };
-              if (typeof header === "string") {
-                return (
-                  <HeaderCell key={index} style={flexStyle}>
-                    {header}
-                  </HeaderCell>
+      <section className={styles.overflowWrapper}>
+        <section
+          className={styles.content}
+          style={{
+            width: width ? `${width}px` : "100%",
+          }}
+        >
+          <section className={styles.headerSection}>
+            {!disableNumbering && (
+              <HeaderCell className={styles.numberingCell}>No</HeaderCell>
+            )}
+            {useMemo(() => {
+              return headers.map((header, index) => {
+                const flexStyle = {
+                  flexGrow: colWidths ? colWidths[index] : 1,
+                  flexShrink: colWidths ? 1 / colWidths[index] : 1,
+                  flexBasis: 10,
+                };
+                if (typeof header === "string") {
+                  return (
+                    <HeaderCell key={index} style={flexStyle}>
+                      {header}
+                    </HeaderCell>
+                  );
+                } else {
+                  return (
+                    <HeaderCell
+                      key={index}
+                      style={{ ...flexStyle, cursor: "pointer" }}
+                      onClick={() => handleHeaderSort(header)}
+                    >
+                      <div className={styles.title}>{header.label}</div>
+                      {sortOrders[header.label] === SORT_ORDER.ASC ? (
+                        <IconSortUp />
+                      ) : sortOrders[header.label] === SORT_ORDER.DESC ? (
+                        <IconSortDown />
+                      ) : (
+                        <IconSort />
+                      )}
+                    </HeaderCell>
+                  );
+                }
+              });
+            }, [headers, colWidths, sortOrders, handleHeaderSort])}
+          </section>
+          <section className={styles.contentSection}>
+            {useMemo(() => {
+              return items.map((item, rowIndex) => {
+                const shouldHighlightRow = Boolean(
+                  rowConfigMap.get(rowIndex)?.isHighlighted
                 );
-              } else {
                 return (
-                  <HeaderCell
-                    key={index}
-                    style={{ ...flexStyle, cursor: "pointer" }}
-                    onClick={() => handleHeaderSort(header)}
+                  <div
+                    key={rowIndex}
+                    className={
+                      styles.row +
+                      (!config.uniformRowColor && rowIndex % 2 === 0
+                        ? ` ${styles.greyBackground}`
+                        : "") +
+                      (shouldHighlightRow ? ` ${styles.pinkBackground}` : "")
+                    }
                   >
-                    <div className={styles.title}>{header.label}</div>
-                    {sortOrders[header.label] === SORT_ORDER.ASC ? (
-                      <IconSortUp />
-                    ) : sortOrders[header.label] === SORT_ORDER.DESC ? (
-                      <IconSortDown />
-                    ) : (
-                      <IconSort />
+                    {!disableNumbering && (
+                      <Cell className={styles.numberingCell}>
+                        {rowIndex + 1}
+                      </Cell>
                     )}
-                  </HeaderCell>
-                );
-              }
-            });
-          }, [headers, colWidths, sortOrders, handleHeaderSort])}
-        </section>
-        <section className={styles.usersSection}>
-          {useMemo(() => {
-            return items.map((item, rowIndex) => {
-              const shouldHighlightRow = Boolean(
-                rowConfigMap.get(rowIndex)?.isHighlighted
-              );
-              return (
-                <div
-                  key={rowIndex}
-                  className={
-                    styles.row +
-                    (!config.uniformRowColor && rowIndex % 2 === 0
-                      ? ` ${styles.greyBackground}`
-                      : "") +
-                    (shouldHighlightRow ? ` ${styles.pinkBackground}` : "")
-                  }
-                >
-                  {!disableNumbering && (
-                    <Cell className={styles.numberingCell}>{rowIndex + 1}</Cell>
-                  )}
-                  {Object.keys(item).map((key, cellIndex) => {
-                    const flexStyle = {
-                      flexGrow: colWidths ? colWidths[cellIndex] : 1,
-                      flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
-                      flexBasis: 10,
-                    };
-                    const cellItem = item[key];
-                    if (
-                      !cellItem ||
-                      typeof cellItem === "string" ||
-                      typeof cellItem === "number"
-                    ) {
-                      return (
-                        <Cell key={cellIndex} style={flexStyle}>
-                          {cellItem}
-                        </Cell>
-                      );
-                    } else if (Array.isArray(cellItem)) {
-                      return (
-                        <Cell key={cellIndex} style={flexStyle}>
-                          {cellItem.map((item, index) => {
-                            return item.isTextButton ? (
+                    {Object.keys(item).map((key, cellIndex) => {
+                      const flexStyle = {
+                        flexGrow: colWidths ? colWidths[cellIndex] : 1,
+                        flexShrink: colWidths ? 1 / colWidths[cellIndex] : 1,
+                        flexBasis: 10,
+                      };
+                      const cellItem = item[key];
+                      if (
+                        !cellItem ||
+                        typeof cellItem === "string" ||
+                        typeof cellItem === "number"
+                      ) {
+                        return (
+                          <Cell key={cellIndex} style={flexStyle}>
+                            {cellItem}
+                          </Cell>
+                        );
+                      } else if (Array.isArray(cellItem)) {
+                        return (
+                          <Cell key={cellIndex} style={flexStyle}>
+                            {cellItem.map((item, index) => {
+                              return item.isTextButton ? (
+                                <TextButton
+                                  key={index}
+                                  onClick={() => item.onClick()}
+                                  className={styles.cellTextButton}
+                                >
+                                  {item.label}
+                                </TextButton>
+                              ) : (
+                                <ActionButton
+                                  key={index}
+                                  onClick={() => item.onClick()}
+                                  className={styles.cellButton}
+                                >
+                                  {item.label}
+                                </ActionButton>
+                              );
+                            })}
+                          </Cell>
+                        );
+                      } else {
+                        return (
+                          <Cell key={cellIndex} style={flexStyle}>
+                            {cellItem.isTextButton ? (
                               <TextButton
-                                key={index}
-                                onClick={() => item.onClick()}
+                                onClick={() => cellItem.onClick()}
                                 className={styles.cellTextButton}
                               >
-                                {item.label}
+                                {cellItem.label}
                               </TextButton>
                             ) : (
                               <ActionButton
-                                key={index}
-                                onClick={() => item.onClick()}
+                                onClick={() => cellItem.onClick()}
                                 className={styles.cellButton}
                               >
-                                {item.label}
+                                {cellItem.label}
                               </ActionButton>
-                            );
-                          })}
-                        </Cell>
-                      );
-                    } else {
-                      return (
-                        <Cell key={cellIndex} style={flexStyle}>
-                          {cellItem.isTextButton ? (
-                            <TextButton
-                              onClick={() => cellItem.onClick()}
-                              className={styles.cellTextButton}
-                            >
-                              {cellItem.label}
-                            </TextButton>
-                          ) : (
-                            <ActionButton
-                              onClick={() => cellItem.onClick()}
-                              className={styles.cellButton}
-                            >
-                              {cellItem.label}
-                            </ActionButton>
-                          )}
-                        </Cell>
-                      );
-                    }
-                  })}
-                </div>
-              );
-            });
-          }, [items, config, rowConfigMap, colWidths, disableNumbering])}
+                            )}
+                          </Cell>
+                        );
+                      }
+                    })}
+                  </div>
+                );
+              });
+            }, [items, config, rowConfigMap, colWidths, disableNumbering])}
+          </section>
         </section>
       </section>
-      <section className={styles.pagination}>
+      <section
+        className={styles.pagination}
+        style={{
+          width: "100%",
+          maxWidth: width ? `${width}px` : "100%",
+        }}
+      >
         <div className={styles.recordNumberWrapper}>
           Showing <span className={styles.recordNumber}>10</span> of{" "}
           <span className={styles.recordNumber}>60</span> records

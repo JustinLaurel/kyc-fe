@@ -36,7 +36,7 @@ $column-gap: 8px;
       padding-bottom: 5px;
     }
   }
-  .usersSection {
+  .contentSection {
     :last-child {
       border-bottom-right-radius: $container-radius;
       border-bottom-left-radius: $container-radius;
@@ -92,6 +92,10 @@ $column-gap: 8px;
   .numberingCell {
     width: 2rem;
   }
+}
+.overflowWrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .pagination {

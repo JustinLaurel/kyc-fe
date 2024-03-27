@@ -218,6 +218,7 @@ export default function RelatedParty() {
         colWidths={tableConfig.colWidths}
         config={tableConfig.config}
         rowConfig={tableConfig.rowConfig}
+        width={2000}
       />
     </Card>
   );
