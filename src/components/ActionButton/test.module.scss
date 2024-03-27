@@ -1,0 +1,32 @@
+@use "src/app/colors";
+
+.action {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  padding-top: 11.5px;
+  padding-bottom: 11.5px;
+  width: 220px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: none;
+  
+
+  &.redBtn {
+    background: colors.$ambank-red-gradient;
+    color: white;
+  }
+  &.whiteBtn {
+    background-color: white;
+    color: colors.$ambank-red;
+  }
+  &.greyBtn {
+    background: linear-gradient(180deg, #97989A 0%, #5F6062 100%);
+    color: white;
+  }
+  &.lightGreyBtn {
+    background: linear-gradient(180deg, #ECEDF0 0%, #BFBFC1 100%);
+    color: colors.$medium-gray;
+  }
+}

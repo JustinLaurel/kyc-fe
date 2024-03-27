@@ -1,16 +1,8 @@
-'use client';
-import { Lato } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
-
-export const latoFont = Lato({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const theme = createTheme({
   typography: {
-    fontFamily: latoFont.style.fontFamily,
+    fontFamily: "Lato, sans-serif",
   },
   components: {
     MuiAlert: {

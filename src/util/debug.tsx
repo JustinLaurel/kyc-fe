@@ -1,5 +1,3 @@
-import { use } from "react";
-
 function triggerSuspense<T>(
   duration = 2000,
   data: T

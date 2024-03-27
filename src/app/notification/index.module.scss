@@ -1,0 +1,23 @@
+@use 'src/app/colors';
+
+.notificationContainer {
+  border: 1px solid colors.$border-gray;
+  border-radius: 4px;
+
+  div:last-child {
+    border-bottom: none !important;
+  }
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .markButton {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
