@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import loadable from "@loadable/component";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Suspense, useEffect, useState } from "react";
 
 const Login = loadable(() => import("@/src/login"));
 const LoginLayout = loadable(() => import("@/src/login/layout"));
@@ -28,7 +30,22 @@ const BoAppDelete = loadable(() => import("@/backoffice/make/delete"));
 const BoAppEdit = loadable(() => import("@/backoffice/make/edit"));
 const BoAppView = loadable(() => import("@/backoffice/make/view"));
 
+const ReactQueryDevtoolsProduction = loadable(() =>
+  import("@tanstack/react-query-devtools/build/modern/production.js").then(
+    (d) => ({
+      default: d.ReactQueryDevtools,
+    })
+  )
+);
+
 function App() {
+  const [showDevtools, setShowDevtools] = useState(false);
+  useEffect(() => {
+    // Call window.toggleDevTools() on console to open devtools
+    // @ts-expect-error
+    window.toggleDevtools = () => setShowDevtools((old) => !old);
+  }, []);
+
   return (
     <>
       <Routes>
@@ -69,6 +86,11 @@ function App() {
           <Route path="/" element={<Login />} />
         </Route>
       </Routes>
+      {showDevtools && (
+        <Suspense fallback={null}>
+          <ReactQueryDevtoolsProduction />
+        </Suspense>
+      )}
     </>
   );
 }
