@@ -1,6 +1,6 @@
-import { get } from "./api";
-import { routes } from "../config/routes";
-import { ListItem, SimpleStaff } from "../config/types";
+import { get } from "@/services/api";
+import { routes } from "@/config/routes";
+import { ListItem, SimpleStaff } from "@/config/types";
 
 function getListDepartments() {
   return {
@@ -23,6 +23,19 @@ function getListApproverGroups() {
     staleTime: 60 * 1000,
   };
 }
+function getListStatus() {
+  return {
+    queryKey: ["list", "status"],
+    queryFn: () => [
+      { label: "Pending Approval", value: "Pending Approval" },
+      { label: "Active", value: "Active" },
+      { label: "Rejected", value: "Rejected" },
+      { label: "Reopened", value: "Reopened" },
+      { label: "Deleted", value: "Deleted" },
+    ],
+    staleTime: 60 * 1000,
+  };
+}
 
 function getStaffSimple(staffId: string) {
   return {
@@ -37,5 +50,6 @@ export {
   getListDepartments,
   getListRoles,
   getListApproverGroups,
+  getListStatus,
   getStaffSimple,
 };

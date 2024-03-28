@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import loadable from "@loadable/component";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Suspense, useEffect, useState } from "react";
 
 const Login = loadable(() => import("@/src/login"));
@@ -22,13 +21,13 @@ const FoCustomerViewAudit = loadable(
 const BoMake = loadable(() => import("@/backoffice/make"));
 const BoMakeAdd = loadable(() => import("@/backoffice/make/add"));
 const BoMakeDelete = loadable(() => import("@/backoffice/make/delete"));
-const BoMakeEdit = loadable(() => import("@/backoffice/make/add"));
-const BoMakeView = loadable(() => import("@/backoffice/make/add"));
-const BoApp = loadable(() => import("@/backoffice/make/add"));
-const BoAppAdd = loadable(() => import("@/backoffice/make/add"));
-const BoAppDelete = loadable(() => import("@/backoffice/make/delete"));
-const BoAppEdit = loadable(() => import("@/backoffice/make/edit"));
-const BoAppView = loadable(() => import("@/backoffice/make/view"));
+const BoMakeEdit = loadable(() => import("@/backoffice/make/edit"));
+const BoMakeView = loadable(() => import("@/backoffice/make/view"));
+const BoApp = loadable(() => import("@/backoffice/approve"));
+const BoAppAdd = loadable(() => import("@/backoffice/approve/add"));
+const BoAppDelete = loadable(() => import("@/backoffice/approve/delete"));
+const BoAppEdit = loadable(() => import("@/backoffice/approve/edit"));
+const BoAppView = loadable(() => import("@/backoffice/approve/view"));
 
 const ReactQueryDevtoolsProduction = loadable(() =>
   import("@tanstack/react-query-devtools/build/modern/production.js").then(
@@ -37,6 +36,29 @@ const ReactQueryDevtoolsProduction = loadable(() =>
     })
   )
 );
+
+export const page = {
+  LOGIN: "/login",
+  FO_DASHBOARD: "/frontoffice",
+  FO_AUDIT: "/frontoffice/auditLog",
+  FO_CUST: "/frontoffice/customer",
+  FO_CUST_ADD: "/frontoffice/customer/add",
+  FO_CUST_VIEW: "/frontoffice/customer/view/:userId",
+  FO_CUST_VIEW_AUDIT: "/frontoffice/customer/view/audit",
+  FO_APPLICATIONS: "/frontoffice/application",
+  BO_MAKE: "/backoffice/make",
+  BO_MAKE_ADD: "/backoffice/make/add",
+  BO_MAKE_DELETE: "/backoffice/make/delete/:userId",
+  BO_MAKE_EDIT: "/backoffice/make/edit/:userId",
+  BO_MAKE_VIEW: "/backoffice/make/view/:userId",
+  BO_APP: "/backoffice/approve",
+  BO_APP_ADD: "/backoffice/approve/add",
+  BO_APP_DELETE: "/backoffice/approve/delete/:userId",
+  BO_APP_EDIT: "/backoffice/approve/edit/:userId",
+  BO_APP_VIEW: "/backoffice/approve/view/:userId",
+  MY_PROFILE: "/myProfile",
+  NOTIFICATION: "/notification",
+};
 
 function App() {
   const [showDevtools, setShowDevtools] = useState(false);
@@ -50,39 +72,40 @@ function App() {
     <>
       <Routes>
         <Route element={<DefaultLayout />}>
-          <Route path="myProfile" element={<MyProfile />} />
-          <Route path="notification" element={<Notification />} />
-          <Route path="frontoffice">
-            <Route path="" element={<FrontOffice />} />
-            <Route path="application" element={<FoApplication />} />
-            <Route path="auditLog" element={<FoAuditLog />} />
-            <Route path="customer">
-              <Route path="" element={<FoCustomer />} />
-              <Route path="add" element={<FoCustomerAdd />} />
-              <Route path="view/:userId" element={<FoCustomerView />} />
+          <Route path={page.FO_DASHBOARD}>
+            <Route path={page.FO_DASHBOARD} element={<FrontOffice />} />
+            <Route path={page.FO_APPLICATIONS} element={<FoApplication />} />
+            <Route path={page.FO_AUDIT} element={<FoAuditLog />} />
+            <Route path={page.FO_CUST}>
+              <Route path={page.FO_CUST} element={<FoCustomer />} />
+              <Route path={page.FO_CUST_ADD} element={<FoCustomerAdd />} />
+              <Route path={page.FO_CUST_VIEW} element={<FoCustomerView />} />
               <Route
-                path="view/audit/:userId"
+                path={page.FO_CUST_VIEW_AUDIT}
                 element={<FoCustomerViewAudit />}
               />
             </Route>
           </Route>
           <Route path="backoffice">
-            <Route path="make" element={<BoMake />}>
-              <Route path="add" element={<BoMakeAdd />} />
-              <Route path="delete/:userId" element={<BoMakeDelete />} />
-              <Route path="edit/:userId" element={<BoMakeEdit />} />
-              <Route path="view/:userId" element={<BoMakeView />} />
+            <Route path={page.BO_MAKE}>
+              <Route path={page.BO_MAKE} element={<BoMake />} />
+              <Route path={page.BO_MAKE_ADD} element={<BoMakeAdd />} />
+              <Route path={page.BO_MAKE_DELETE} element={<BoMakeDelete />} />
+              <Route path={page.BO_MAKE_EDIT} element={<BoMakeEdit />} />
+              <Route path={page.BO_MAKE_VIEW} element={<BoMakeView />} />
             </Route>
-            <Route path="approve" element={<BoApp />}>
-              <Route path="add" element={<BoAppAdd />} />
-              <Route path="delete/:userId" element={<BoAppDelete />} />
-              <Route path="edit/:userId" element={<BoAppEdit />} />
-              <Route path="view/:userId" element={<BoAppView />} />
+            <Route path={page.BO_APP} element={<BoApp />}>
+              <Route path={page.BO_APP_ADD} element={<BoAppAdd />} />
+              <Route path={page.BO_APP_DELETE} element={<BoAppDelete />} />
+              <Route path={page.BO_APP_EDIT} element={<BoAppEdit />} />
+              <Route path={page.BO_APP_VIEW} element={<BoAppView />} />
             </Route>
           </Route>
+          <Route path={page.MY_PROFILE} element={<MyProfile />} />
+          <Route path={page.NOTIFICATION} element={<Notification />} />
         </Route>
         <Route element={<LoginLayout />}>
-          <Route path="/login" element={<Login />} />
+          <Route path={page.LOGIN} element={<Login />} />
           <Route path="/" element={<Login />} />
         </Route>
       </Routes>

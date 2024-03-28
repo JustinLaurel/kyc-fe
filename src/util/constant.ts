@@ -1,0 +1,9 @@
+enum USER_ROLE {
+  ADMIN_MAKER,
+  ADMIN_APPROVER,
+  RM_MAKER,
+  RM_APPROVER,
+};
+export {
+  USER_ROLE
+}

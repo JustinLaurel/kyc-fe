@@ -1,4 +1,4 @@
-@use 'src/app/colors';
+@use "src/app/colors";
 
 html {
   height: 100%;
@@ -12,6 +12,16 @@ html {
 input {
   font-family: Lato, sans-serif;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 textarea {
   font-family: colors.$font-lato;
 }

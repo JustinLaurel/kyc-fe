@@ -13,6 +13,7 @@
     line-height: 14px;
   }
   .inputWrapper {
+    position: relative;
     display: flex;
     flex: 1;
     column-gap: 16px;
@@ -36,6 +37,13 @@
       &::placeholder {
         color: colors.$medium-gray;
       }
+    }
+    .inputError {
+      position: absolute;
+      right: 0;
+      bottom: -1.15rem;
+      color: colors.$ambank-red;
+      font-size: 0.75rem;
     }
 
     .button {

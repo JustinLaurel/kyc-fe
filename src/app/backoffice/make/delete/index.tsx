@@ -10,6 +10,7 @@ import {
   getListRoles,
   getStaffSimple,
 } from "@/src/services/query";
+import { Suspense } from "react";
 
 export default function BoMakeDelete() {
   const { userId = "" } = useParams();
@@ -31,12 +32,14 @@ export default function BoMakeDelete() {
   return (
     <div className={styles.container}>
       <HeaderSection />
-      <ContentSection
-        staff={convertNullToEmptyString(staffData)}
-        departmentList={departmentList}
-        roleList={roleList}
-        approverGroupList={approverGroupList}
-      />
+      <Suspense fallback={"LOADING"}>
+        <ContentSection
+          staff={convertNullToEmptyString(staffData)}
+          departmentList={departmentList}
+          roleList={roleList}
+          approverGroupList={approverGroupList}
+        />
+      </Suspense>
     </div>
   );
 }

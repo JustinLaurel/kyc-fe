@@ -5,48 +5,48 @@ import Card from "@/components/Card";
 import FieldInput from "@/components/FieldInput";
 import FieldAutocomplete from "@/components/FieldAutocomplete";
 import FieldDropdown from "@/components/FieldDropdown";
-import { UseFormReturn } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { INITIAL_SEARCH_FORM } from "./ContentSection";
 import { ListItem } from "@/config/types";
 import StyledFieldContainer from "@/components/StyledFieldContainer";
 import DateRangePicker from "@/components/DateRangePicker";
 
-const VALIDATION_RULES = {
-  name: {
-    minLength: 6,
-  },
-  userId: {
-    minLength: 5,
-  },
-  status: {
-    minLength: 1,
-  },
-};
-
 interface FilterViewProps {
   departmentList: ListItem[];
   roleList: ListItem[];
-  handleSearch: () => void;
-  handleClear: () => void;
-  formHook: UseFormReturn<typeof INITIAL_SEARCH_FORM, any, undefined>;
+  onSubmit: (values: typeof INITIAL_SEARCH_FORM) => void;
 }
 export default function FilterView(props: FilterViewProps) {
-  const { departmentList, roleList, handleSearch, handleClear, formHook } = props;
-  const { register, control } = formHook;
+  const { departmentList, roleList, onSubmit } = props;
+  const {
+    register,
+    control,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm<typeof INITIAL_SEARCH_FORM>({
+    defaultValues: {
+      ...INITIAL_SEARCH_FORM,
+    },
+    reValidateMode: "onSubmit",
+  });
+
+  function handleClearFilter() {
+    reset({ ...INITIAL_SEARCH_FORM });
+  }
 
   return (
-    <form onSubmit={handleSearch}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card
         header="Search"
         buttons={[
           {
             label: "Clear",
-            onClick: handleClear,
+            onClick: handleClearFilter,
             colorScheme: BUTTON_COLOR_SCHEMES.WHITE,
           },
           {
             label: "Search",
-            onClick: handleSearch,
             isSubmit: true,
           },
         ]}
@@ -55,17 +55,20 @@ export default function FilterView(props: FilterViewProps) {
           <FieldInput
             label={"Name"}
             placeholder={"Search by name"}
+            error={errors.name}
             {...register("name", VALIDATION_RULES.name)}
           />
           <FieldDropdown
             items={roleList}
             label={"User Role"}
+            error={errors.role}
             {...register("role")}
             control={control}
           />
           <FieldInput
             label={"User ID"}
             placeholder={"Search by user ID"}
+            error={errors.userId}
             {...register("userId", VALIDATION_RULES.userId)}
           />
           <FieldAutocomplete
@@ -78,6 +81,7 @@ export default function FilterView(props: FilterViewProps) {
             label={"Status"}
             placeholder={"Search by status"}
             control={control}
+            error={errors.status}
             {...register("status", VALIDATION_RULES.status)}
           />
           <FieldAutocomplete
@@ -85,6 +89,7 @@ export default function FilterView(props: FilterViewProps) {
             label={"Department"}
             placeholder={"Search by department/branch"}
             control={control}
+            error={errors.department}
             {...register("department")}
           />
         </StyledFieldContainer>
@@ -92,3 +97,18 @@ export default function FilterView(props: FilterViewProps) {
     </form>
   );
 }
+
+const VALIDATION_RULES = {
+  name: {
+    minLength: {
+      value: 3,
+      message: "Please enter at least 3 characters in the field.",
+    },
+  },
+  userId: {
+    minLength: {
+      value: 3,
+      message: "Please enter at least 3 characters in the field.",
+    },
+  },
+};

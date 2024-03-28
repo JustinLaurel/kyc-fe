@@ -1,8 +1,8 @@
-import { PartialRecord } from "@/util";
+import { isNotNullOrUndefined, PartialRecord } from "@/util";
 import styles from "./index.module.scss";
 import ActionButton from "@/components/ActionButton";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import React, { HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute, useCallback, useMemo } from "react";
 
 const StylingClasses = {
   container: "container",
@@ -28,13 +28,24 @@ interface ControlledFieldInputProps
 
 const FieldInput = React.forwardRef<
   HTMLInputElement,
-  UncontrolledFieldInputProps | ControlledFieldInputProps
+  (UncontrolledFieldInputProps | ControlledFieldInputProps) &
+    React.HTMLProps<HTMLInputElement>
 >(function FieldInputInternal(props, ref) {
   function handleInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter" && onButtonClick && buttonLabel) {
       onButtonClick();
     }
   }
+
+  const maxLengthCheck = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.target.value = event.target.value.slice(
+        0,
+        event.target.maxLength === 0 ? Infinity : event.target.maxLength
+      );
+    },
+    []
+  );
 
   const {
     label,
@@ -76,10 +87,18 @@ const FieldInput = React.forwardRef<
           }
           type={type}
           onKeyDown={handleInputEnter}
-          onChange={() => {}} // Suppress browser console error
+          onChange={useCallback(() => {}, [])} // Suppress browser console error
           {...inputProps}
+          {...(type === "number"
+            ? {
+                onInput: maxLengthCheck,
+              }
+            : {})}
           ref={ref}
         />
+        {"error" in props && props.error && (
+          <span className={styles.inputError}>{props.error.message}</span>
+        )}
         {onButtonClick && buttonLabel && (
           <ActionButton
             className={
